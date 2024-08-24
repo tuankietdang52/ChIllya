@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\viewmodel\\directoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\viewmodel\\directoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\view\\directorypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\view\\directorypage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\view\\directorypage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\view\\directorypage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\model\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\model\\song.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DirectoryViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\ViewModel\\DirectoryViewModel.cs",
+              "RelativeDocumentMoniker": "ChIllya\\ViewModel\\DirectoryViewModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\ViewModel\\DirectoryViewModel.cs",
+              "RelativeToolTip": "ChIllya\\ViewModel\\DirectoryViewModel.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAYwBwAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T13:08:07.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DirectoryPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\View\\DirectoryPage.xaml.cs",
+              "RelativeDocumentMoniker": "ChIllya\\View\\DirectoryPage.xaml.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\View\\DirectoryPage.xaml.cs",
+              "RelativeToolTip": "ChIllya\\View\\DirectoryPage.xaml.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T12:50:57.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DirectoryPage.xaml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\View\\DirectoryPage.xaml",
+              "RelativeDocumentMoniker": "ChIllya\\View\\DirectoryPage.xaml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\View\\DirectoryPage.xaml",
+              "RelativeToolTip": "ChIllya\\View\\DirectoryPage.xaml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAkwBwAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-08-24T12:50:36.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Song.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Model\\Song.cs",
+              "RelativeDocumentMoniker": "ChIllya\\Model\\Song.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Model\\Song.cs",
+              "RelativeToolTip": "ChIllya\\Model\\Song.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T13:09:07.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppShell.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\AppShell.xaml.cs",
+              "RelativeDocumentMoniker": "ChIllya\\AppShell.xaml.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\AppShell.xaml.cs",
+              "RelativeToolTip": "ChIllya\\AppShell.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T14:12:45.825Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\AppShell.xaml",
+              "RelativeDocumentMoniker": "ChIllya\\AppShell.xaml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\AppShell.xaml",
+              "RelativeToolTip": "ChIllya\\AppShell.xaml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-08-24T14:12:46.615Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
