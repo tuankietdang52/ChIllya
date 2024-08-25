@@ -13,18 +13,18 @@ namespace ChIllya.Model
         private string name;
 
         [ObservableProperty]
-        private string path;
+        private string songPath;
 
         public Song()
         {
             Name = "";
-            Path = "";
+            SongPath = "";
         }
 
         public Song(string name, string path)
         {
             Name = name;
-            Path = path;
+            SongPath = path;
         }
     }
 }

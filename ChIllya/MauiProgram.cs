@@ -1,5 +1,6 @@
-﻿using CommunityToolkit.Maui;
+﻿using ChIllya.Utils;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 
 namespace ChIllya
 {
@@ -10,12 +11,14 @@ namespace ChIllya
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkitMediaElement()
+                .AddAudio()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            MusicPlayer media = new();
 
 #if DEBUG
     		builder.Logging.AddDebug();

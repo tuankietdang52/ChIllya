@@ -2,17 +2,18 @@ using ChIllya.ViewModel;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace ChIllya.View;
-
-public partial class DirectoryPage : ContentPage
+namespace ChIllya.View
 {
-	public DirectoryViewModel ViewModel { get; set; }
-
-	public DirectoryPage()
+	public partial class DirectoryPage : ContentPage
 	{
-        InitializeComponent();
-		ViewModel = new();
+		public DirectoryViewModel ViewModel { get; set; }
 
-		BindingContext = ViewModel;
+		public DirectoryPage()
+		{
+			InitializeComponent();
+			ViewModel = new();
+
+			BindingContext = ViewModel;
+		}
 	}
 }

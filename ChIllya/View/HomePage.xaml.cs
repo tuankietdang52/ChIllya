@@ -1,9 +1,10 @@
-namespace ChIllya.View;
-
-public partial class HomePage : ContentPage
+namespace ChIllya.View
 {
-	public HomePage()
+	public partial class HomePage : ContentPage
 	{
-		InitializeComponent();
+		public HomePage()
+		{
+			InitializeComponent();
+		}
 	}
 }

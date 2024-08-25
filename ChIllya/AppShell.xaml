@@ -8,8 +8,7 @@
     Title="ChIllya">
 
     <TabBar>
-        <Tab Title="Home"
-             Icon="../Assets/abc.png">
+        <Tab Title="Home">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab Title="Directory">

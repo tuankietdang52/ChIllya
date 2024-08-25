@@ -4,10 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ChIllya.Error;
+using ChIllya.Utils;
+
 
 namespace ChIllya.ViewModel
 {
@@ -19,20 +23,19 @@ namespace ChIllya.ViewModel
 
         public DirectoryViewModel()
         {
-            Songs ??= new();
-
-            test();
-
-            ChooseCommand = new RelayCommand(() =>
+            Songs ??= new()
             {
-                Debug.WriteLine("Playing");
-            });
+                new Song("shinkai", "shinkai.mp3"),
+                new Song("altair", "altair.mp3")
+            };
+
+            ChooseCommand = new RelayCommand<string>(PlayingSong);
         }
 
-        public void test()
+        private void PlayingSong(string? path)
         {
-            Song song = new Song("shinkai", "/Assets/Songs/shinkai.mp3");
-            Songs.Add(song);
+            MusicPlayer media = MusicPlayer.GetInstance();
+            media.CreateMusic(path!);
         }
     }
 }

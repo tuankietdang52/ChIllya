@@ -10,6 +10,11 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.GestureRecognizers>
+                            <!--
+                                Detect grid being tapped
+                                Command using relative command to get viewmodel context instead of
+                                stacklayout context
+                            -->
                             <TapGestureRecognizer
                                Command="{Binding 
                                    Source={
@@ -18,7 +23,8 @@
                                        }
                                    },
                                    Path=ChooseCommand
-                               }"/>
+                               }"
+                               CommandParameter="{Binding SongPath}"/>
                         </Grid.GestureRecognizers>
                         <Label
                            Text="{Binding Name}"
