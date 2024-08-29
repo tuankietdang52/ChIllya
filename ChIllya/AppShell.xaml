@@ -4,15 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ChIllya.View"
-    Shell.FlyoutBehavior="Disabled"
-    Title="ChIllya">
+    Shell.FlyoutBehavior="Disabled">
 
-    <TabBar>
-        <Tab Title="Home">
+    <TabBar Route="maintab">
+        <Tab Title="Home" Route="home">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
-        <Tab Title="Directory">
+        <Tab Title="Directory" Route="directory">
             <ShellContent ContentTemplate="{DataTemplate views:DirectoryPage}"/>
         </Tab>
     </TabBar>
+
+    <ShellContent 
+        ContentTemplate="{DataTemplate views:SongPage}"
+        Route="songpage"/>
 </Shell>

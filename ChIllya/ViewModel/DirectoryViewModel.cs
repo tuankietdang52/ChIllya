@@ -11,31 +11,38 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ChIllya.Error;
 using ChIllya.Utils;
+using ChIllya.View;
 
 
 namespace ChIllya.ViewModel
 {
-    public class DirectoryViewModel
+    public class DirectoryViewModel : IViewModel
     {
         public ObservableCollection<Song> Songs { get; set;}
 
-        public ICommand ChooseCommand { get; set; }
+        public ICommand? ChooseCommand { get; set; }
 
         public DirectoryViewModel()
         {
-            Songs ??= new()
+            Songs = new()
             {
                 new Song("shinkai", "shinkai.mp3"),
-                new Song("altair", "altair.mp3")
+                new Song("altair", "altair.mp3"),
+                new Song("6h chill", "6H CHILL.mp3")
             };
 
-            ChooseCommand = new RelayCommand<string>(PlayingSong);
+            GenerateCommand();
         }
 
-        private void PlayingSong(string? path)
+        public void GenerateCommand()
         {
-            MusicPlayer media = MusicPlayer.GetInstance();
-            media.CreateMusic(path!);
+            ChooseCommand = new RelayCommand<Song>(PlayingSong);
+        }
+
+        private async void PlayingSong(Song? choice)
+        {
+            ArgumentNullException.ThrowIfNull(choice, nameof(choice));
+            await Shell.Current.Navigation.PushAsync(new SongPage(choice));
         }
     }
 }

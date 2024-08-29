@@ -6,5 +6,5 @@ namespace ChIllya.View
 		{
 			InitializeComponent();
 		}
-	}
+    }
 }

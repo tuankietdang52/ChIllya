@@ -18,7 +18,7 @@ namespace ChIllya
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            MusicPlayer media = new();
+            new MusicPlayer();
 
 #if DEBUG
     		builder.Logging.AddDebug();

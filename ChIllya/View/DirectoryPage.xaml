@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.View.DirectoryPage"
-             xmlns:ViewModel="clr-namespace:ChIllya.ViewModel"
+             xmlns:viewmodels="clr-namespace:ChIllya.ViewModel"
              Title="List Music">
+
+    <ContentPage.BindingContext>
+        <viewmodels:DirectoryViewModel x:Name="ViewModel"/>
+    </ContentPage.BindingContext>
+    
     <ScrollView>
         <StackLayout BindableLayout.ItemsSource="{Binding Songs}">
             <BindableLayout.ItemTemplate>
@@ -11,7 +16,7 @@
                     <Grid>
                         <Grid.GestureRecognizers>
                             <!--
-                                Detect grid being tapped
+                                Detect if grid being tapped
                                 Command using relative command to get viewmodel context instead of
                                 stacklayout context
                             -->
@@ -19,12 +24,12 @@
                                Command="{Binding 
                                    Source={
                                        RelativeSource AncestorType={
-                                           x:Type ViewModel:DirectoryViewModel
+                                           x:Type viewmodels:DirectoryViewModel
                                        }
                                    },
                                    Path=ChooseCommand
                                }"
-                               CommandParameter="{Binding SongPath}"/>
+                               CommandParameter="{Binding .}"/>
                         </Grid.GestureRecognizers>
                         <Label
                            Text="{Binding Name}"

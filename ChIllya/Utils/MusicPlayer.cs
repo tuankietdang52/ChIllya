@@ -37,17 +37,20 @@ namespace ChIllya.Utils
         /// <exception cref="NullReferenceException"></exception>
         public static MusicPlayer GetInstance()
         {
-            if (instance == null) throw new NullReferenceException("Instance is null");
+            if (instance == null) throw new NullReferenceException("Player is null");
             return instance;
         }
 
-        public async void CreateMusic(string path)
+        public async void CreateMusic(string path, EventHandler? endEvent = null)
         {
             player?.Dispose();
             currentPosition = 0;
 
             player = AudioManager.Current.CreatePlayer(
-                    await MauiStorage.FileSystem.OpenAppPackageFileAsync(path));
+                await MauiStorage.FileSystem.OpenAppPackageFileAsync(path));
+
+            if (player == null) throw new NullReferenceException("Instance is null");
+            if (endEvent != null) player.PlaybackEnded += endEvent;
 
             PlayMusic();
         }
@@ -79,6 +82,14 @@ namespace ChIllya.Utils
 
             currentPosition = player.CurrentPosition;
             player.Stop();
+        }
+
+        public void ReplayMusic()
+        {
+            if (player == null) throw new NullReferenceException("Music Player is null");
+
+            SeekMusic(0);
+            PlayMusic();
         }
     }
 }

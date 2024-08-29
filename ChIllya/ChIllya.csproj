@@ -77,11 +77,17 @@
 	  <MauiXaml Update="View\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\SongPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="View\DirectoryPage.xaml.cs">
 	    <DependentUpon>DirectoryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\SongPage.xaml.cs">
+	    <DependentUpon>SongPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
