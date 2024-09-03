@@ -1,8 +1,4 @@
-using ChIllya.ViewModel;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-
-namespace ChIllya.View
+namespace ChIllya.Views
 {
 	public partial class DirectoryPage : ContentPage
 	{

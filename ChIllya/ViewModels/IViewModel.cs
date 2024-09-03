@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChIllya.ViewModel
+namespace ChIllya.ViewModels
 {
     public interface IViewModel
     {

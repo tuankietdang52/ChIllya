@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChIllya.Model
+namespace ChIllya.Models
 {
     public partial class Song : ObservableObject
     {

@@ -1,4 +1,6 @@
 ﻿using ChIllya.Error;
+using ChIllya.Models;
+using ChIllya.ViewModels;
 using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
@@ -17,54 +19,48 @@ namespace ChIllya.Utils
     /// </summary>
     public class MusicPlayer
     {
-        private static MusicPlayer? instance;
-
         private IAudioPlayer? player;
-
-        /// <summary>
-        /// for replay music after stop
-        /// </summary>
-        private double currentPosition = 0;
 
         public MusicPlayer()
         {
-            instance ??= this;
+
         }
 
-        /// <summary>
-        /// Get instance of Media Manager
-        /// </summary>
-        /// <exception cref="NullReferenceException"></exception>
-        public static MusicPlayer GetInstance()
-        {
-            if (instance == null) throw new NullReferenceException("Player is null");
-            return instance;
-        }
+        #region Get Set
 
-        public async void CreateMusic(string path, EventHandler? endEvent = null)
+        public bool IsPlaying() => player != null && player.IsPlaying;
+        public double GetPosition() => player != null ? player.CurrentPosition : 0;
+        public double GetDuration() => player != null ? player.Duration : 0;
+        public bool IsEnd() => player != null && GetPosition() >= GetDuration();
+
+        #endregion
+
+        public void CreateMusic(Song song)
         {
+            player?.Stop();
             player?.Dispose();
-            currentPosition = 0;
 
-            player = AudioManager.Current.CreatePlayer(
-                await MauiStorage.FileSystem.OpenAppPackageFileAsync(path));
+            Task<Stream> task =
+                MauiStorage.FileSystem.OpenAppPackageFileAsync(song.SongPath);
+            task.Wait();
 
-            if (player == null) throw new NullReferenceException("Instance is null");
-            if (endEvent != null) player.PlaybackEnded += endEvent;
+            player = AudioManager.Current.CreatePlayer(task.Result);
 
-            PlayMusic();
+            if (player == null) throw new NullReferenceException("Cant create player");
+            player.Play();
+
+            // wait to load information
+            Thread.Sleep(250);
         }
 
         /// <summary>
         /// Need to create music first
-        /// <para>Playing current song</para>
+        /// <para>Continue to play current song</para>
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public void PlayMusic()
+        public void ContinueToPlay()
         {
             if (player == null) throw new NullReferenceException("Music Player is null");
-
-            SeekMusic(currentPosition);
             player.Play();
         }
 
@@ -76,12 +72,10 @@ namespace ChIllya.Utils
             player?.Seek(position);
         }
 
-        public void StopMusic()
+        public void PausePlaying()
         {
             if (player == null) throw new NullReferenceException("Music Player is null");
-
-            currentPosition = player.CurrentPosition;
-            player.Stop();
+            player.Pause();
         }
 
         public void ReplayMusic()
@@ -89,7 +83,19 @@ namespace ChIllya.Utils
             if (player == null) throw new NullReferenceException("Music Player is null");
 
             SeekMusic(0);
-            PlayMusic();
+            ContinueToPlay();
+        }
+
+        public void AddPlaybackEvent(EventHandler callback)
+        {
+            if (player == null) return;
+            player.PlaybackEnded += callback;
+        }
+
+        public void RemovePlaybackEvent(EventHandler callback)
+        {
+            if (player == null) return;
+            player.PlaybackEnded -= callback;
         }
     }
 }

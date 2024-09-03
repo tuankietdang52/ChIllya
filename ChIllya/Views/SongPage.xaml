@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChIllya.View.SongPage"
-             xmlns:viewmodels="clr-namespace:ChIllya.ViewModel"
+             x:Class="ChIllya.Views.SongPage"
+             xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
+             xmlns:controls="clr-namespace:ChIllya.Controls"
              Shell.TabBarIsVisible="False">
 
-    <ContentPage.BindingContext>
-        <viewmodels:SongViewModel x:Name="ViewModel"/>
-    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SongButton" TargetType="controls:ChIllyaImageButton">
+                <Setter Property="BackgroundColor"
+                        Value="Gray"/>
+                <Setter Property="CornerRadius"
+                        Value="100"/>
+                <Setter Property="WidthRequest"
+                        Value="100"/>
+                <Setter Property="HeightRequest"
+                        Value="100"/>
+                <Setter Property="ImageWidth"
+                        Value="40"/>
+                <Setter Property="ImageHeight"
+                        Value="40"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior
@@ -15,7 +31,7 @@
             Command="{Binding BackCommand}"/>
     </Shell.BackButtonBehavior>
 
-    <Grid BindingContext="{Binding Current}">
+    <Grid BindingContext="{Binding Current, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="5*"/>
@@ -42,14 +58,9 @@
                     }
             }">
 
-            <ImageButton
-                CornerRadius="100"
-                Source="{Binding StatusImage}"
-                HeightRequest="100"
-                WidthRequest="100"
-                Padding="{Binding ScaleImage}"
-                Aspect="AspectFit"
-                Command="{Binding PlayCommand}"/>
+            <controls:ChIllyaImageButton Style="{DynamicResource Key=SongButton}"
+                                         TapCommand="{Binding MusicCommand}"
+                                         ImageSource="{Binding ImageStatus}"/>
         </FlexLayout>
     </Grid>
 </ContentPage>

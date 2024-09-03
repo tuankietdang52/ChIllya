@@ -3,9 +3,9 @@
     x:Class="ChIllya.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:ChIllya.View"
+    xmlns:views="clr-namespace:ChIllya.Views"
     Shell.FlyoutBehavior="Disabled">
-
+    
     <TabBar Route="maintab">
         <Tab Title="Home" Route="home">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
