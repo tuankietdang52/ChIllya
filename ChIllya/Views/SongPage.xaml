@@ -31,32 +31,43 @@
             Command="{Binding BackCommand}"/>
     </Shell.BackButtonBehavior>
 
-    <Grid BindingContext="{Binding Current, Mode=OneWay}">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         
         <Label
-            Grid.Row="2"
-            Text="{Binding Name}"
+            Grid.Row="1"
+            Text="{Binding Current.Name}"
             FontSize="25"
             FontAttributes="Bold"
             TextColor="White"/>
 
+        <Label
+            Grid.Row="2"
+            Text="{Binding Position}"
+            VerticalTextAlignment="End"
+            HorizontalTextAlignment="End"
+            FontSize="20"/>
+
+        <Slider Grid.Row="3"
+                x:Name="MusicSlider"
+                Value="{Binding SliderValue}"
+                Minimum="0"
+                Maximum="{Binding Current.Duration}"
+                DragCompleted="SliderValueChanged"
+                ThumbColor="DeepPink"
+                MinimumTrackColor="HotPink"
+                MaximumTrackColor="Purple"/>
+
         <FlexLayout
             Grid.Row="4"
             JustifyContent="Center"
-            AlignItems="Center"
-            BindingContext="{Binding Source={
-                        RelativeSource AncestorType={
-                            x:Type viewmodels:SongViewModel
-                        }
-                    }
-            }">
+            AlignItems="Center">
 
             <controls:ChIllyaImageButton Style="{DynamicResource Key=SongButton}"
                                          TapCommand="{Binding MusicCommand}"

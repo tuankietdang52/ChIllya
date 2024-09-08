@@ -23,14 +23,22 @@ namespace ChIllya.Utils
 
         public MusicPlayer()
         {
-
+            
         }
 
         #region Get Set
 
         public bool IsPlaying() => player != null && player.IsPlaying;
-        public double GetPosition() => player != null ? player.CurrentPosition : 0;
-        public double GetDuration() => player != null ? player.Duration : 0;
+        public double GetPosition()
+        {
+            Debug.WriteLine($"Pos: {player?.CurrentPosition}");
+            return player != null ? player.CurrentPosition : 0;
+        }
+        public double GetDuration()
+        {
+            Debug.WriteLine($"Dur: {player?.Duration}");
+            return player != null ? player.Duration : 0;
+        }
         public bool IsEnd() => player != null && GetPosition() >= GetDuration();
 
         #endregion
@@ -40,17 +48,21 @@ namespace ChIllya.Utils
             player?.Stop();
             player?.Dispose();
 
-            Task<Stream> task =
-                MauiStorage.FileSystem.OpenAppPackageFileAsync(song.SongPath);
-            task.Wait();
+            //Task<Stream> task =
+            //    MauiStorage.FileSystem.OpenAppPackageFileAsync(song.SongPath);
+            //task.Wait();
 
-            player = AudioManager.Current.CreatePlayer(task.Result);
+            var stream = File.Open(song.SongPath, FileMode.Open);
+
+            if (!song.IsLoadedSuccessfully) throw new InvalidSongPathException();
+
+            player = AudioManager.Current.CreatePlayer(stream);
 
             if (player == null) throw new NullReferenceException("Cant create player");
             player.Play();
 
             // wait to load information
-            Thread.Sleep(250);
+            Thread.Sleep(300);
         }
 
         /// <summary>
@@ -69,7 +81,9 @@ namespace ChIllya.Utils
         /// </summary>
         public void SeekMusic(double position)
         {
+            player?.Stop();
             player?.Seek(position);
+            player?.Play();
         }
 
         public void PausePlaying()

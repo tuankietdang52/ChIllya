@@ -15,7 +15,7 @@
             <StackLayout BindableLayout.ItemsSource="{Binding Songs}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid ColumnDefinitions="7*, 3*" HeightRequest="50">
                             <Grid.GestureRecognizers>
                                 <!--
                                     Detect if grid being tapped
@@ -33,15 +33,23 @@
                                     }"
                                     CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>
-                            <Label
-                                Text="{Binding Name}"
-                                Margin="10, 0, 0, 0"
-                                FontAttributes="Bold"
-                                FontSize="20"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Start"
-                                HorizontalOptions="FillAndExpand"
-                                HeightRequest="50"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="{Binding Name}"
+                                   Margin="10, 0, 0, 0"
+                                   FontAttributes="Bold"
+                                   FontSize="15"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Start"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding DurationText, StringFormat='{0:hh\\:mm\\:ss}'}"
+                                   Margin="0, 0, 10, 0"
+                                   FontSize="13"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="End"/>
                         </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

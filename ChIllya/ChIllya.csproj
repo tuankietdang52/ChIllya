@@ -68,6 +68,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.0" />
+		<PackageReference Include="taglib-sharp-netstandard2.0" Version="2.1.0" />
 		<PackageReference Include="VideoLibrary" Version="3.2.5" />
 	</ItemGroup>
 
@@ -99,10 +100,6 @@
 	  <Compile Update="Views\SongPage.xaml.cs">
 	    <DependentUpon>SongPage.xaml</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controls\Properties\" />
 	</ItemGroup>
 
 </Project>

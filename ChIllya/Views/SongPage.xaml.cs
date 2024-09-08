@@ -16,5 +16,10 @@ namespace ChIllya.Views
 
             BindingContext = ViewModel;
         }
+
+        private void SliderValueChanged(object sender, EventArgs e)
+        {
+            ViewModel.SliderValueChanged(this.MusicSlider.Value);           
+        }
     }
 }

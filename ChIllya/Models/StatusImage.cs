@@ -15,9 +15,6 @@ namespace ChIllya.Utils
         [ObservableProperty]
         private string source = "";
 
-        [ObservableProperty]
-        private Microsoft.Maui.Thickness scale = new(30, 0, 30, 0);
-
         public StatusImage(MusicManager manager)
         {
             this.manager = manager;
@@ -26,7 +23,7 @@ namespace ChIllya.Utils
         public void UpdateStatus()
         {
             //idk why the information of music status is loading so slow
-            Thread.Sleep(150);
+            Thread.Sleep(200);
 
             if (manager.IsEnd())
             {

@@ -14,12 +14,17 @@ namespace ChIllya.Utils
     {
         public static MusicManager? Instance { get; private set; }
 
-        private MusicPlayer player = new();
 
         private readonly List<IObserveSong> observers = new();
 
         [ObservableProperty]
         private StatusImage? imageStatus;
+
+        #region Music Field
+
+        private MusicPlayer player = new();
+
+        private List<Song> playList = new();
 
         private Song? current;
         public Song Current { 
@@ -31,13 +36,14 @@ namespace ChIllya.Utils
             }
         }
 
+        #endregion
+
         [ObservableProperty]
         private ICommand? musicCommand;
 
         public MusicManager()
         {
             Instance ??= this;
-
             imageStatus = new(this);
         }
 
@@ -101,6 +107,11 @@ namespace ChIllya.Utils
             player.ContinueToPlay();
             MusicCommand = new RelayCommand(PauseSong);
             UpdateStatus();
+        }
+
+        public void SeekSong(double position)
+        {
+            player.SeekMusic(position);
         }
 
         public void PauseSong()
