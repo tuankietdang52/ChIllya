@@ -4,7 +4,7 @@
              x:Class="ChIllya.Views.HomePage"
              Title="Morning"
              xmlns:views="clr-namespace:ChIllya.Views"
-             xmlns:controls="clr-namespace:ChIllya.Controls">
+             xmlns:controls="clr-namespace:ChIllya.UIComponents">
     <views:PageControl>
         
     </views:PageControl>

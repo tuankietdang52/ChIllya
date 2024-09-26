@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.Views.SongPage"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
-             xmlns:controls="clr-namespace:ChIllya.Controls"
+             xmlns:controls="clr-namespace:ChIllya.UIComponents"
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>

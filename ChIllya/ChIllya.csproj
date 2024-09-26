@@ -24,7 +24,7 @@
 		<ApplicationTitle>ChIllya</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.chillya</ApplicationId>
+		<ApplicationId>com.example.chillya</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -68,12 +68,14 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.0" />
+		<PackageReference Include="SpotifyAPI.Web" Version="7.1.1" />
+		<PackageReference Include="SpotifyAPI.Web.Auth" Version="7.1.1" />
 		<PackageReference Include="taglib-sharp-netstandard2.0" Version="2.1.0" />
 		<PackageReference Include="VideoLibrary" Version="3.2.5" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\ChIllyaImageButton.xaml">
+	  <MauiXaml Update="UIComponents\ChIllyaImageButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\DirectoryPage.xaml">
@@ -91,7 +93,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Controls\ChIllyaImageButton.xaml.cs">
+	  <Compile Update="UIComponents\ChIllyaImageButton.xaml.cs">
 	    <DependentUpon>ChIllyaImageButton.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\DirectoryPage.xaml.cs">
