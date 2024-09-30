@@ -1,8 +1,11 @@
 ﻿using ChIllya.Models;
+using ChIllya.ViewModels.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,32 +17,42 @@ namespace ChIllya.Utils
     {
         public static MusicManager? Instance { get; private set; }
 
+        private readonly IMessenger messenger = new StrongReferenceMessenger();
 
-        private readonly List<IObserveSong> observers = new();
-
-        [ObservableProperty]
         private StatusImage? imageStatus;
 
         #region Music Field
 
-        private MusicPlayer player = new();
+        private readonly MusicPlayer player = new();
 
-        private List<Song> playList = new();
+        private List<Song> playList = [];
 
         private Song? current;
         public Song Current { 
             get => current!;
             private set
             {
+                if (current == value) return;
+
                 current = value;
-                Notify();
+                SendMessage();
             }
         }
 
         #endregion
 
-        [ObservableProperty]
         private ICommand? musicCommand;
+        public ICommand MusicCommand
+        {
+            get => musicCommand!;
+            set
+            {
+                if (musicCommand == value) return;
+
+                musicCommand = value;
+                SendMessage();          
+            }
+        }
 
         public MusicManager()
         {
@@ -56,31 +69,23 @@ namespace ChIllya.Utils
 
         #endregion
 
-        #region Managing List of Observer
+        #region Managing Messager
 
-        public void Subscribe(IObserveSong observer)
+        public void Register(IRecipient<SongMessage> receiver)
         {
-            observers.Add(observer);
-            observer.Update();
+            messenger.Register(receiver);
+            receiver.Receive(new SongMessage(Current, imageStatus!.Source!, musicCommand!));
         }
 
-        public void Unsubscribe(IObserveSong observer)
+        public void Unregister(IRecipient<SongMessage> receiver)
         {
-            observers.Remove(observer);
+            messenger.Unregister<SongMessage>(receiver);
         }
 
-        public void Notify()
+        private void SendMessage()
         {
-            foreach (IObserveSong observe in observers)
-            {
-                observe.Update();
-            }
-        }
-
-        private void UpdateStatus()
-        {
-            ImageStatus?.UpdateStatus();
-            Notify();
+            imageStatus?.UpdateStatus();
+            messenger.Send(new SongMessage(Current, imageStatus!.Source!, musicCommand!));
         }
 
         #endregion
@@ -99,42 +104,36 @@ namespace ChIllya.Utils
             player.AddPlaybackEvent(MusicEnding);
 
             MusicCommand = new RelayCommand(PauseSong);
-            UpdateStatus();
         }
 
         public void UnpauseSong()
         {
             player.ContinueToPlay();
             MusicCommand = new RelayCommand(PauseSong);
-            UpdateStatus();
         }
 
         public void SeekSong(double position)
         {
             player.SeekMusic(position);
+            MusicCommand = new RelayCommand(PauseSong);
         }
 
         public void PauseSong()
         {
             player.PausePlaying();
             MusicCommand = new RelayCommand(UnpauseSong);
-            UpdateStatus();
         }
 
         public void ReplaySong()
         {
             player.ReplayMusic();
-
             MusicCommand = new RelayCommand(PauseSong);
-            UpdateStatus();
         }
 
         private void MusicEnding(object? sender, EventArgs e)
         {
             if (!IsEnd()) return;
-
             MusicCommand = new RelayCommand(ReplaySong);
-            UpdateStatus();
         }
     }
 }

@@ -3,6 +3,7 @@ using ChIllya.Utils;
 using ChIllya.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace ChIllya.ViewModels
 {
-    public partial class PageControlViewModel : ObservableObject, IObserveSong
+    public partial class PageControlViewModel : ObservableObject, IRecipient<SongMessage>
     {
         private MusicManager Manager => MusicManager.Instance!;
 
@@ -33,15 +34,13 @@ namespace ChIllya.ViewModels
 
         public PageControlViewModel()
         {
-            Manager.Subscribe(this);
+            Manager.Register(this);
             ReturnCommand = new RelayCommand(ReturnToSongPage);
         }
 
-        public void Update()
+        public void Receive(SongMessage message)
         {
-            Current = Manager.Current;
-            ImageStatus = Manager.ImageStatus!.Source;
-            MusicCommand = Manager.MusicCommand;
+            (Current, ImageStatus, MusicCommand) = message.GetData();
         }
 
         private async void ReturnToSongPage()

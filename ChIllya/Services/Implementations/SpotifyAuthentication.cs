@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using VideoLibrary;
 using static System.Formats.Asn1.AsnWriter;
 
-namespace ChIllya.Services
+namespace ChIllya.Services.Implementations
 {
     public class SpotifyAuthentication
     {

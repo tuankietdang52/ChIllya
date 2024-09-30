@@ -52,7 +52,7 @@ namespace ChIllya.Utils
             //    MauiStorage.FileSystem.OpenAppPackageFileAsync(song.SongPath);
             //task.Wait();
 
-            var stream = File.Open(song.SongPath, FileMode.Open);
+            var stream = File.Open(song.DirectoryPath, FileMode.Open);
 
             if (!song.IsLoadedSuccessfully) throw new InvalidSongPathException();
 

@@ -39,13 +39,26 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        
-        <Label
-            Grid.Row="1"
-            Text="{Binding Current.Name}"
-            FontSize="25"
-            FontAttributes="Bold"
-            TextColor="White"/>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Text="{Binding Current.Name}"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Label
+                Grid.Row="1"
+                Text="{Binding Current.ArtistName}"
+                FontSize="15"
+                TextColor="White"/>
+        </Grid>
 
         <Label
             Grid.Row="2"

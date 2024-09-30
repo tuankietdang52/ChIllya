@@ -12,6 +12,10 @@ using System.Windows.Input;
 using ChIllya.Error;
 using ChIllya.Utils;
 using ChIllya.Views;
+using ChIllya.Views.Popups;
+using Swan;
+using ChIllya.Services;
+using ChIllya.Services.Implementations;
 
 
 namespace ChIllya.ViewModels
@@ -27,38 +31,20 @@ namespace ChIllya.ViewModels
 
         public DirectoryViewModel()
         {
-            AndroidSongInit();
+            LoadSongs();
             GenerateCommand();
         }
 
-        //test test
-        private void WindowsSongInit()
+        private async void LoadSongs()
         {
-            Songs = new()
-            {
-                new Song($"{windowsPath}shinkai.mp3"),
-                new Song($"{windowsPath}altair.mp3"),
-                new Song($"{windowsPath}6H CHILL.mp3"),
-                new Song($"{windowsPath}underbrightlight.mp3")
-            };
+            Songs = new();
+            ISongService songService = new SongService();
 
-            foreach (var song in Songs)
-            {
-                if (!song.IsLoadedSuccessfully) Songs.Remove(song);
-            }
-        }
+            await Shell.Current.Navigation.PushAsync(new LoadingPage());
 
-        private void AndroidSongInit()
-        {
-            Songs = new()
-            {
-                new Song($"{androidPath}starlog.mp3")
-            };
+            await songService.GetAllOnDevice(Songs);
 
-            //foreach (var song in Songs)
-            //{
-            //    if (!song.IsLoadedSuccessfully) Songs.Remove(song);
-            //}
+            await Shell.Current.Navigation.PopAsync();
         }
 
         public void GenerateCommand()
@@ -68,10 +54,15 @@ namespace ChIllya.ViewModels
 
         private async void DirectToSong(Song? choice)
         {
-            ArgumentNullException.ThrowIfNull(choice, nameof(choice));
+            if (choice == null)
+            {
+                PopUp.DisplayError("Song is null");
+                return;
+            }
+
             Song current = MusicManager.Instance!.Current;
 
-            if (current == null || choice.SongPath != current.SongPath)
+            if (current == null || choice.DirectoryPath != current.DirectoryPath)
             {
                 // User choose a song similar to the one currently playing
                 await Shell.Current.Navigation.PushAsync(new SongPage(choice));

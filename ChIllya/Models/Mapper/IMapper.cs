@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChIllya.Utils
+namespace ChIllya.Models.Mapper
 {
-    public interface IObserveSong
+    public interface IMapper<TSource, TResult>
     {
-        void Update();
+        TResult Map(TSource source);
     }
 }

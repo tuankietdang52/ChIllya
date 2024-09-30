@@ -12,8 +12,7 @@ namespace ChIllya.Utils
     {
         private MusicManager manager;
 
-        [ObservableProperty]
-        private string source = "";
+        public string? Source { get; set; } = "";
 
         public StatusImage(MusicManager manager)
         {

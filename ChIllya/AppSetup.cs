@@ -22,7 +22,7 @@ namespace ChIllya
 
         public AppSetup LoadSecretFile()
         {
-            EnvLoader.Load("Secret/.env");
+            EnvLoader.Load("Secret/secret.env");
             return this;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using ChIllya.Views.Popups;
+using Microsoft.Maui.Controls.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,24 +14,29 @@ namespace ChIllya.Utils
     {
         public static void Load(string filePath)
         {
-            StreamReader sr;
             try
             {
                 var task = FileSystem.Current.OpenAppPackageFileAsync(filePath);
                 task.Wait();
 
                 Stream fileStream = task.Result;
-                sr = new StreamReader(fileStream);
+                StreamReader sr = new StreamReader(fileStream);
+
+                InsertEnvironmentVariable(sr);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                PopUp.DisplayError(ex.Message);
                 return;
             }
+        }
 
+        private static void InsertEnvironmentVariable(StreamReader sr)
+        {
             string? line;
 
-            while ((line = sr.ReadLine()) != null){
+            while ((line = sr.ReadLine()) != null)
+            {
                 // Skip empty lines and comments
                 if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#"))
                 {

@@ -1,7 +1,9 @@
 ﻿using ChIllya.Models;
 using ChIllya.Utils;
+using ChIllya.ViewModels.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -26,7 +28,7 @@ namespace ChIllya.ViewModels
     ///     and setup properties depend on song status through Music Player Instance 
     /// </para>
     /// </summary>
-    public partial class SongViewModel : ObservableObject, IViewModel, IObserveSong
+    public partial class SongViewModel : ObservableObject, IViewModel, IRecipient<SongMessage>
     {
         [ObservableProperty]
         private Song? current;
@@ -59,7 +61,6 @@ namespace ChIllya.ViewModels
             SetViewPosition();
         }
 
-        // User go to song page by click on new song
         public SongViewModel(Song song)
         {
             Setup();
@@ -67,18 +68,15 @@ namespace ChIllya.ViewModels
         }
 
         // update information of current song
-        public void Update()
+        public void Receive(SongMessage message)
         {
-            Current = Manager.Current;
-            ImageStatus = Manager.ImageStatus!.Source;
-            MusicCommand = Manager.MusicCommand!;
-
+            (Current, ImageStatus, MusicCommand) = message.GetData();
             TimerControl(Manager.IsPlaying());
         }
 
         private void Setup()
         {
-            Manager.Subscribe(this);
+            Manager.Register(this);
             SetTimer();
             GenerateCommand();
         }
@@ -95,7 +93,9 @@ namespace ChIllya.ViewModels
         {
             double remain = Manager.GetDuration() - Manager.GetPosition();
             Position = TimeSpan.FromSeconds((int)remain).ToString("hh\\:mm\\:ss");
-            SliderValue = Manager.GetPosition();
+
+            if (!Manager.IsEnd()) SliderValue = Manager.GetPosition();
+            else SliderValue = 0;
         }
 
         private void TimerControl(bool isPlaying)
@@ -110,7 +110,7 @@ namespace ChIllya.ViewModels
         {
             BackCommand = new RelayCommand(async () =>
             {
-                Manager.Unsubscribe(this);
+                Manager.Unregister(this);
                 timer.Dispose();
 
                 await Shell.Current.Navigation.PopAsync();
