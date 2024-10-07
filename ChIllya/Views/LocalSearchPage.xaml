@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChIllya.Views.DirectoryPage"
-             xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
-             xmlns:views="clr-namespace:ChIllya.Views"
-             Title="List Music">
+             x:Class="ChIllya.Views.LocalSearchPage"
+             Title="Local Search"
+             xmlns:views="clr-namespace:ChIllya.Views">
     <views:PageControl>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <ActivityIndicator 
+            <Entry
+                x:Name="input"
                 Grid.Row="0"
-                IsVisible="{Binding IsLoading}"
-                IsRunning="{Binding IsLoading}" 
-                VerticalOptions="Center" 
-                HorizontalOptions="Center"/>
-
-            <ScrollView 
-                IsVisible="{Binding IsHaveResult}" 
-                Grid.Row="0">
+                Placeholder="Search..."
+                ReturnCommand="{Binding SearchCommand}"
+                ReturnCommandParameter="{Binding Source={x:Reference input}, Path=Text}">
+            </Entry>
+            <!--
+            <ScrollView Grid.Row="1">
                 <StackLayout BindableLayout.ItemsSource="{Binding Songs}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid ColumnDefinitions="7*, 3*" HeightRequest="50">
                                 <Grid.GestureRecognizers>
-                                    <!--
+                                    
                                         Detect if grid being tapped
                                         Command using relative command to get viewmodel context instead of
                                         stacklayout context
-                                    -->
+                                    
                                     <TapGestureRecognizer
-                                        Command="{Binding
+                                        Command="{Binding 
                                             Source={
                                                 RelativeSource AncestorType={
-                                                    x:Type viewmodels:DirectoryViewModel
+                                                x:Type viewmodels:DirectoryViewModel
                                                 }
                                             },
                                             Path=ChooseCommand
@@ -64,6 +63,7 @@
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
+        -->
         </Grid>
     </views:PageControl>
 </ContentPage>

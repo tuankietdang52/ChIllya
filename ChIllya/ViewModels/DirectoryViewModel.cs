@@ -16,21 +16,42 @@ using ChIllya.Views.Popups;
 using Swan;
 using ChIllya.Services;
 using ChIllya.Services.Implementations;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 
 namespace ChIllya.ViewModels
 {
-    public class DirectoryViewModel : IViewModel
+    public partial class DirectoryViewModel : ObservableObject, IViewModel
     {
         private readonly string windowsPath = "C:/Users/ADMIN/ChIllyaData/";
         private readonly string androidPath = "/storage/emulated/0/music shiba/";
 
+        private readonly ILocalService _localService;
+
         public ObservableCollection<Song>? Songs { get; set;}
+
+        // for loading view
+        public bool isLoading = false;
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                SetProperty(ref isLoading, value);
+                IsHaveResult = !isLoading;
+            }
+        }
+
+        // for list view
+        // im just too lazy to do the convert :D 
+        [ObservableProperty]
+        public bool isHaveResult = false;
 
         public ICommand? ChooseCommand { get; set; }
 
-        public DirectoryViewModel()
+        public DirectoryViewModel(ILocalService localService)
         {
+            _localService = localService;
             LoadSongs();
             GenerateCommand();
         }
@@ -38,13 +59,25 @@ namespace ChIllya.ViewModels
         private async void LoadSongs()
         {
             Songs = new();
-            ISongService songService = new SongService();
 
-            await Shell.Current.Navigation.PushAsync(new LoadingPage());
+            IsLoading = true;
 
-            await songService.GetAllOnDevice(Songs);
+            var task =  _localService.FetchSongOnDevice();
 
-            await Shell.Current.Navigation.PopAsync();
+            // checking if task done first or the time out first
+            var result = await Task.WhenAny(task, Task.Delay(40000));
+
+            if (result != task)
+            {
+                PopUp.DisplayError("Time Out! Something wrong");
+            }
+
+            foreach (var song in task.Result)
+            {
+                Songs.Add(song);
+            }
+
+            IsLoading = false;
         }
 
         public void GenerateCommand()

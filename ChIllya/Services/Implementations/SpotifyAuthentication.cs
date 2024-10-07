@@ -1,14 +1,4 @@
-﻿using EmbedIO.Authentication;
-using SpotifyAPI.Web;
-using SpotifyAPI.Web.Auth;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VideoLibrary;
-using static System.Formats.Asn1.AsnWriter;
+﻿using SpotifyAPI.Web;
 
 namespace ChIllya.Services.Implementations
 {

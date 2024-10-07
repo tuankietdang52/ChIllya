@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ChIllya.Services.Implementations
 {
-    public class SpotifyService
+    public class SpotifyService : ISpotifyService
     {
         private readonly ISpotifyClient client;
 

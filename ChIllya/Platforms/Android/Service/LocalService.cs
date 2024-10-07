@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace ChIllya.Services.Implementations
 {
-    public partial class SongService : ISongService
+    public partial class LocalService : ILocalService
     {
 #pragma warning disable CA1416
         private partial List<string> GetData()

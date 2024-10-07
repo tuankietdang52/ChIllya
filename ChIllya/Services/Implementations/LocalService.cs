@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace ChIllya.Services.Implementations
 {
-    public partial class SongService : ISongService
+    public partial class LocalService : ILocalService
     { 
-        public SongService()
+        public LocalService()
         {
             
         }
@@ -44,10 +44,10 @@ namespace ChIllya.Services.Implementations
         }
 #endif
 
-        private List<Song> GettingData()
+        private ObservableCollection<Song> GettingData()
         {
             var paths = GetData();
-            List<Song> list = [];
+            ObservableCollection<Song> list = new();
 
             foreach (var path in paths)
             {
@@ -58,27 +58,10 @@ namespace ChIllya.Services.Implementations
             return list;
         }
 
-        private Collection<Song> GettingData(Collection<Song> list)
-        {
-            var paths = GetData();
-
-            foreach (var path in paths)
-            {
-                Song song = new(path);
-                if (song.IsLoadedSuccessfully) list.Add(song);
-            }
-
-            return list;
-        }
-
-        public Task<List<Song>> GetAllOnDevice()
+        // running in task for not frozing app while fetching data
+        public Task<ObservableCollection<Song>> FetchSongOnDevice()
         {
             return Task.Run(() => GettingData());
-        }
-
-        public Task GetAllOnDevice(Collection<Song> list)
-        {
-            return Task.Run(() => GettingData(list));
         }
     }
 }

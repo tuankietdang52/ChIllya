@@ -1,3 +1,6 @@
 /ChIllya/bin/*
 /ChIllya/obj/*
 /ChIllya/Resources/Raw/Secret/*
+/.vs/ChIllya/FileContentIndex/*
+/ChIllyaTest/bin/*
+/ChIllyaTest/obj/*

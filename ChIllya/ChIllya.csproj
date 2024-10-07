@@ -13,7 +13,10 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
-		<OutputType>Exe</OutputType>
+		<!-- <OutputType>Exe</OutputType> -->
+
+		<OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
+
 		<RootNamespace>ChIllya</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -84,13 +87,10 @@
 	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoadingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\PageControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\SearchLocalPage.xaml">
+	  <MauiXaml Update="Views\LocalSearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SongPage.xaml">
@@ -104,6 +104,9 @@
 	  </Compile>
 	  <Compile Update="Views\DirectoryPage.xaml.cs">
 	    <DependentUpon>DirectoryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LocalSearchPage.xaml.cs">
+	    <DependentUpon>LocalSearchPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\SongPage.xaml.cs">
 	    <DependentUpon>SongPage.xaml</DependentUpon>
