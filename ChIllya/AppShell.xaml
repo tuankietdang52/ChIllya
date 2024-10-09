@@ -10,9 +10,8 @@
         <Tab Title="Home" Route="home">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
-        <Tab Title="Search" Route="search">
-            <ShellContent Title="Search Local" Route="local" 
-                          ContentTemplate="{DataTemplate views:LocalSearchPage}"/>
+        <Tab Title="Download Song" Route="download">
+            <ShellContent ContentTemplate="{DataTemplate views:SpotifySearchPage}"/>
         </Tab>
         <Tab Title="Directory" Route="directory">
             <ShellContent ContentTemplate="{DataTemplate views:DirectoryPage}"/>

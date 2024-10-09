@@ -23,6 +23,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
 		<!-- Display name -->
 		<ApplicationTitle>ChIllya</ApplicationTitle>
 
@@ -65,6 +67,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
@@ -81,6 +84,9 @@
 	  <MauiXaml Update="UIComponents\ChIllyaImageButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UIComponents\ListSongView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\DirectoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -90,7 +96,7 @@
 	  <MauiXaml Update="Views\PageControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LocalSearchPage.xaml">
+	  <MauiXaml Update="Views\SpotifySearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\SongPage.xaml">
@@ -105,8 +111,8 @@
 	  <Compile Update="Views\DirectoryPage.xaml.cs">
 	    <DependentUpon>DirectoryPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\LocalSearchPage.xaml.cs">
-	    <DependentUpon>LocalSearchPage.xaml</DependentUpon>
+	  <Compile Update="Views\SpotifySearchPage.xaml.cs">
+	    <DependentUpon>SpotifySearchPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\SongPage.xaml.cs">
 	    <DependentUpon>SongPage.xaml</DependentUpon>

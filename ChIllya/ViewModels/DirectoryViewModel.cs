@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ChIllya.Error;
 using ChIllya.Utils;
 using ChIllya.Views;
 using ChIllya.Views.Popups;
@@ -17,6 +16,11 @@ using Swan;
 using ChIllya.Services;
 using ChIllya.Services.Implementations;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using CommunityToolkit.Maui.Core.Extensions;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 
 namespace ChIllya.ViewModels
@@ -28,9 +32,12 @@ namespace ChIllya.ViewModels
 
         private readonly ILocalService _localService;
 
-        public ObservableCollection<Song>? Songs { get; set;}
+        private CancellationTokenSource? cancellationTokenSource;
 
-        // for loading view
+        private List<Song>? Songs;
+
+        public BindableCollection<Song>? DisplaySongs { get; set; }
+        
         public bool isLoading = false;
         public bool IsLoading
         {
@@ -42,40 +49,28 @@ namespace ChIllya.ViewModels
             }
         }
 
-        // for list view
-        // im just too lazy to do the convert :D 
         [ObservableProperty]
-        public bool isHaveResult = false;
+        private bool isHaveResult = false;
 
         public ICommand? ChooseCommand { get; set; }
 
         public DirectoryViewModel(ILocalService localService)
         {
             _localService = localService;
-            LoadSongs();
             GenerateCommand();
+
+            LoadSongs();
         }
 
         private async void LoadSongs()
         {
-            Songs = new();
-
+            DisplaySongs = new();
+            
             IsLoading = true;
 
-            var task =  _localService.FetchSongOnDevice();
+            Songs = await _localService.FetchSongOnDevice();
 
-            // checking if task done first or the time out first
-            var result = await Task.WhenAny(task, Task.Delay(40000));
-
-            if (result != task)
-            {
-                PopUp.DisplayError("Time Out! Something wrong");
-            }
-
-            foreach (var song in task.Result)
-            {
-                Songs.Add(song);
-            }
+            DisplaySongs.ResetTo(Songs);
 
             IsLoading = false;
         }
@@ -102,5 +97,38 @@ namespace ChIllya.ViewModels
             }
             else await Shell.Current.Navigation.PushAsync(new SongPage());
         }
+
+        public void Searching(string query)
+        {
+            if (Songs is null || DisplaySongs is null)
+            {
+                PopUp.DisplayError("Cannot Load Songs on Device");
+                return;
+            }
+
+            MainThread.BeginInvokeOnMainThread(() => FilterSong(query));
+        }
+
+        private async void FilterSong(string query)
+        {
+            if (IsLoading) cancellationTokenSource?.Cancel();
+
+            IsLoading = true;
+
+            List<Song> temp = new();
+            cancellationTokenSource = new();
+
+            await Task.Run(() =>
+            {
+                temp = Songs!.FindAll(song => song.Name
+                                                  .ToLower()
+                                                  .Contains(query.Trim().ToLower()));
+
+            }, cancellationTokenSource.Token);
+
+            DisplaySongs?.ResetTo(temp);
+            IsLoading = false;
+        }
+
     }
 }

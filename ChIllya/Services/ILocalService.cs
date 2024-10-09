@@ -17,7 +17,7 @@ namespace ChIllya.Services
         /// Get all song on Device
         /// </summary>
         /// <returns></returns>
-        Task<ObservableCollection<Song>> FetchSongOnDevice();
+        Task<List<Song>> FetchSongOnDevice();
 
         //Task<IList<Song>> Search(string query);
     }

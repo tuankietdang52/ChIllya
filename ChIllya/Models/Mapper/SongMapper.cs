@@ -17,6 +17,7 @@ namespace ChIllya.Models.Mapper
                 Artists = track.Artists,
                 SpotifyID = track.Id,
                 Duration = track.DurationMs,
+                DurationText = TimeSpan.FromMilliseconds(track.DurationMs),
                 SpotifyUri = track.Uri,
             };
         }

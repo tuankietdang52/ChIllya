@@ -12,15 +12,6 @@ namespace ChIllya.Views
         public HomePage()
 		{
 			InitializeComponent();
-			test();
 		}
-
-		private void test()
-		{
-			var spotify = new SpotifyAuthentication().CreateSpotifyClient();
-			var service = new SpotifyService(spotify);
-
-			var list = service.Search("Die For You");
-        }
     }
 }

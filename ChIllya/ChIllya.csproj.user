@@ -20,6 +20,9 @@
     <MauiXaml Update="UIComponents\ChIllyaImageButton.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="UIComponents\ListSongView.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\DirectoryPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -29,7 +32,7 @@
     <MauiXaml Update="Views\PageControl.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\LocalSearchPage.xaml">
+    <MauiXaml Update="Views\SpotifySearchPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\SongPage.xaml">

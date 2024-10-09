@@ -1,6 +1,6 @@
-﻿using ChIllya.Error;
-using ChIllya.Models;
+﻿using ChIllya.Models;
 using ChIllya.ViewModels;
+using ChIllya.Views.Popups;
 using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
@@ -52,11 +52,16 @@ namespace ChIllya.Utils
             //    MauiStorage.FileSystem.OpenAppPackageFileAsync(song.SongPath);
             //task.Wait();
 
-            var stream = File.Open(song.DirectoryPath, FileMode.Open);
-
-            if (!song.IsLoadedSuccessfully) throw new InvalidSongPathException();
-
-            player = AudioManager.Current.CreatePlayer(stream);
+            try
+            {
+                var stream = File.Open(song.DirectoryPath, FileMode.Open);
+                player = AudioManager.Current.CreatePlayer(stream);
+            }
+            catch (FileNotFoundException ex)
+            {
+                PopUp.DisplayError(ex.Message);
+                return;
+            }
 
             if (player == null) throw new NullReferenceException("Cant create player");
             player.Play();

@@ -3,6 +3,7 @@ using ChIllya.Services.Implementations;
 using ChIllya.Utils;
 using ChIllya.ViewModels;
 using ChIllya.Views;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
 
@@ -14,6 +15,7 @@ namespace ChIllya
         {
             var builder = MauiApp.CreateBuilder();
             builder
+                .UseMauiCommunityToolkit()
                 .UseMauiApp<App>()
                 .AddAudio()
                 .RegisterViews()
@@ -42,14 +44,14 @@ namespace ChIllya
         {
             builder.Services.AddScoped<HomePage>();
             builder.Services.AddScoped<DirectoryPage>();
-            builder.Services.AddScoped<LocalSearchPage>();
+            builder.Services.AddScoped<SpotifySearchPage>();
 
             return builder;
         }
 
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddScoped<LocalSearchViewModel>();
+            builder.Services.AddScoped<SpotifySearchViewModel>();
             builder.Services.AddScoped<DirectoryViewModel>();
 
             return builder;
@@ -57,12 +59,13 @@ namespace ChIllya
 
         private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddScoped<ISpotifyService, SpotifyService>(provider =>
+            builder.Services.AddTransient<ISpotifyService, SpotifyService>(provider =>
             {
                 var client = new SpotifyAuthentication().CreateSpotifyClient();
                 return new SpotifyService(client);
             });
 
+            builder.Services.AddTransient<ISongService, SongService>();
             builder.Services.AddTransient<ILocalService, LocalService>();
 
             return builder;

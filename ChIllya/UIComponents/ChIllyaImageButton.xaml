@@ -6,8 +6,10 @@
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <!--
-            Binding context to a Control instance that the template is being applied to 
-            (and its base classes)
+                Binding context to a Control instance that the template is being applied to 
+                (and its base classes)
+                e.g: this frame context is binding to this class context so we
+                can bind our properties have declared in this class in child element
             -->
             <Frame BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
                    WidthRequest="{Binding WidthRequest}"

@@ -37,7 +37,7 @@ namespace ChIllya.Services.Implementations
             }
             catch (Exception ex)
             {
-                PopUp.DisplayError(ex.Message);
+                PopUp.DisplayError($"{ex.Message}! Try connect your Wifi and try again");
                 return songs;
             }
 
@@ -50,6 +50,7 @@ namespace ChIllya.Services.Implementations
 
                 Song song = mapper.Map(track);
                 songs.Add(song);
+
                 count++;
             }
 
