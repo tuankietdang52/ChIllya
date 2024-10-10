@@ -17,31 +17,29 @@ namespace ChIllya.Services.Implementations
 
         public Song? GetInformationFromFile(string filePath)
         {
-            Song song;
+            try { return FetchingInformation(filePath); }
+            catch { return null!; }
+        }
 
-            try
-            {
-                song = FetchingInformation(filePath);
-            }
-            catch
-            {
-                return null!;
-            }
+        public string GenerateNameFile(Song song)
+        {
+            string name = song.Name;
+            string artists = GetArtistNameText(song);
 
-            return song;
+            if (artists == "") return $"{name}.mp3";
+
+            return $"{name} - {artists}.mp3";
         }
 
         private Song FetchingInformation(string filePath)
         {
-
             var file = TagLib.File.Create(filePath);
 
             Song song = new()
             {
-                Name = GetNameFromPath(filePath),
+                Name = $"{GetNameFromPath(filePath)}",
                 DirectoryPath = filePath,
                 Duration = (int)file.Properties.Duration.TotalSeconds,
-                ArtistName = GetArtistNameText(file.Tag.Performers),
                 DurationText = new TimeSpan(file.Properties.Duration.Ticks),
             };
 
@@ -49,9 +47,15 @@ namespace ChIllya.Services.Implementations
             return song;
         }
 
-        private string GetArtistNameText(string[] artists)
+        public string GetArtistNameText(Song song)
         {
-            if (artists.Length == 0) return "Unknown";
+            List<string> artists = [];
+            foreach (var artist in song.Artists)
+            {
+                artists.Add(artist.Name);
+            }
+
+            if (artists.Count == 0) return "";
 
             StringBuilder sb = new();
             foreach (var artist in artists)
@@ -60,6 +64,7 @@ namespace ChIllya.Services.Implementations
             }
 
             sb.Remove(sb.Length - 2, 2);
+
             return sb.ToString();
         }
 

@@ -52,7 +52,7 @@ namespace ChIllya.ViewModels
         [ObservableProperty]
         private bool isHaveResult = false;
 
-        public ICommand? ChooseCommand { get; set; }
+        public ICommand? TapCommand { get; set; }
 
         public DirectoryViewModel(ILocalService localService)
         {
@@ -69,7 +69,6 @@ namespace ChIllya.ViewModels
             IsLoading = true;
 
             Songs = await _localService.FetchSongOnDevice();
-
             DisplaySongs.ResetTo(Songs);
 
             IsLoading = false;
@@ -77,7 +76,7 @@ namespace ChIllya.ViewModels
 
         public void GenerateCommand()
         {
-            ChooseCommand = new RelayCommand<Song>(DirectToSong);
+            TapCommand = new RelayCommand<Song>(DirectToSong);
         }
 
         private async void DirectToSong(Song? choice)

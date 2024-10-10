@@ -11,9 +11,19 @@ namespace ChIllya.Models.Mapper
     {
         public Song Map(FullTrack track)
         {
+            StringBuilder sb = new();
+            foreach (var artist in track.Artists)
+            {
+                sb.Append(artist.Name);
+                sb.Append(", ");
+            }
+
+            sb.Remove(sb.Length - 2, 2);
+
             return new Song()
             {
-                Name = track.Name,
+                Title = $"{track.Name}",
+                Name = $"{track.Name} - {sb}",
                 Artists = track.Artists,
                 SpotifyID = track.Id,
                 Duration = track.DurationMs,

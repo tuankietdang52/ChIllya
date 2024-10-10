@@ -1,6 +1,5 @@
 ﻿using ChIllya.Services;
 using ChIllya.Services.Implementations;
-using ChIllya.Utils;
 using ChIllya.ViewModels;
 using ChIllya.Views;
 using CommunityToolkit.Maui;
@@ -67,6 +66,7 @@ namespace ChIllya
 
             builder.Services.AddTransient<ISongService, SongService>();
             builder.Services.AddTransient<ILocalService, LocalService>();
+            builder.Services.AddTransient<IYoutubeService, YoutubeService>();
 
             return builder;
         }

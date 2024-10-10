@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
@@ -76,8 +76,9 @@
 		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.0" />
 		<PackageReference Include="SpotifyAPI.Web" Version="7.1.1" />
 		<PackageReference Include="SpotifyAPI.Web.Auth" Version="7.1.1" />
-		<PackageReference Include="taglib-sharp-netstandard2.0" Version="2.1.0" />
-		<PackageReference Include="VideoLibrary" Version="3.2.5" />
+		<PackageReference Include="TagLibSharp" Version="2.3.0" />
+		<PackageReference Include="YoutubeExplode" Version="6.4.3" />
+		<PackageReference Include="YoutubeExplode.Converter" Version="6.4.3" />
 	</ItemGroup>
 
 	<ItemGroup>

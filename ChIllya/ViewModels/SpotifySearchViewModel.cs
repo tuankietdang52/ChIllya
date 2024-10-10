@@ -18,10 +18,9 @@ namespace ChIllya.ViewModels
     public partial class SpotifySearchViewModel : ObservableObject, IViewModel
     {
         private readonly ISpotifyService _spotifyService;
+        private readonly IYoutubeService _youtubeService;
 
         public BindableCollection<Song> Songs { get; set; }
-
-        public ICommand? LookupCommand { get; set; }
 
         // for loading view
         public bool isLoading = false;
@@ -40,17 +39,26 @@ namespace ChIllya.ViewModels
         [ObservableProperty]
         public bool isHaveResult = false;
 
-        public SpotifySearchViewModel(ISpotifyService spotifyService)
+        #region Command Field
+
+        public ICommand? LookupCommand { get; set; }
+        public ICommand? TapCommand { get; set; }
+
+        #endregion
+
+        public SpotifySearchViewModel(ISpotifyService spotifyService, IYoutubeService youtubeService)
         {
             _spotifyService = spotifyService;
-            Songs = new();
+            _youtubeService = youtubeService;
 
+            Songs = new();
             GenerateCommand();
         }
 
         public void GenerateCommand()
         {
             LookupCommand = new RelayCommand<string>(Searching!);
+            TapCommand = new RelayCommand<Song>(DownloadMusic!);
         }
 
         public async void Searching(string query)
@@ -58,10 +66,16 @@ namespace ChIllya.ViewModels
             IsLoading = true;
 
             var result = await _spotifyService.Search(query);
-
             Songs.ResetTo(result);
 
             IsLoading = false;
+        }
+
+        public async void DownloadMusic(Song song)
+        {
+            if (song is null) return;
+
+            await _youtubeService.Download(song);
         }
     }
 }

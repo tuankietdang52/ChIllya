@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VideoLibrary;
 
 using MauiStorage = Microsoft.Maui.Storage;
 
@@ -31,12 +30,10 @@ namespace ChIllya.Utils
         public bool IsPlaying() => player != null && player.IsPlaying;
         public double GetPosition()
         {
-            Debug.WriteLine($"Pos: {player?.CurrentPosition}");
             return player != null ? player.CurrentPosition : 0;
         }
         public double GetDuration()
         {
-            Debug.WriteLine($"Dur: {player?.Duration}");
             return player != null ? player.Duration : 0;
         }
         public bool IsEnd() => player != null && GetPosition() >= GetDuration();

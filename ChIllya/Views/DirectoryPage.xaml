@@ -27,7 +27,7 @@
             <controls:ListSongView Grid.Row="1"
                                    ItemsSource="{Binding DisplaySongs}"
                                    IsVisible="{Binding IsHaveResult}"
-                                   ItemTapCommand="{Binding ChooseCommand}">
+                                   ItemTapCommand="{Binding TapCommand}">
                 
             </controls:ListSongView>
 

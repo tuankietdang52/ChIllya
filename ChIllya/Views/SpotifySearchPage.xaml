@@ -31,7 +31,8 @@
             <controls:ListSongView
                 Grid.Row="1"
                 IsVisible="{Binding IsHaveResult}"
-                ItemsSource="{Binding Songs}">
+                ItemsSource="{Binding Songs}"
+                ItemTapCommand="{Binding TapCommand}">
 
             </controls:ListSongView>
         </Grid>

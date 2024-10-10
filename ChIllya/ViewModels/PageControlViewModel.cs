@@ -23,6 +23,9 @@ namespace ChIllya.ViewModels
         [ObservableProperty]
         private string? imageStatus;
 
+        [ObservableProperty]
+        private bool isHaveCurrentSong = false;
+
         #region Command
 
         public ICommand? ReturnCommand { get; set; }
@@ -41,6 +44,8 @@ namespace ChIllya.ViewModels
         public void Receive(SongMessage message)
         {
             (Current, ImageStatus, MusicCommand) = message.GetData();
+
+            if (Current is not null && !IsHaveCurrentSong) IsHaveCurrentSong = true;
         }
 
         private async void ReturnToSongPage()

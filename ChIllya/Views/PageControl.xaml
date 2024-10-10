@@ -27,10 +27,12 @@
                 </Frame>
 
                 <BoxView Grid.Row="1" 
+                         IsVisible="{Binding IsHaveCurrentSong}"
                          Color="White"/>
 
-                <Grid x:Name="Shortcut" 
+                <Grid x:Name="Shortcut"
                       Grid.Row="2"
+                      IsVisible="{Binding IsHaveCurrentSong}"
                       ColumnDefinitions="9*, 1*">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer
@@ -38,11 +40,17 @@
                     </Grid.GestureRecognizers>
 
                     <Label Grid.Column="0"
-                           Text="{Binding Current.Name}"
                            FontSize="20"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"
-                           Margin="10, 0"/>
+                           Margin="10, 0">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} - {1}">
+                                <Binding Path="Current.Name"/>
+                                <Binding Path="Current.ArtistName"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
 
                     <controls:ChIllyaImageButton Grid.Column="1"
                                                  Style="{DynamicResource Key=SongButton}"

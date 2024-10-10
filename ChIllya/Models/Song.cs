@@ -13,25 +13,15 @@ namespace ChIllya.Models
     public partial class Song : ObservableObject
     {
         #region Song Properties
+        public string Title { get; set; }
 
+        // file name and for display in UI
         [ObservableProperty]
         private string name = "";
 
         [ObservableProperty]
         private string directoryPath = "";
-
-        [ObservableProperty]
-        private string artistName = "Unknown";
-
-        private List<SimpleArtist> artists = [];
-        public List<SimpleArtist> Artists {
-            get => artists;
-            set
-            {
-                artists = value;
-                SetArtistNameText();
-            } 
-        }
+        public List<SimpleArtist> Artists { get; set; } = [];
 
         [ObservableProperty]
         private string spotifyID = "";
@@ -50,20 +40,6 @@ namespace ChIllya.Models
         public Song()
         {
 
-        }
-
-        private void SetArtistNameText()
-        {
-            if (Artists.Count == 0) ArtistName = "Unknown";
-
-            StringBuilder sb = new();
-            foreach (var artist in Artists)
-            {
-                sb.Append(artist.Name + ", ");
-            }
-
-            sb.Remove(sb.Length - 2, 2);
-            ArtistName = sb.ToString();
         }
     }
 }

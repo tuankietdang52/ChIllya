@@ -22,6 +22,8 @@ namespace ChIllya.Services.Implementations
 
         public async Task<List<Song>> Search(string query)
         {
+            if (query == "" || query is null) return [];
+
             List<Song> songs = [];
             SongMapper mapper = new();
 
@@ -35,15 +37,22 @@ namespace ChIllya.Services.Implementations
                 request = new(SearchRequest.Types.Track, query);
                 result = await client.Search.Item(request);
             }
+            catch (HttpRequestException ex)
+            {
+                PopUp.DisplayError($"{ex.Message}! Connect your Wifi and try again");
+                return songs;
+            }
             catch (Exception ex)
             {
-                PopUp.DisplayError($"{ex.Message}! Try connect your Wifi and try again");
+                PopUp.DisplayError($"{ex.Message}");
                 return songs;
             }
 
-            // we need to supply mapper function to get the correct result we want
-            // cause some endpoints contain have multiple paginations objects
-            // and it will return the root which contain multiple paging object (album, track,...)
+            /* 
+             * We need to supply mapper function to get the correct result we want
+             * cause some endpoints contain have multiple paginations objects
+             * and it will return the root which contain multiple paging object (album, track,...)
+             */
             await foreach (var track in client.Paginate(result.Tracks, (s) => s.Tracks))
             {
                 if (count >= 50) break;
