@@ -7,16 +7,20 @@
       "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\services\\implementations\\youtubeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\views\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\views\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\services\\implementations\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\services\\implementations\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\models\\mapper\\songmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\models\\mapper\\songmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\services\\implementations\\localservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\services\\implementations\\localservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\services\\implementations\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\services\\implementations\\songservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\services\\implementations\\spotifyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\views\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|solutionrelative:chillya\\views\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E2903591-B7B7-43DA-9E1E-779386CEA078}|ChIllya\\ChIllya.csproj|c:\\users\\admin\\source\\repos\\.vs\\project\\chillya\\chillya\\views\\spotifysearchpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -96,27 +96,26 @@
               "RelativeDocumentMoniker": "ChIllya\\Services\\Implementations\\YoutubeService.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Services\\Implementations\\YoutubeService.cs",
               "RelativeToolTip": "ChIllya\\Services\\Implementations\\YoutubeService.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAswBsAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAUwC8AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-10T16:49:45.179Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "SongService.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Services\\Implementations\\SongService.cs",
               "RelativeDocumentMoniker": "ChIllya\\Services\\Implementations\\SongService.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Services\\Implementations\\SongService.cs",
               "RelativeToolTip": "ChIllya\\Services\\Implementations\\SongService.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAIwEEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwBQAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T11:24:56.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T11:24:56.615Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "LocalService.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Services\\Implementations\\LocalService.cs",
               "RelativeDocumentMoniker": "ChIllya\\Services\\Implementations\\LocalService.cs",
@@ -124,25 +123,23 @@
               "RelativeToolTip": "ChIllya\\Services\\Implementations\\LocalService.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAD4vzAAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T14:25:53.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T14:25:53.706Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "HomePage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Views\\HomePage.xaml.cs",
               "RelativeDocumentMoniker": "ChIllya\\Views\\HomePage.xaml.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Views\\HomePage.xaml.cs",
               "RelativeToolTip": "ChIllya\\Views\\HomePage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T16:51:13.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T16:51:13.82Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SongMapper.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Models\\Mapper\\SongMapper.cs",
               "RelativeDocumentMoniker": "ChIllya\\Models\\Mapper\\SongMapper.cs",
@@ -150,12 +147,11 @@
               "RelativeToolTip": "ChIllya\\Models\\Mapper\\SongMapper.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAqwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T11:50:15.091Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-09T11:50:15.091Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "LocalService.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Platforms\\Android\\Service\\LocalService.cs",
               "RelativeDocumentMoniker": "ChIllya\\Platforms\\Android\\Service\\LocalService.cs",
@@ -163,12 +159,11 @@
               "RelativeToolTip": "ChIllya\\Platforms\\Android\\Service\\LocalService.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAIwCcAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T09:59:46.732Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-09T09:59:46.732Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DirectoryPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Views\\DirectoryPage.xaml.cs",
               "RelativeDocumentMoniker": "ChIllya\\Views\\DirectoryPage.xaml.cs",
@@ -176,8 +171,7 @@
               "RelativeToolTip": "ChIllya\\Views\\DirectoryPage.xaml.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T09:49:38.662Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T09:49:38.662Z"
             },
             {
               "$type": "Document",
@@ -189,12 +183,11 @@
               "RelativeToolTip": "ChIllya\\ViewModels\\SpotifySearchViewModel.cs",
               "ViewState": "AgIAAD8AAAAAAAAAAAAAwEkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T09:16:41.395Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T09:16:41.395Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\MauiProgram.cs",
               "RelativeDocumentMoniker": "ChIllya\\MauiProgram.cs",
@@ -202,12 +195,11 @@
               "RelativeToolTip": "ChIllya\\MauiProgram.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAAIwEIAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T14:53:38.05Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T14:53:38.05Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "DirectoryViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\ViewModels\\DirectoryViewModel.cs",
               "RelativeDocumentMoniker": "ChIllya\\ViewModels\\DirectoryViewModel.cs",
@@ -215,8 +207,7 @@
               "RelativeToolTip": "ChIllya\\ViewModels\\DirectoryViewModel.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAAAEIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T09:23:24.854Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T09:23:24.854Z"
             },
             {
               "$type": "Document",
@@ -228,8 +219,7 @@
               "RelativeToolTip": "ChIllya\\ViewModels\\PageControlViewModel.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAUwCUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-09T23:46:47.44Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-09T23:46:47.44Z"
             },
             {
               "$type": "Document",
@@ -241,8 +231,7 @@
               "RelativeToolTip": "ChIllya\\Views\\SpotifySearchPage.xaml",
               "ViewState": "AgIAABUAAAAAAAAAAAAAAB4AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-07T09:10:15.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T09:10:15.807Z"
             },
             {
               "$type": "Document",
@@ -254,12 +243,11 @@
               "RelativeToolTip": "ChIllya\\Views\\SpotifySearchPage.xaml.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAowAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T10:32:53.568Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T10:32:53.568Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "IMapper.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Models\\Mapper\\IMapper.cs",
               "RelativeDocumentMoniker": "ChIllya\\Models\\Mapper\\IMapper.cs",
@@ -267,12 +255,11 @@
               "RelativeToolTip": "ChIllya\\Models\\Mapper\\IMapper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T11:43:38.75Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T11:43:38.75Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "SpotifyService.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\.vs\\Project\\ChIllya\\ChIllya\\Services\\Implementations\\SpotifyService.cs",
               "RelativeDocumentMoniker": "ChIllya\\Services\\Implementations\\SpotifyService.cs",
@@ -280,8 +267,7 @@
               "RelativeToolTip": "ChIllya\\Services\\Implementations\\SpotifyService.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAswDsAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T10:22:04.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T10:22:04.418Z"
             },
             {
               "$type": "Document",
@@ -293,8 +279,7 @@
               "RelativeToolTip": "ChIllya\\Views\\SongPage.xaml",
               "ViewState": "AgIAAEgAAAAAAAAAAIBZwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-08T10:07:09.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T10:07:09.837Z"
             },
             {
               "$type": "Document",
@@ -306,8 +291,7 @@
               "RelativeToolTip": "ChIllya\\Utils\\MusicManager.cs",
               "ViewState": "AgIAAAYAAAAAAAAAACBjwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T13:04:27.299Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T13:04:27.299Z"
             },
             {
               "$type": "Document",
@@ -319,8 +303,7 @@
               "RelativeToolTip": "ChIllya\\AppShell.xaml",
               "ViewState": "AgIAAAMAAAAAAAAAAIBZwAwAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-07T09:17:35.676Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T09:17:35.676Z"
             },
             {
               "$type": "Document",
@@ -332,8 +315,7 @@
               "RelativeToolTip": "ChIllya\\Views\\HomePage.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-07T09:11:56.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T09:11:56.034Z"
             }
           ]
         },

@@ -13,7 +13,7 @@ namespace ChIllya.Models
     public partial class Song : ObservableObject
     {
         #region Song Properties
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
 
         // file name and for display in UI
         [ObservableProperty]
