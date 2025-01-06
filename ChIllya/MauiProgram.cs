@@ -24,10 +24,7 @@ namespace ChIllya
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
-            var setup = new AppSetup();
-            setup
+                })
                 .InitMusicManager()
                 .LoadSecretFile();
 
@@ -36,39 +33,6 @@ namespace ChIllya
 #endif
 
             return builder.Build();
-        }
-
-        // dependency injection
-        private static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
-        {
-            builder.Services.AddScoped<HomePage>();
-            builder.Services.AddScoped<DirectoryPage>();
-            builder.Services.AddScoped<SpotifySearchPage>();
-
-            return builder;
-        }
-
-        private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
-        {
-            builder.Services.AddScoped<SpotifySearchViewModel>();
-            builder.Services.AddScoped<DirectoryViewModel>();
-
-            return builder;
-        }
-
-        private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
-        {
-            builder.Services.AddTransient<ISpotifyService, SpotifyService>(provider =>
-            {
-                var client = new SpotifyAuthentication().CreateSpotifyClient();
-                return new SpotifyService(client);
-            });
-
-            builder.Services.AddTransient<ISongService, SongService>();
-            builder.Services.AddTransient<ILocalService, LocalService>();
-            builder.Services.AddTransient<IYoutubeService, YoutubeService>();
-
-            return builder;
         }
     }
 }

@@ -11,8 +11,8 @@ namespace ChIllya.Views
 		public DirectoryPage(DirectoryViewModel viewModel)
 		{
 			InitializeComponent();
-			BindingContext = viewModel;
             _viewModel = viewModel;
+            BindingContext = _viewModel;
 
             SetupDebounce();
 		}

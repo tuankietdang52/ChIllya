@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.Views.SpotifySearchPage"
              xmlns:views="clr-namespace:ChIllya.Views"
+             xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              Title="Search Spotify">
     <views:PageControl>
-        <Grid>
+        <Grid x:DataType="viewmodels:SpotifySearchViewModel">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="9*"></RowDefinition>

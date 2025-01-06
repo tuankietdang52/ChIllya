@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace ChIllya.Models
 {
-    public partial class Song : ObservableObject
+#pragma warning disable IDE0079
+#pragma warning disable MVVMTK0045
+	public partial class Song : ObservableObject
     {
         #region Song Properties
         public string Title { get; set; } = "";
@@ -42,4 +44,6 @@ namespace ChIllya.Models
 
         }
     }
+#pragma warning restore MVVMTK0045
+#pragma warning restore IDE0079
 }

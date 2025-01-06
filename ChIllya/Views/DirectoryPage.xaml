@@ -4,9 +4,10 @@
              x:Class="ChIllya.Views.DirectoryPage"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:views="clr-namespace:ChIllya.Views"
-             xmlns:controls="clr-namespace:ChIllya.UIComponents">
+             xmlns:controls="clr-namespace:ChIllya.UIComponents"
+             Title="On Device">
     <views:PageControl>
-        <Grid>
+        <Grid x:DataType="viewmodels:DirectoryViewModel">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="9*"></RowDefinition>

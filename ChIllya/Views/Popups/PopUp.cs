@@ -9,7 +9,7 @@ namespace ChIllya.Views.Popups
 {
     public static class PopUp
     {
-        private static Page MainPage => App.Current!.MainPage!;
+        private static Page MainPage => App.Current!.Windows[0]!.Page!;
 
         /// <summary>
         /// run without await

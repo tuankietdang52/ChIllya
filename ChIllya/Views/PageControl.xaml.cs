@@ -10,15 +10,15 @@ namespace ChIllya.Views
 		public PageControl()
 		{
 			InitializeComponent();
-
 			ViewModel = new();
+
 			SetContentShortcut();
 		}
 
 		private void SetContentShortcut()
 		{
 			base.OnApplyTemplate();
-			var shortcut = (Grid) GetTemplateChild("Shortcut");
+			var shortcut = (Grid)GetTemplateChild("Shortcut");
 
 			shortcut.BindingContext = ViewModel;
 		}

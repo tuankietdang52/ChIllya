@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.Views.PageControl"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
-             x:Name="view">
+             xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
+             x:Name="view"
+             x:DataType="viewmodels:PageControlViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <Style x:Key="SongButton" TargetType="controls:ChIllyaImageButton">
@@ -21,10 +23,11 @@
         <ControlTemplate>
             <Grid RowDefinitions="9*, 0.05*, 1*">
                 <!--using frame to add more complex UI-->
-                <Frame Grid.Row="0">
+                <Border Grid.Row="0"
+                        Stroke="Transparent">
                     <!--Where new UI will exist-->
                     <ContentPresenter/>
-                </Frame>
+                </Border>
 
                 <BoxView Grid.Row="1" 
                          IsVisible="{Binding IsHaveCurrentSong}"
@@ -43,13 +46,8 @@
                            FontSize="20"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"
+                           Text="{Binding Current.Name}"
                            Margin="10, 0">
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}{0} - {1}">
-                                <Binding Path="Current.Name"/>
-                                <Binding Path="Current.ArtistName"/>
-                            </MultiBinding>
-                        </Label.Text>
                     </Label>
 
                     <controls:ChIllyaImageButton Grid.Column="1"

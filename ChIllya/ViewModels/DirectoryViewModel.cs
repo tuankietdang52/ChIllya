@@ -25,7 +25,9 @@ using System.Runtime.CompilerServices;
 
 namespace ChIllya.ViewModels
 {
-    public partial class DirectoryViewModel : ObservableObject, IViewModel
+#pragma warning disable IDE0079
+#pragma warning disable MVVMTK0045
+	public partial class DirectoryViewModel : ObservableObject, IViewModel
     {
         private readonly string windowsPath = "C:/Users/ADMIN/ChIllyaData/";
         private readonly string androidPath = "/storage/emulated/0/music shiba/";
@@ -119,15 +121,16 @@ namespace ChIllya.ViewModels
 
             await Task.Run(() =>
             {
-                temp = Songs!.FindAll(song => song.Name
-                                                  .ToLower()
-                                                  .Contains(query.Trim().ToLower()));
+                temp = Songs!.FindAll(
+                    song => song.Name
+                                .Contains(query.Trim(), StringComparison.CurrentCultureIgnoreCase));
 
             }, cancellationTokenSource.Token);
 
             DisplaySongs?.ResetTo(temp);
             IsLoading = false;
         }
-
     }
+#pragma warning restore MVVMTK0045
+#pragma warning restore IDE0079
 }

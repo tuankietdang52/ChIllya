@@ -8,8 +8,9 @@ namespace ChIllya.Services.Implementations
 {
     public partial class LocalService : ILocalService
     {
+#pragma warning disable IDE0079
 #pragma warning disable CA1416
-        private partial List<string> GetData()
+		private partial List<string> GetData()
         {
             List<string> result = [];
             string[] projection =
@@ -43,5 +44,6 @@ namespace ChIllya.Services.Implementations
             return result;
         }
 #pragma warning restore CA1416
-    }
+#pragma warning restore IDE0079
+	}
 }

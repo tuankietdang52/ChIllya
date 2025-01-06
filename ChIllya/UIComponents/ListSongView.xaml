@@ -2,13 +2,15 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.UIComponents.ListSongView"
-             xmlns:controls="clr-namespace:ChIllya.UIComponents">
+             xmlns:controls="clr-namespace:ChIllya.UIComponents"
+             xmlns:model="clr-namespace:ChIllya.Models"
+             x:DataType="controls:ListSongView">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <CollectionView BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
                             ItemsSource="{Binding ItemsSource}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="model:Song">
                         <Grid ColumnDefinitions="7*, 3*" HeightRequest="50">
                             <Grid.GestureRecognizers>
                                 <!--
@@ -18,13 +20,13 @@
                                 -->
                                 <TapGestureRecognizer
                                     Command="{Binding
-                                        Source={
-                                            RelativeSource AncestorType={
-                                                x:Type controls:ListSongView
-                                            }
-                                        },
-                                        Path=ItemTapCommand
-                                    }"
+                                       Source={
+                                           RelativeSource AncestorType={
+                                               x:Type controls:ListSongView
+                                           }
+                                       },
+                                       Path=ItemTapCommand
+                                   }"
                                     CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>
 
