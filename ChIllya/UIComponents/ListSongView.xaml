@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.UIComponents.ListSongView"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
-             xmlns:model="clr-namespace:ChIllya.Models"
-             x:DataType="controls:ListSongView">
+             xmlns:model="clr-namespace:ChIllya.Models">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <CollectionView BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
                             ItemsSource="{Binding ItemsSource}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Song">
+                    <DataTemplate>
                         <Grid ColumnDefinitions="7*, 3*" HeightRequest="50">
                             <Grid.GestureRecognizers>
                                 <!--

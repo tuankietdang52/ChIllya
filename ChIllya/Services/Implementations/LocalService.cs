@@ -75,7 +75,7 @@ namespace ChIllya.Services.Implementations
 
             if (result != task)
             {
-                PopUp.DisplayError("Time Out! Something wrong");
+                WarningPopup.DisplayError("Time Out! Something wrong");
                 return [];
             }
 

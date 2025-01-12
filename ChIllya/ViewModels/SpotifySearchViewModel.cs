@@ -1,43 +1,39 @@
 ﻿using ChIllya.Models;
 using ChIllya.Services;
-using ChIllya.Services.Implementations;
 using ChIllya.Utils;
+using ChIllya.Views.Popups;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ChIllya.ViewModels
 {
-    public partial class SpotifySearchViewModel : ObservableObject, IViewModel
+#pragma warning disable IDE0079
+#pragma warning disable MVVMTK0045
+	public partial class SpotifySearchViewModel : ObservableObject, IViewModel
     {
         private readonly ISpotifyService _spotifyService;
         private readonly IYoutubeService _youtubeService;
 
         public BindableCollection<Song> Songs { get; set; }
 
-        // for loading view
-        public bool isLoading = false;
-        public bool IsLoading
-        {
-            get => isLoading;
-            set
-            {
-                SetProperty(ref isLoading, value);
-                IsHaveResult = !isLoading;
-            }
-        }
+		// for loading view
+		public bool isLoading = false;
+		public bool IsLoading
+		{
+			get => isLoading;
+			set
+			{
+				SetProperty(ref isLoading, value);
+				IsFree = !isLoading;
+			}
+		}
 
         // for list view
         // im just too lazy to do the convert :D 
         [ObservableProperty]
-        public bool isHaveResult = false;
+        public bool isFree = true;
 
         #region Command Field
 
@@ -51,7 +47,7 @@ namespace ChIllya.ViewModels
             _spotifyService = spotifyService;
             _youtubeService = youtubeService;
 
-            Songs = new();
+            Songs = [];
             GenerateCommand();
         }
 
@@ -75,7 +71,15 @@ namespace ChIllya.ViewModels
         {
             if (song is null) return;
 
-            await _youtubeService.Download(song);
+            DownloadProgressWindow popupProgress = new();
+            Shell.Current.ShowPopup(popupProgress);
+
+            await _youtubeService.Download(song, popupProgress.TrackingDownload, 
+                popupProgress.Cts.Token);
+
+            popupProgress.Close();
         }
     }
+#pragma warning restore MVVMTK0045
+#pragma warning restore IDE0079
 }

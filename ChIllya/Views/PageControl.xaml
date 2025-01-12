@@ -4,8 +4,7 @@
              x:Class="ChIllya.Views.PageControl"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
-             x:Name="view"
-             x:DataType="viewmodels:PageControlViewModel">
+             x:Name="view">
     <ContentView.Resources>
         <ResourceDictionary>
             <Style x:Key="SongButton" TargetType="controls:ChIllyaImageButton">
@@ -30,10 +29,11 @@
                 </Border>
 
                 <BoxView Grid.Row="1" 
-                         IsVisible="{Binding IsHaveCurrentSong}"
                          Color="White"/>
 
                 <Grid x:Name="Shortcut"
+                      x:DataType="viewmodels:PageControlViewModel"
+                      BindingContext="{viewmodels:PageControlViewModel}"
                       Grid.Row="2"
                       IsVisible="{Binding IsHaveCurrentSong}"
                       ColumnDefinitions="9*, 1*">

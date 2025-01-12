@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChIllya.Views.Popups
 {
-    public static class PopUp
+    public static class WarningPopup
     {
         private static Page MainPage => App.Current!.Windows[0]!.Page!;
 

@@ -1,6 +1,7 @@
 ﻿using ChIllya.Models;
 using ChIllya.Services;
 using ChIllya.Views.Popups;
+using CommunityToolkit.Maui.Views;
 using SpotifyAPI.Web.Http;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace ChIllya.Services
 			_songService = songService;
 		}
 
-		public async Task Download(Song song)
+		public async Task Download(Song song, Action<double> handlerProgress, CancellationToken cancellationToken)
 		{
 			string url = await GetVideoUrl(song);
 
@@ -50,7 +51,22 @@ namespace ChIllya.Services
 			var streamInfo = streamManifest.GetAudioStreams().GetWithHighestBitrate();
 
 			song.DirectoryPath = Path.Combine(dir, $"{song.Name}.mp3");
-			await client.Videos.Streams.DownloadAsync(streamInfo, song.DirectoryPath);
+
+			Progress<double> progress = new(handlerProgress);
+			try
+			{
+				await Task.Run(async () => await client.Videos.Streams.DownloadAsync(streamInfo, song.DirectoryPath, progress), cancellationToken);
+			}
+			catch (TaskCanceledException)
+			{
+				DeleteUncompleteFile(song.DirectoryPath);
+				return;
+			}
+		}
+
+		private void DeleteUncompleteFile(string path)
+		{
+			if (File.Exists(path)) File.Delete(path);
 		}
 
 		private string GetArtistsQuery(Song song)
@@ -93,7 +109,7 @@ namespace ChIllya.Services
 
 			if (!match.Success)
 			{
-				PopUp.DisplayError("Cant find url");
+				WarningPopup.DisplayError("Cant find url");
 				return "";
 			}
 

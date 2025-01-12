@@ -56,7 +56,7 @@ namespace ChIllya.Utils
             }
             catch (FileNotFoundException ex)
             {
-                PopUp.DisplayError(ex.Message);
+                WarningPopup.DisplayError(ex.Message);
                 return;
             }
 

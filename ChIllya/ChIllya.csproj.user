@@ -32,6 +32,9 @@
     <MauiXaml Update="Views\PageControl.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Views\Popups\DownloadProgressWindow.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\SpotifySearchPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

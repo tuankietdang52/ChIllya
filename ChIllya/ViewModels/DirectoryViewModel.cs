@@ -1,26 +1,11 @@
 ﻿using ChIllya.Models;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ChIllya.Utils;
 using ChIllya.Views;
 using ChIllya.Views.Popups;
-using Swan;
 using ChIllya.Services;
-using ChIllya.Services.Implementations;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using CommunityToolkit.Maui.Core.Extensions;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 
 namespace ChIllya.ViewModels
@@ -47,12 +32,12 @@ namespace ChIllya.ViewModels
             set
             {
                 SetProperty(ref isLoading, value);
-                IsHaveResult = !isLoading;
+                IsFree = !isLoading;
             }
         }
 
         [ObservableProperty]
-        private bool isHaveResult = false;
+        private bool isFree = false;
 
         public ICommand? TapCommand { get; set; }
 
@@ -66,7 +51,7 @@ namespace ChIllya.ViewModels
 
         private async void LoadSongs()
         {
-            DisplaySongs = new();
+            DisplaySongs = [];
             
             IsLoading = true;
 
@@ -85,7 +70,7 @@ namespace ChIllya.ViewModels
         {
             if (choice == null)
             {
-                PopUp.DisplayError("Song is null");
+                WarningPopup.DisplayError("Song is null");
                 return;
             }
 
@@ -103,7 +88,7 @@ namespace ChIllya.ViewModels
         {
             if (Songs is null || DisplaySongs is null)
             {
-                PopUp.DisplayError("Cannot Load Songs on Device");
+                WarningPopup.DisplayError("Cannot Load Songs on Device");
                 return;
             }
 

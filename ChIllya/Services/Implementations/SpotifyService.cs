@@ -39,12 +39,12 @@ namespace ChIllya.Services.Implementations
             }
             catch (HttpRequestException ex)
             {
-                PopUp.DisplayError($"{ex.Message}! Connect your Wifi and try again");
+                WarningPopup.DisplayError($"{ex.Message}! Connect your Wifi and try again");
                 return songs;
             }
             catch (Exception ex)
             {
-                PopUp.DisplayError($"{ex.Message}");
+                WarningPopup.DisplayError($"{ex.Message}");
                 return songs;
             }
 

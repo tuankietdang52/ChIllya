@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="ChIllya.Views.Popups.DownloadProgressWindow"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               Color="Transparent"
+               CanBeDismissedByTappingOutsideOfPopup="False">
+    <Border BackgroundColor="Black" HeightRequest="150" WidthRequest="350">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10"></RoundRectangle>
+        </Border.StrokeShape>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" x:Name="progressState" HorizontalOptions="Center" VerticalOptions="Center">
+                Downloading
+            </Label>
+            <ProgressBar x:Name="progressBar" Grid.Row="1" Progress="0" ProgressColor="Purple" />
+            <Button x:Name="closeButton" 
+                    Grid.Row="2" Text="Cancel" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" 
+                    WidthRequest="150">
+            </Button>
+        </Grid>
+    </Border>
+</toolkit:Popup>

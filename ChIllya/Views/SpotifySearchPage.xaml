@@ -5,9 +5,11 @@
              xmlns:views="clr-namespace:ChIllya.Views"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
-             Title="Search Spotify">
+             x:Name="spotifySearchPage"
+             Title="Search Spotify"
+             x:DataType="viewmodels:SpotifySearchViewModel">
     <views:PageControl>
-        <Grid x:DataType="viewmodels:SpotifySearchViewModel">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="9*"></RowDefinition>
@@ -16,11 +18,9 @@
             <Entry Grid.Row="0"
                    x:Name="input"
                    Placeholder="Search on Spotify..."
-                   ReturnCommand="{Binding LookupCommand}"
-                   ReturnCommandParameter="{Binding Source={Reference input}, Path=Text}">
-
+                   IsEnabled="{Binding IsFree}"
+                   ReturnCommand="{Binding LookupCommand}">
             </Entry>
-
 
             <ActivityIndicator 
                 Grid.Row="1"
@@ -31,7 +31,7 @@
 
             <controls:ListSongView
                 Grid.Row="1"
-                IsVisible="{Binding IsHaveResult}"
+                IsVisible="{Binding IsFree}"
                 ItemsSource="{Binding Songs}"
                 ItemTapCommand="{Binding TapCommand}">
 

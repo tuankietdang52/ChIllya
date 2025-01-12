@@ -11,8 +11,20 @@ public partial class SpotifySearchPage : ContentPage
 	public SpotifySearchPage(SpotifySearchViewModel viewModel)
 	{
 		InitializeComponent();
+		SetBindingSearchResult();
 
 		_viewModel = viewModel;
 		BindingContext = _viewModel;
+	}
+
+	public void SetBindingSearchResult()
+	{
+		var binding = new Binding()
+		{
+			Source = input,
+			Path = "Text"
+		};
+
+		input.SetBinding(Entry.ReturnCommandParameterProperty, binding);
 	}
 }

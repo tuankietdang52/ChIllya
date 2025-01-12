@@ -26,7 +26,7 @@ namespace ChIllya.Utils
             }
             catch (Exception ex)
             {
-                PopUp.DisplayError(ex.Message);
+                WarningPopup.DisplayError(ex.Message);
                 return;
             }
         }
