@@ -30,5 +30,4 @@ ChIllya can also be used to listen to music. You can play, stop, and skip song. 
 ### Beta
 <p>ChIllya still in development so it might have some issue</p>
 
-### Github
-Install through github on https://github.com/tuankietdang52/ChIllya/releases/tag/Beta or in Release Section of this repository
+### ChIllya is temporary cant download because some issue about Youtube Download Service
