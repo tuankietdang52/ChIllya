@@ -53,14 +53,21 @@ namespace ChIllya.Services.Implementations
              * cause some endpoints contain have multiple paginations objects
              * and it will return the root which contain multiple paging object (album, track,...)
              */
-            await foreach (var track in client.Paginate(result.Tracks, (s) => s.Tracks))
+            try
             {
-                if (count >= 50) break;
+                await foreach (var track in client.Paginate(result.Tracks, (s) => s.Tracks))
+				{
+					if (count >= 50) break;
 
-                Song song = mapper.Map(track);
-                songs.Add(song);
+					Song song = mapper.Map(track);
+					songs.Add(song);
 
-                count++;
+					count++;
+				}
+            }
+            catch (APIException)
+            {
+                return songs;
             }
 
             return songs;

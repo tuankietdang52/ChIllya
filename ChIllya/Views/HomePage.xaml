@@ -4,7 +4,8 @@
              x:Class="ChIllya.Views.HomePage"
              Title="Morning"
              xmlns:views="clr-namespace:ChIllya.Views"
-             xmlns:controls="clr-namespace:ChIllya.UIComponents">
+             xmlns:controls="clr-namespace:ChIllya.UIComponents"
+             xmlns:sfButton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons">
     <views:PageControl>
         
     </views:PageControl>

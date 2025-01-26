@@ -5,6 +5,7 @@ using ChIllya.Views;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace ChIllya
 {
@@ -24,9 +25,14 @@ namespace ChIllya
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                })
+                    fonts.AddFont("Raleway-Regular.ttf", "RalewayRegular");
+					fonts.AddFont("Raleway-SemiBold.ttf", "RalewaySemibold");
+                    fonts.AddFont("Inter_24pt-Regular.tff", "InterRegular");
+					fonts.AddFont("Inter_24pt-SemiBold.tff", "InterSemibold");
+				})
                 .InitMusicManager()
-                .LoadSecretFile();
+                .LoadSecretFile()
+                .ConfigureSyncfusionCore();
 
 #if DEBUG
             builder.Logging.AddDebug();

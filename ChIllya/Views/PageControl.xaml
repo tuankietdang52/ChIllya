@@ -4,27 +4,16 @@
              x:Class="ChIllya.Views.PageControl"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Name="view">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style x:Key="SongButton" TargetType="controls:ChIllyaImageButton">
-                <Setter Property="BackgroundColor"
-                        Value="Transparent"/>
-                <Setter Property="ImageWidth"
-                        Value="30"/>
-                <Setter Property="ImageHeight"
-                        Value="30"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentView.Resources>
-    
+
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid RowDefinitions="9*, 0.05*, 1*">
                 <!--using frame to add more complex UI-->
                 <Border Grid.Row="0"
                         Stroke="Transparent">
-                    <!--Where new UI will exist-->
                     <ContentPresenter/>
                 </Border>
 
@@ -50,10 +39,15 @@
                            Margin="10, 0">
                     </Label>
 
-                    <controls:ChIllyaImageButton Grid.Column="1"
-                                                 Style="{DynamicResource Key=SongButton}"
-                                                 ImageSource="{Binding ImageStatus}"
-                                                 TapCommand="{Binding MusicCommand}"/>
+                    <sfbutton:SfButton ImageSource="{Binding ImageStatus}"
+                                       Grid.Column="1"
+                                       ShowIcon="True"
+                                       ImageSize="30"
+                                       EnableRippleEffect="False"
+                                       ImageAlignment="Default"
+                                       Background="Transparent"
+                                       Command="{Binding MusicCommand}">
+                    </sfbutton:SfButton>
                 </Grid>
             </Grid>
         </ControlTemplate>

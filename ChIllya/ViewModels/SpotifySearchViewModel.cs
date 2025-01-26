@@ -74,8 +74,15 @@ namespace ChIllya.ViewModels
             DownloadProgressWindow popupProgress = new();
             Shell.Current.ShowPopup(popupProgress);
 
-            await _youtubeService.Download(song, popupProgress.TrackingDownload, 
-                popupProgress.Cts.Token);
+            try
+            {
+				await _youtubeService.Download(song, popupProgress.TrackingDownload,
+				    popupProgress.Cts.Token);
+			}
+            catch (Exception ex)
+            {
+                WarningPopup.DisplayError(ex.Message);
+            }
 
             popupProgress.Close();
         }

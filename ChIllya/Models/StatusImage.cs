@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using ChIllya.Utils;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChIllya.Utils
+namespace ChIllya.Models
 {
     public partial class StatusImage : ObservableObject
     {
@@ -26,11 +27,11 @@ namespace ChIllya.Utils
 
             if (manager.IsEnd())
             {
-                Source = "Images/replay.png";
+                Source = "Images/replay.svg";
                 return;
             }
 
-            Source = manager.IsPlaying() ? "Images/pause.png" : "Images/play.png";
+            Source = manager.IsPlaying() ? "Images/pause.svg" : "Images/play.svg";
         }
     }
 }

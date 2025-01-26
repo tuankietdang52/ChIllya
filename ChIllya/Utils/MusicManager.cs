@@ -19,7 +19,7 @@ namespace ChIllya.Utils
 
         private readonly IMessenger messenger = new StrongReferenceMessenger();
 
-        private StatusImage? imageStatus;
+        private readonly StatusImage? imageStatus;
 
         #region Music Field
 

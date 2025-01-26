@@ -4,88 +4,95 @@
              x:Class="ChIllya.Views.SongPage"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
+             xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              Shell.TabBarIsVisible="False"
              x:DataType="viewmodels:SongViewModel">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="SongButton" TargetType="controls:ChIllyaImageButton">
-                <Setter Property="BackgroundColor"
-                        Value="Gray"/>
-                <Setter Property="CornerRadius"
-                        Value="100"/>
-                <Setter Property="WidthRequest"
-                        Value="100"/>
-                <Setter Property="HeightRequest"
-                        Value="100"/>
-                <Setter Property="ImageWidth"
-                        Value="40"/>
-                <Setter Property="ImageHeight"
-                        Value="40"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior
-            TextOverride="&lt;"
-            Command="{Binding BackCommand}"/>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
 
-    <Grid x:DataType="viewmodels:SongViewModel">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+    <Grid>
+        <Image Source="Images/blursongbg.png"
+               Aspect="AspectFill"
+               Scale="1.5">
+        </Image>
 
-        <Grid Grid.Row="1">
+        <Grid x:DataType="viewmodels:SongViewModel">
             <Grid.RowDefinitions>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4.5*"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
             </Grid.RowDefinitions>
 
-            <Label
-                Grid.Row="0"
-                Text="{Binding Current.Name}"
-                FontSize="25"
-                FontAttributes="Bold"
-                TextColor="White"/>
+            <AbsoluteLayout Grid.Row="0">
+                <sfbutton:SfButton AbsoluteLayout.LayoutBounds="0.05, 0.5, 30, 30"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional" 
+                                   Command="{Binding BackCommand}"
+                                   BackgroundImageSource="Images/arrowleft.svg"
+                                   Background="Transparent">
+                </sfbutton:SfButton>
+                <Label AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center">
+                    Now Playing
+                </Label>
+            </AbsoluteLayout>
+            <Image Grid.Row="1" Source="Images/disk.svg" Aspect="Center"
+                   Scale="0.7" Opacity="0.8">
+                
+            </Image>
 
-            <Label
-                Grid.Row="1"
-                Text=""
-                FontSize="15"
-                TextColor="White"/>
+            <Label Grid.Row="2"
+                   Text="{Binding Current.Name}"
+                   FontSize="25"
+                   Padding="20, 0, 0, 0"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+            <Slider Grid.Row="3"
+                    x:Name="MusicSlider"
+                    Value="{Binding SliderValue}"
+                    Minimum="0"
+                    Maximum="{Binding Current.Duration}"
+                    DragCompleted="SliderValueChanged"
+                    ThumbColor="DeepPink"
+                    MinimumTrackColor="HotPink"
+                    MaximumTrackColor="Purple" />
+
+            <Label Grid.Row="4"
+                   Text="{Binding Position}"
+                   VerticalTextAlignment="End"
+                   HorizontalTextAlignment="End"
+                   FontFamily="InterRegular"
+                   Padding="0, 0, 20, 20"
+                   FontSize="15"/>
+
+            <FlexLayout Grid.Row="5"
+                        JustifyContent="Center"
+                        AlignItems="Center">
+
+                <sfbutton:SfButton ImageSource="{Binding ImageStatus}"
+                                   WidthRequest="100"
+                                   HeightRequest="100"
+                                   ShowIcon="True"
+                                   ImageSize="40"
+                                   EnableRippleEffect="False"
+                                   ImageAlignment="Default"
+                                   CornerRadius="50"
+                                   Command="{Binding MusicCommand}">
+                    <sfbutton:SfButton.Background>
+                        <LinearGradientBrush EndPoint="1,1">
+                            <GradientStop Color="#CC00FF" Offset="0.1"></GradientStop>
+                            <GradientStop Color="#FF008C" Offset="1.0"></GradientStop>
+                        </LinearGradientBrush>
+                    </sfbutton:SfButton.Background>
+                </sfbutton:SfButton>
+            </FlexLayout>
         </Grid>
-
-        <Label
-            Grid.Row="2"
-            Text="{Binding Position}"
-            VerticalTextAlignment="End"
-            HorizontalTextAlignment="End"
-            FontSize="20"/>
-
-        <Slider Grid.Row="3"
-                x:Name="MusicSlider"
-                Value="{Binding SliderValue}"
-                Minimum="0"
-                Maximum="{Binding Current.Duration}"
-                DragCompleted="SliderValueChanged"
-                ThumbColor="DeepPink"
-                MinimumTrackColor="HotPink"
-                MaximumTrackColor="Purple"/>
-
-        <FlexLayout
-            Grid.Row="4"
-            JustifyContent="Center"
-            AlignItems="Center">
-
-            <controls:ChIllyaImageButton Style="{DynamicResource Key=SongButton}"
-                                         TapCommand="{Binding MusicCommand}"
-                                         ImageSource="{Binding ImageStatus}"/>
-        </FlexLayout>
     </Grid>
 </ContentPage>

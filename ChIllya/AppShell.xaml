@@ -4,7 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ChIllya.Views"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.FlyoutBehavior="Disabled">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="Transparent"></toolkit:StatusBarBehavior>
+    </Shell.Behaviors>
     
     <TabBar Route="maintab">
         <Tab Title="Home" Route="home">

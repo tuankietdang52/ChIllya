@@ -44,6 +44,7 @@
                                    Text="{Binding DurationText, StringFormat='{0:hh\\:mm\\:ss}'}"
                                    Margin="0, 0, 10, 0"
                                    FontSize="13"
+                                   FontFamily="InterRegular"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="End"/>
                         </Grid>
