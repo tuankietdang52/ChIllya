@@ -9,6 +9,7 @@
 <p align="center">
 <a href="https://github.com/search?q=repo%3Atuankietdang52%2FChIllya++language%3AC%23&type=code"><img alt="language" src="https://img.shields.io/badge/language-c%23-purple"></a>
 <a><img alt="framework" src="https://img.shields.io/badge/framework-9.0-%23512BD4?logo=.net"></a>
+<a href="https://github.com/tuankietdang52/ChIllya/blob/main/LICENSE"><img alt="Static Badge" src="https://img.shields.io/badge/license-MIT-green"></a>
 </p>
 
 ## Downloading a song
@@ -29,5 +30,4 @@ ChIllya can also be used to listen to music. You can play, stop, and skip song. 
 ### Beta
 <p>ChIllya still in development so it might have some issue</p>
 
-### Github
-
+### ChIllya is temporary cant download because some issue about Youtube Download Service
