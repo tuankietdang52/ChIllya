@@ -18,7 +18,7 @@ namespace ChIllya.Services
         /// </summary>
         /// <returns></returns>
         Task<List<Song>> FetchSongOnDevice();
-
+        Task<List<Playlist>> FetchPlaylistOnDevice();
         //Task<IList<Song>> Search(string query);
     }
 }

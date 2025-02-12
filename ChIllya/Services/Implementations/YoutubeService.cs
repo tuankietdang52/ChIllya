@@ -53,20 +53,17 @@ namespace ChIllya.Services
 			song.DirectoryPath = Path.Combine(dir, $"{song.Name}.mp3");
 
 			Progress<double> progress = new(handlerProgress);
+			string path = song.DirectoryPath;
+
 			try
 			{
-				await Task.Run(async () => await client.Videos.Streams.DownloadAsync(streamInfo, song.DirectoryPath, progress), cancellationToken);
+				await Task.Run(async () => await client.Videos.Streams.DownloadAsync(streamInfo, path, progress), cancellationToken);
 			}
 			catch (TaskCanceledException)
 			{
-				DeleteUncompleteFile(song.DirectoryPath);
+				if (File.Exists(path)) File.Delete(path);
 				return;
 			}
-		}
-
-		private void DeleteUncompleteFile(string path)
-		{
-			if (File.Exists(path)) File.Delete(path);
 		}
 
 		private string GetArtistsQuery(Song song)
@@ -101,10 +98,10 @@ namespace ChIllya.Services
 		private async Task<string> GetVideoUrl(Song song)
 		{
 			string query = $"{song.Title}+{GetArtistsQuery(song)}";
-			string path = $"https://www.youtube.com/results?search_query={query}+audio";
+			string searchUrl = $"https://www.youtube.com/results?search_query={query}+audio";
 
 			// get html text
-			var response = await httpClient.GetStringAsync(path);
+			var response = await httpClient.GetStringAsync(searchUrl);
 			Match match = videoUrlRegex.Match(response);
 
 			if (!match.Success)

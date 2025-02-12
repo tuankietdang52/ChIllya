@@ -5,7 +5,14 @@
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:views="clr-namespace:ChIllya.Views"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
-             Title="On Device">
+             xmlns:utils="clr-namespace:ChIllya.Utils"
+             Title="Playlist on device">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <utils:BooleanConverter x:Key="BooleanConverter"></utils:BooleanConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <views:PageControl>
         <Grid x:DataType="viewmodels:DirectoryViewModel">
             <Grid.RowDefinitions>
@@ -18,21 +25,26 @@
                    TextChanged="OnTextChanged">
             </Entry>
 
-            <ActivityIndicator 
-                Grid.Row="1"
-                IsVisible="{Binding IsLoading}"
-                IsRunning="{Binding IsLoading}" 
-                VerticalOptions="Center" 
-                HorizontalOptions="Center"/>
+            <ActivityIndicator Grid.Row="1"
+                               IsVisible="{Binding IsLoading}"
+                               IsRunning="{Binding IsLoading}" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"/>
 
-            <controls:ListSongView Grid.Row="1"
-                                   ItemsSource="{Binding DisplaySongs}"
-                                   IsVisible="{Binding IsFree}"
-                                   ItemTapCommand="{Binding TapCommand}">
-                
-            </controls:ListSongView>
-
-
+            <Grid Grid.Row="1" 
+                  RowDefinitions="1*" 
+                  IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}">
+                <Label Grid.Row="0"
+                       IsVisible="{Binding IsHaveItem, Converter={StaticResource BooleanConverter}}"
+                       HorizontalTextAlignment="Center">
+                    No playlist
+                </Label>
+                <controls:ListDirectoryView Grid.Row="0"
+                                            ItemsSource="{Binding DisplayPlaylists}"
+                                            IsHaveItem="{Binding IsHaveItem}"
+                                            ItemTapCommand="{Binding TapCommand}">
+                </controls:ListDirectoryView>
+            </Grid>
         </Grid>
     </views:PageControl>
 </ContentPage>

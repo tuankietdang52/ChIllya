@@ -26,7 +26,7 @@ namespace ChIllya.Views
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (searching is null) return;
-            if (_viewModel.DisplaySongs is null) return;
+            if (_viewModel.DisplayPlaylists is null) return;
 
             searching(e.NewTextValue);
         }

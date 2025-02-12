@@ -20,7 +20,7 @@ namespace ChIllya.Utils
                 task.Wait();
 
                 Stream fileStream = task.Result;
-                StreamReader sr = new StreamReader(fileStream);
+                StreamReader sr = new(fileStream);
 
                 InsertEnvironmentVariable(sr);
             }

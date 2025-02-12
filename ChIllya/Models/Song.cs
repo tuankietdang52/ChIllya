@@ -37,6 +37,8 @@ namespace ChIllya.Models
         [ObservableProperty]
         private TimeSpan durationText;
 
+        public string Folder { get; set; } = "";
+
         #endregion
 
         public Song()

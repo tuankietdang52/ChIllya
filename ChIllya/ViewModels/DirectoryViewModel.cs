@@ -14,30 +14,21 @@ namespace ChIllya.ViewModels
 #pragma warning disable MVVMTK0045
 	public partial class DirectoryViewModel : ObservableObject, IViewModel
     {
-        private readonly string windowsPath = "C:/Users/ADMIN/ChIllyaData/";
-        private readonly string androidPath = "/storage/emulated/0/music shiba/";
+        //private readonly string windowsPath = "C:/Users/ADMIN/ChIllyaData/";
+        //private readonly string androidPath = "/storage/emulated/0/music shiba/";
 
         private readonly ILocalService _localService;
 
         private CancellationTokenSource? cancellationTokenSource;
 
-        private List<Song>? Songs;
+        private List<Playlist>? Playlists;
+        public BindableCollection<Playlist>? DisplayPlaylists { get; set; }
 
-        public BindableCollection<Song>? DisplaySongs { get; set; }
-        
+        [ObservableProperty]        
         public bool isLoading = false;
-        public bool IsLoading
-        {
-            get => isLoading;
-            set
-            {
-                SetProperty(ref isLoading, value);
-                IsFree = !isLoading;
-            }
-        }
 
         [ObservableProperty]
-        private bool isFree = false;
+        private bool isHaveItem = false;
 
         public ICommand? TapCommand { get; set; }
 
@@ -46,49 +37,43 @@ namespace ChIllya.ViewModels
             _localService = localService;
             GenerateCommand();
 
-            LoadSongs();
+            LoadPlaylists();
         }
 
-        private async void LoadSongs()
+        private async void LoadPlaylists()
         {
-            DisplaySongs = [];
-            
+            DisplayPlaylists = [];      
             IsLoading = true;
 
-            Songs = await _localService.FetchSongOnDevice();
-            DisplaySongs.ResetTo(Songs);
+            Playlists = await _localService.FetchPlaylistOnDevice();
+            DisplayPlaylists.ResetTo(Playlists);
+
+            IsHaveItem = DisplayPlaylists.Any();
 
             IsLoading = false;
         }
 
         public void GenerateCommand()
         {
-            TapCommand = new RelayCommand<Song>(DirectToSong);
+            TapCommand = new RelayCommand<Playlist>(DirectToPlaylistView!);
         }
 
-        private async void DirectToSong(Song? choice)
+        private async void DirectToPlaylistView(Playlist playlist)
         {
-            if (choice == null)
+            if (playlist == null)
             {
-                WarningPopup.DisplayError("Song is null");
+                WarningPopup.DisplayError("Playlist is null");
                 return;
             }
 
-            Song current = MusicManager.Instance!.Current;
-
-            if (current == null || choice.DirectoryPath != current.DirectoryPath)
-            {
-                // User choose a song similar to the one currently playing
-                await Shell.Current.Navigation.PushAsync(new SongPage(choice));
-            }
-            else await Shell.Current.Navigation.PushAsync(new SongPage());
+            await Shell.Current.Navigation.PushAsync(new PlaylistView(playlist));
         }
 
         public void Searching(string query)
         {
-            if (Songs is null || DisplaySongs is null)
+            if (Playlists is null || DisplayPlaylists is null)
             {
-                WarningPopup.DisplayError("Cannot Load Songs on Device");
+                WarningPopup.DisplayError("Cannot Load Playlists on device");
                 return;
             }
 
@@ -101,18 +86,18 @@ namespace ChIllya.ViewModels
 
             IsLoading = true;
 
-            List<Song> temp = new();
+            List<Playlist> temp = [];
             cancellationTokenSource = new();
 
             await Task.Run(() =>
             {
-                temp = Songs!.FindAll(
-                    song => song.Name
+                temp = Playlists!.FindAll(
+                    playlist => playlist.Name
                                 .Contains(query.Trim(), StringComparison.CurrentCultureIgnoreCase));
 
             }, cancellationTokenSource.Token);
 
-            DisplaySongs?.ResetTo(temp);
+            DisplayPlaylists?.ResetTo(temp);
             IsLoading = false;
         }
     }

@@ -42,9 +42,11 @@
                     Now Playing
                 </Label>
             </AbsoluteLayout>
-            <Image Grid.Row="1" Source="Images/disk.svg" Aspect="Center"
-                   Scale="0.7" Opacity="0.8">
-                
+            <Image Grid.Row="1" 
+                   Source="Images/disk.svg"
+                   Aspect="Center"
+                   Scale="0.7"
+                   Opacity="0.8">
             </Image>
 
             <Label Grid.Row="2"

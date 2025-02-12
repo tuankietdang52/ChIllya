@@ -34,13 +34,17 @@ namespace ChIllya.Services.Implementations
         private Song FetchingInformation(string filePath)
         {
             var file = TagLib.File.Create(filePath);
+            var fileParts = SplitFilePath(filePath);
+
+            int length = fileParts.Length;
 
             Song song = new()
             {
-                Name = $"{GetNameFromPath(filePath)}",
+                Name = $"{fileParts[length - 2]}",
                 DirectoryPath = filePath,
                 Duration = (int)file.Properties.Duration.TotalSeconds,
                 DurationText = new TimeSpan(file.Properties.Duration.Ticks),
+                Folder = fileParts[length - 3],
             };
 
             file.Dispose();
@@ -68,15 +72,16 @@ namespace ChIllya.Services.Implementations
             return sb.ToString();
         }
 
-
-        private string GetNameFromPath(string path)
+        /// <summary>
+        /// Split file path by '/' and '.'
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string[] SplitFilePath(string path)
         {
             char[] filter = ['/', '.'];
             string[] words = path.Split(filter);
-
-            int length = words.Length;
-
-            return words[length - 2];
+            return words;
         }
     }
 }

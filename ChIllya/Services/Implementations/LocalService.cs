@@ -51,10 +51,10 @@ namespace ChIllya.Services.Implementations
         }
 #endif
 
-        private List<Song> GettingData()
+        private List<Song> FetchingSongs()
         {
             var paths = GetData();
-            List<Song> list = new();
+            List<Song> list = [];
 
             foreach (var path in paths)
             {
@@ -68,9 +68,9 @@ namespace ChIllya.Services.Implementations
         // running in task for not frozing app while fetching data
         public async Task<List<Song>> FetchSongOnDevice()
         {
-            var task = Task.Factory.StartNew(() => GettingData());
+            var task = Task.Factory.StartNew(() => FetchingSongs());
 
-            // checking if task done first or the time out first
+            // time out is 10 second
             var result = await Task.WhenAny(task, Task.Delay(10000));
 
             if (result != task)
@@ -81,5 +81,30 @@ namespace ChIllya.Services.Implementations
 
             return task.Result;
         }
+
+        public async Task<List<Playlist>> FetchPlaylistOnDevice()
+        {
+            Dictionary<string, Playlist> playlists = [];
+
+			var songs = await FetchSongOnDevice();
+
+            foreach (var song in songs)
+            {
+                string folderName = song.Folder;
+
+                if (!playlists.TryGetValue(folderName, out Playlist? playlist))
+                {
+					playlist = new Playlist()
+                    {
+                        Name = folderName
+                    };
+					playlists[folderName] = playlist;
+                }
+
+				playlist.AddSong(song);
+            }
+
+            return new List<Playlist>(playlists.Values);
+		}
     }
 }
