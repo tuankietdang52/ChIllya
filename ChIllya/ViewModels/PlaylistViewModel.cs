@@ -4,12 +4,9 @@ using ChIllya.Views;
 using ChIllya.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ChIllya.Music;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace ChIllya.ViewModels
 {
@@ -34,7 +31,7 @@ namespace ChIllya.ViewModels
             LoadSongs();
             GenerateCommand();
         }
-        
+
         public void GenerateCommand()
         {
             TapCommand = new RelayCommand<Song>(DirectToSong);
@@ -57,13 +54,17 @@ namespace ChIllya.ViewModels
                 return;
             }
 
-            Song current = MusicManager.Instance!.Current;
+            MusicManager manager = MusicManager.Instance!;
+            if (manager == null) throw new NullReferenceException(nameof(manager));
 
-            if (current == null || choice.DirectoryPath != current.DirectoryPath)
+            Song currentSong = manager.GetCurrentSong()!;
+
+            if (currentSong == null || choice.DirectoryPath != currentSong.DirectoryPath)
             {
-                // User choose a song similar to the one currently playing
                 await Shell.Current.Navigation.PushAsync(new SongPage(choice));
+                manager.SetPlaylist(Current);
             }
+            // User choose a song similar to the one currently playing
             else await Shell.Current.Navigation.PushAsync(new SongPage());
         }
     }

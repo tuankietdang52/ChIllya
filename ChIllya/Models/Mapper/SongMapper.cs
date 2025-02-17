@@ -1,4 +1,5 @@
 ﻿using ChIllya.Services;
+using ChIllya.Utils;
 using SpotifyAPI.Web;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace ChIllya.Models.Mapper
     {
         private string GetArtistsText(FullTrack track)
         {
-            if (track.Artists.Count == 0) return "";
+            if (track.Artists.IsEmpty()) return "";
 
             StringBuilder sb = new();
             foreach (var artist in track.Artists)

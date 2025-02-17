@@ -1,4 +1,5 @@
 ﻿using ChIllya.Models;
+using ChIllya.Music;
 using ChIllya.Utils;
 using ChIllya.ViewModels.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -23,7 +24,7 @@ namespace ChIllya.ViewModels
     /// will be deleted
     /// </para>
     /// <para>
-    ///     When move to Song Page in any way, 
+    ///     When move to Song Page in anyway, 
     ///     always create the new Song VM instance
     ///     and setup properties depend on song status through Music Player Instance 
     /// </para>
@@ -53,6 +54,9 @@ namespace ChIllya.ViewModels
         [ObservableProperty]
         private ICommand? musicCommand;
 
+        public ICommand? NextSongCommand { get; set; }
+        public ICommand? PreviousSongCommand { get; set; }
+
         #endregion
 
         // User return to song page by shortcut or in directory
@@ -64,7 +68,8 @@ namespace ChIllya.ViewModels
         public SongViewModel(Song song)
         {
             Setup();
-            Manager.ReadyToPlay(song);
+            Manager.SetCurrentSong(song);
+            Manager.StartSong();
         }
 
         // update information of current song
@@ -115,6 +120,22 @@ namespace ChIllya.ViewModels
 
                 await Shell.Current.Navigation.PopAsync();
             });
+
+            var nextAction = ToNextSong;
+            var previousAction = ToPreviousSong;
+
+            NextSongCommand = new RelayCommand(nextAction.Debounce(500));
+            PreviousSongCommand = new RelayCommand(previousAction.Debounce(500));
+        }
+
+        private void ToNextSong()
+        {
+            Manager.NextSong();
+        }
+
+        private void ToPreviousSong()
+        {
+            Manager.PreviousSong();
         }
 
         public void SliderValueChanged(double value)

@@ -1,4 +1,5 @@
 ﻿using ChIllya.Models;
+using ChIllya.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace ChIllya.Services.Implementations
                 artists.Add(artist.Name);
             }
 
-            if (artists.Count == 0) return "";
+            if (artists.IsEmpty()) return "";
 
             StringBuilder sb = new();
             foreach (var artist in artists)

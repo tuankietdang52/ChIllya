@@ -1,17 +1,12 @@
-﻿using ChIllya.Utils;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using ChIllya.Music;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ChIllya.Models
 {
     public partial class StatusImage : ObservableObject
     {
-        private MusicManager manager;
+        private readonly MusicManager manager;
 
         public string? Source { get; set; } = "";
 
@@ -22,16 +17,22 @@ namespace ChIllya.Models
 
         public void UpdateStatus()
         {
-            //idk why the information of music status is loading so slow
             Thread.Sleep(200);
 
-            if (manager.IsEnd())
+            switch (manager.SongState)
             {
-                Source = "Images/replay.svg";
-                return;
-            }
+                case EMusicState.Playing:
+                    Source = "Images/pause.svg";
+                    break;
 
-            Source = manager.IsPlaying() ? "Images/pause.svg" : "Images/play.svg";
+                case EMusicState.Stop or EMusicState.ReadyToChange:
+                    Source = "Images/play.svg";
+                    break;
+
+                case EMusicState.Ending:
+                    Source = "Images/replay.svg";
+                    break;
+            }
         }
     }
 }

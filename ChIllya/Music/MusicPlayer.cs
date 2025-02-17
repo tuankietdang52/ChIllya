@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 using MauiStorage = Microsoft.Maui.Storage;
 
-namespace ChIllya.Utils
+namespace ChIllya.Music
 {
     /// <summary>
     /// Manager of playing music in app
@@ -22,7 +22,7 @@ namespace ChIllya.Utils
 
         public MusicPlayer()
         {
-            
+
         }
 
         #region Get Set

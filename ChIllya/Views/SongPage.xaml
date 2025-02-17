@@ -12,6 +12,25 @@
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
 
+    <ContentPage.Resources>
+        <LinearGradientBrush x:Key="BgGradient" EndPoint="1,1">
+            <GradientStop Color="#CC00FF" Offset="0.1"></GradientStop>
+            <GradientStop Color="#FF008C" Offset="1.0"></GradientStop>
+        </LinearGradientBrush>
+
+        <Style TargetType="sfbutton:SfButton">
+            <Setter Property="WidthRequest"
+                    Value="80">
+            </Setter>
+            <Setter Property="HeightRequest"
+                    Value="80">
+            </Setter>
+            <Setter Property="CornerRadius" 
+                    Value="50">
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <Grid>
         <Image Source="Images/blursongbg.png"
                Aspect="AspectFill"
@@ -77,22 +96,29 @@
             <FlexLayout Grid.Row="5"
                         JustifyContent="Center"
                         AlignItems="Center">
-
-                <sfbutton:SfButton ImageSource="{Binding ImageStatus}"
-                                   WidthRequest="100"
-                                   HeightRequest="100"
+                <sfbutton:SfButton ImageSource="Images/previous.svg"
                                    ShowIcon="True"
-                                   ImageSize="40"
                                    EnableRippleEffect="False"
                                    ImageAlignment="Default"
-                                   CornerRadius="50"
+                                   ImageSize="30"
+                                   Background="Transparent"
+                                   Command="{Binding PreviousSongCommand}">
+                </sfbutton:SfButton>
+                <sfbutton:SfButton ImageSource="{Binding ImageStatus}"
+                                   ShowIcon="True"
+                                   EnableRippleEffect="False"
+                                   ImageAlignment="Default"
+                                   ImageSize="40"
+                                   Background="{StaticResource BgGradient}"
                                    Command="{Binding MusicCommand}">
-                    <sfbutton:SfButton.Background>
-                        <LinearGradientBrush EndPoint="1,1">
-                            <GradientStop Color="#CC00FF" Offset="0.1"></GradientStop>
-                            <GradientStop Color="#FF008C" Offset="1.0"></GradientStop>
-                        </LinearGradientBrush>
-                    </sfbutton:SfButton.Background>
+                </sfbutton:SfButton>
+                <sfbutton:SfButton ImageSource="Images/next.svg"
+                                   ShowIcon="True"
+                                   EnableRippleEffect="False"
+                                   ImageAlignment="Default"
+                                   ImageSize="30"
+                                   Background="Transparent"
+                                   Command="{Binding NextSongCommand}">
                 </sfbutton:SfButton>
             </FlexLayout>
         </Grid>

@@ -3,6 +3,7 @@ using ChIllya.Services.Implementations;
 using ChIllya.Utils;
 using ChIllya.ViewModels;
 using ChIllya.Views;
+using ChIllya.Music;
 using System;
 using System.Collections.Generic;
 using System.Linq;
