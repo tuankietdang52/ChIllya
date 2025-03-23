@@ -24,10 +24,4 @@ ChIllya can also be used to listen to music. You can play, stop, and skip song. 
   <li>IOS coming soon 🫠</li>
 </ul>
 
-
-<h1>Installation</h1>
-
-### Beta
-<p>ChIllya still in development so it might have some issue</p>
-
-### ChIllya is temporary cant download because some issue about Youtube Download Service
+### Still in development, Coming soon
