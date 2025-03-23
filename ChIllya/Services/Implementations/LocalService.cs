@@ -75,7 +75,7 @@ namespace ChIllya.Services.Implementations
 
             if (result != task)
             {
-                WarningPopup.DisplayError("Time Out! Something wrong");
+                WarningPopup.DisplayError("Time Out! Cant get songs on Devices");
                 return [];
             }
 
@@ -84,27 +84,34 @@ namespace ChIllya.Services.Implementations
 
         public async Task<List<Playlist>> FetchPlaylistOnDevice()
         {
+			var songs = await FetchSongOnDevice();
+            return await OrganizeIntoPlaylist(songs);
+		}
+
+        public async Task<List<Playlist>> OrganizeIntoPlaylist(IEnumerable<Song> songs)
+        {
             Dictionary<string, Playlist> playlists = [];
 
-			var songs = await FetchSongOnDevice();
-
-            foreach (var song in songs)
+            await Task.Run(() =>
             {
-                string folderName = song.Folder;
-
-                if (!playlists.TryGetValue(folderName, out Playlist? playlist))
+                foreach (var song in songs)
                 {
-					playlist = new Playlist()
+                    string folderName = song.Folder;
+
+                    if (!playlists.TryGetValue(folderName, out Playlist? playlist))
                     {
-                        Name = folderName
-                    };
-					playlists[folderName] = playlist;
+                        playlist = new Playlist()
+                        {
+                            Name = folderName
+                        };
+                        playlists[folderName] = playlist;
+                    }
+
+                    playlist.AddSong(song);
                 }
+            });
 
-				playlist.AddSong(song);
-            }
-
-            return new List<Playlist>(playlists.Values);
-		}
+            return [.. playlists.Values];
+        }
     }
 }

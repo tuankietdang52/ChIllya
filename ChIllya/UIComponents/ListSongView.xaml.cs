@@ -7,7 +7,7 @@ public partial class ListSongView : ContentView
 {
     public static readonly BindableProperty ItemTapCommandProperty =
         BindableProperty
-        .Create(nameof(ItemTapCommand), typeof(ICommand), typeof(ChIllyaImageButton));
+        .Create(nameof(ItemTapCommand), typeof(ICommand), typeof(ListSongView));
 
     public static readonly BindableProperty ItemsSourceProperty =
         BindableProperty

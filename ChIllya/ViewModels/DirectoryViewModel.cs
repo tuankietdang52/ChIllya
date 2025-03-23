@@ -6,6 +6,7 @@ using ChIllya.Views;
 using ChIllya.Views.Popups;
 using ChIllya.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using ChIllya.Music;
 
 
 namespace ChIllya.ViewModels
@@ -35,27 +36,28 @@ namespace ChIllya.ViewModels
         public DirectoryViewModel(ILocalService localService)
         {
             _localService = localService;
-            GenerateCommand();
+            Initialize();
+        }
 
+        public void Initialize()
+        {
+            TapCommand = new RelayCommand<Playlist>(DirectToPlaylistView!);
             LoadPlaylists();
         }
 
         private async void LoadPlaylists()
         {
-            DisplayPlaylists = [];      
+            DisplayPlaylists = [];
             IsLoading = true;
 
-            Playlists = await _localService.FetchPlaylistOnDevice();
-            DisplayPlaylists.ResetTo(Playlists);
+            Playlists = MusicStorage.Instance.GetAllPlaylists();
+            ArgumentNullException.ThrowIfNull(Playlists);
+
+            await Task.Delay(700)
+                      .ContinueWith(task => DisplayPlaylists.ResetTo(Playlists));
 
             IsHaveItem = DisplayPlaylists.Any();
-
             IsLoading = false;
-        }
-
-        public void GenerateCommand()
-        {
-            TapCommand = new RelayCommand<Playlist>(DirectToPlaylistView!);
         }
 
         private async void DirectToPlaylistView(Playlist playlist)
@@ -77,11 +79,12 @@ namespace ChIllya.ViewModels
                 return;
             }
 
-            MainThread.BeginInvokeOnMainThread(() => FilterSong(query));
+            FilterSong(query);
         }
 
         private async void FilterSong(string query)
         {
+            if (DisplayPlaylists is null) return;
             if (IsLoading) cancellationTokenSource?.Cancel();
 
             IsLoading = true;
@@ -97,8 +100,8 @@ namespace ChIllya.ViewModels
 
             }, cancellationTokenSource.Token);
 
-            DisplayPlaylists?.ResetTo(temp);
             IsLoading = false;
+            MainThread.BeginInvokeOnMainThread(() => DisplayPlaylists.ResetTo(temp));
         }
     }
 #pragma warning restore MVVMTK0045

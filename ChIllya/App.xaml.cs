@@ -1,28 +1,28 @@
 ﻿
+using ChIllya.Config;
+using ChIllya.Models;
+using ChIllya.Services;
 using ChIllya.Utils;
+using ChIllya.Views;
 using ChIllya.Views.Popups;
 using Syncfusion.Licensing;
+using System.Threading.Tasks;
 
 namespace ChIllya
 {
     public partial class App : Application
     {
-        public App()
+        public IServiceProvider? ServiceProvider { get; private set; }
+
+        public App(IServiceProvider serviceProvider)
         {
-			string key = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY")!;
-
-			if (key == null)
-			{
-				WarningPopup.DisplayError("Cant get Syncfusion key");
-			}
-
-			SyncfusionLicenseProvider.RegisterLicense(key);
+            ServiceProvider = serviceProvider;
             InitializeComponent();
 		}
 
-		protected override Window CreateWindow(IActivationState? activationState)
-		{
-            return new Window(new AppShell());
-		}
-	}
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new SplashScreenPage());
+        }
+    }
 }

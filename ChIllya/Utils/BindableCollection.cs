@@ -29,7 +29,6 @@ namespace ChIllya.Utils
         public void AddRange(IEnumerable<T> collection)
         {
             ArgumentNullException.ThrowIfNull(collection);
-
             CheckReentrancy();
 
             foreach (var item in collection)
@@ -37,9 +36,9 @@ namespace ChIllya.Utils
                 Items.Add(item);
             }
 
-            this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-            this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+            OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+            OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(
                 NotifyCollectionChangedAction.Reset));
         }
 

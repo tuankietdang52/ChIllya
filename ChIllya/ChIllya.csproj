@@ -98,13 +98,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="UIComponents\ChIllyaImageButton.xaml">
+	  <MauiXaml Update="UIComponents\Icon.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UIComponents\ListDirectoryView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UIComponents\ListSongView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UIComponents\SongShorcut.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\DirectoryPage.xaml">
@@ -122,6 +125,9 @@
 	  <MauiXaml Update="Views\Popups\DownloadProgressWindow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SplashScreenPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SpotifySearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -131,9 +137,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="UIComponents\ChIllyaImageButton.xaml.cs">
-	    <DependentUpon>ChIllyaImageButton.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\DirectoryPage.xaml.cs">
 	    <DependentUpon>DirectoryPage.xaml</DependentUpon>
 	  </Compile>

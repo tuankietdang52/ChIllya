@@ -14,21 +14,13 @@ namespace ChIllya.Utils
     {
         public static void Load(string filePath)
         {
-            try
-            {
-                var task = FileSystem.Current.OpenAppPackageFileAsync(filePath);
-                task.Wait();
+            var task = FileSystem.Current.OpenAppPackageFileAsync(filePath);
+            task.Wait();
 
-                Stream fileStream = task.Result;
-                StreamReader sr = new(fileStream);
+            Stream fileStream = task.Result;
+            StreamReader sr = new(fileStream);
 
-                InsertEnvironmentVariable(sr);
-            }
-            catch (Exception ex)
-            {
-                WarningPopup.DisplayError(ex.Message);
-                return;
-            }
+            InsertEnvironmentVariable(sr);
         }
 
         private static void InsertEnvironmentVariable(StreamReader sr)

@@ -18,7 +18,7 @@
             <Label Grid.Row="0" x:Name="progressState" HorizontalOptions="Center" VerticalOptions="Center">
                 Downloading
             </Label>
-            <ProgressBar x:Name="progressBar" Grid.Row="1" Progress="0" ProgressColor="Purple" />
+            <ProgressBar x:Name="progressBar" Grid.Row="1" Progress="0" ProgressColor="{StaticResource Pink}" />
             <Button x:Name="closeButton" 
                     Grid.Row="2" Text="Cancel" 
                     HorizontalOptions="Center"

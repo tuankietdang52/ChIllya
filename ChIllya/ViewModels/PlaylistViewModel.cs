@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using ChIllya.Music;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using System.Threading.Tasks;
 
 namespace ChIllya.ViewModels
 {
@@ -27,24 +28,23 @@ namespace ChIllya.ViewModels
         public PlaylistViewModel(Playlist playlist)
         {
             Current = playlist;
-
-            LoadSongs();
-            GenerateCommand();
+            Initialize();
         }
 
-        public void GenerateCommand()
+        public void Initialize()
         {
             TapCommand = new RelayCommand<Song>(DirectToSong);
+            LoadSongs();
         }
 
         private async void LoadSongs()
         {
             IsLoading = true;
-            await Task.Delay(500);
-
-            DisplaySongs.ResetTo(Current.GetSongs());
-            IsLoading = false;
+            await Task.Delay(900)
+                      .ContinueWith(task => DisplaySongs.ResetTo(Current.GetSongs()))
+                      .ContinueWith(task => IsLoading = false);
         }
+
 
         private async void DirectToSong(Song? choice)
         {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChIllya.ViewModels
+namespace ChIllya.Utils
 {
-    public interface IViewModel
+    public class ProgressReport
     {
-        void Initialize();
+        public double PercentComplete { get; set; } = 0;
     }
 }

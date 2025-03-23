@@ -18,22 +18,12 @@ namespace ChIllya.ViewModels
 
         public BindableCollection<Song> Songs { get; set; }
 
-		// for loading view
 		public bool isLoading = false;
 		public bool IsLoading
 		{
 			get => isLoading;
-			set
-			{
-				SetProperty(ref isLoading, value);
-				IsFree = !isLoading;
-			}
-		}
-
-        // for list view
-        // im just too lazy to do the convert :D 
-        [ObservableProperty]
-        public bool isFree = true;
+			set => SetProperty(ref isLoading, value);
+        }
 
         #region Command Field
 
@@ -48,11 +38,13 @@ namespace ChIllya.ViewModels
             _youtubeService = youtubeService;
 
             Songs = [];
-            GenerateCommand();
+            Initialize();
         }
 
-        public void GenerateCommand()
+        public void Initialize()
         {
+            Songs = [];
+
             LookupCommand = new RelayCommand<string>(Searching!);
             TapCommand = new RelayCommand<Song>(DownloadMusic!);
         }

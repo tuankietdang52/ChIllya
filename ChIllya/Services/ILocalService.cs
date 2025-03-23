@@ -19,6 +19,6 @@ namespace ChIllya.Services
         /// <returns></returns>
         Task<List<Song>> FetchSongOnDevice();
         Task<List<Playlist>> FetchPlaylistOnDevice();
-        //Task<IList<Song>> Search(string query);
+        Task<List<Playlist>> OrganizeIntoPlaylist(IEnumerable<Song> list);
     }
 }

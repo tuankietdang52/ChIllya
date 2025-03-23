@@ -5,6 +5,7 @@
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:components="clr-namespace:ChIllya.UIComponents"
              Shell.TabBarIsVisible="False"
              x:DataType="viewmodels:SongViewModel">
 
@@ -44,13 +45,17 @@
                 <RowDefinition Height="0.7*"/>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <AbsoluteLayout Grid.Row="0">
                 <sfbutton:SfButton AbsoluteLayout.LayoutBounds="0.05, 0.5, 30, 30"
                                    AbsoluteLayout.LayoutFlags="PositionProportional" 
                                    Command="{Binding BackCommand}"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   ImageSize="20"
                                    BackgroundImageSource="Images/arrowleft.svg"
                                    Background="Transparent">
                 </sfbutton:SfButton>
@@ -79,7 +84,7 @@
                     x:Name="MusicSlider"
                     Value="{Binding SliderValue}"
                     Minimum="0"
-                    Maximum="{Binding Current.Duration}"
+                    Maximum="{Binding SongLength}"
                     DragCompleted="SliderValueChanged"
                     ThumbColor="DeepPink"
                     MinimumTrackColor="HotPink"
@@ -104,6 +109,7 @@
                                    Background="Transparent"
                                    Command="{Binding PreviousSongCommand}">
                 </sfbutton:SfButton>
+                <BoxView WidthRequest="20" Color="Transparent"></BoxView>
                 <sfbutton:SfButton ImageSource="{Binding ImageStatus}"
                                    ShowIcon="True"
                                    EnableRippleEffect="False"
@@ -112,6 +118,7 @@
                                    Background="{StaticResource BgGradient}"
                                    Command="{Binding MusicCommand}">
                 </sfbutton:SfButton>
+                <BoxView WidthRequest="20" Color="Transparent"></BoxView>
                 <sfbutton:SfButton ImageSource="Images/next.svg"
                                    ShowIcon="True"
                                    EnableRippleEffect="False"
@@ -121,6 +128,28 @@
                                    Command="{Binding NextSongCommand}">
                 </sfbutton:SfButton>
             </FlexLayout>
+            <Grid Grid.Row="6"
+                  ColumnDefinitions="5*, 5*">
+                <controls:Icon Grid.Column="0"
+                               Glyph="&#xf074;"
+                               Margin="20, 0, 0, 0"
+                               HorizontalOptions="Start"
+                               Color="{Binding ShuffleButtonColor}"
+                               Click="{Binding ShuffleCommand}"
+                               HeightRequest="25"
+                               WidthRequest="25">
+                </controls:Icon>
+
+                <controls:Icon Grid.Column="1"
+                               Glyph="&#xf2f1;"
+                               Margin="0, 0, 20, 0"
+                               HorizontalOptions="End"
+                               Color="{Binding LoopButtonColor}"
+                               HeightRequest="25"
+                               WidthRequest="25"
+                               Click="{Binding LoopCommand}">
+                </controls:Icon>
+            </Grid>
         </Grid>
     </Grid>
 </ContentPage>

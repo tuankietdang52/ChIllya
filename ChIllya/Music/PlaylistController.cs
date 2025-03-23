@@ -1,10 +1,5 @@
 ﻿using ChIllya.Models;
 using ChIllya.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChIllya.Music
 {
@@ -15,9 +10,10 @@ namespace ChIllya.Music
         private Song? current;
         
         private Playlist? playlist;
-        private bool isRandom = false;
+        private bool isShuffle = false;
+        private bool isLoop = false;
 
-        private List<Song> randomSongs = [];
+        private List<Song> shuffleSongs = [];
 
         public event CurrentSongChangedHandler? CurrentSongChanged;
 
@@ -27,22 +23,23 @@ namespace ChIllya.Music
         }
 
         public Song? GetCurrent() => current;
+        public bool IsShuffle() => isShuffle;
+        public bool IsLoop() => isLoop;
 
         public void OnCurrentSongChanged()
         {
             if (current != null) CurrentSongChanged?.Invoke(this, current);
         }
 
-        public void SetRandomMode(bool isRandom)
+        public void SetShuffleMode(bool isShuffle)
         {
-            this.isRandom = isRandom;
+            this.isShuffle = isShuffle;
+            if (!isShuffle || playlist == null) shuffleSongs.Clear();
+        }
 
-            if (isRandom && playlist != null)
-            {
-                randomSongs = playlist.GetSongs();
-                randomSongs.Shuffle();
-            }
-            else randomSongs.Clear();
+        public void SetLoopMode(bool isLoop)
+        {
+            this.isLoop = isLoop;
         }
 
         public void SetCurrentSong(Song song)
@@ -56,27 +53,32 @@ namespace ChIllya.Music
             this.playlist = playlist;
         }
 
-        public void NextSong()
+        public async Task NextSong()
         {
-            ToAdjacentSong(EAdjacent.Next);
+            await Task.Run(() => ToAdjacentSong(EAdjacent.Next));
         }
 
-        public void PreviousSong()
+        public async Task PreviousSong()
         {
-            ToAdjacentSong(EAdjacent.Previous);
+            await Task.Run(() => ToAdjacentSong(EAdjacent.Previous));
         }
 
         private void ToAdjacentSong(EAdjacent adjacent)
         {
+            if (isLoop) return;
             if (playlist == null) return;
-            var songs = isRandom ? randomSongs : playlist.GetSongs();
 
+            if (isShuffle && shuffleSongs.IsEmpty()) OnShuffleSongs();
+
+            var songs = isShuffle ? shuffleSongs : playlist.GetSongs();
             if (songs == null) return;
 
             for (int i = 0; i < songs.Count; i++)
             {
                 var song = songs[i];
-                if (current != song) continue;
+
+                if (current == null) return;
+                if (current.DirectoryPath != song.DirectoryPath) continue;
 
                 current = GetAdjacentSong(adjacent, songs, i);
                 break;
@@ -84,6 +86,14 @@ namespace ChIllya.Music
 
             if (current == null) return;
             OnCurrentSongChanged();
+        }
+
+        private void OnShuffleSongs()
+        {
+            if (playlist == null) return;
+
+            shuffleSongs = new List<Song>(playlist.GetSongs());
+            shuffleSongs.Shuffle();
         }
 
         private Song? GetAdjacentSong(EAdjacent adjacent, List<Song> songs, int i)

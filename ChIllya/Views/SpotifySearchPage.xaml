@@ -25,13 +25,14 @@
             <ActivityIndicator 
                 Grid.Row="1"
                 IsVisible="{Binding IsLoading}"
-                IsRunning="{Binding IsLoading}" 
-                VerticalOptions="Center" 
+                IsRunning="{Binding IsLoading}"
+                Color="{StaticResource Pink}"
+                VerticalOptions="Center"
                 HorizontalOptions="Center"/>
 
             <controls:ListSongView
                 Grid.Row="1"
-                IsVisible="{Binding IsFree}"
+                IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}"
                 ItemsSource="{Binding Songs}"
                 ItemTapCommand="{Binding TapCommand}">
 

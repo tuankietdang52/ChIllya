@@ -10,45 +10,27 @@
 
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Grid RowDefinitions="9*, 0.05*, 1*">
-                <!--using frame to add more complex UI-->
+            <Grid x:DataType="viewmodels:PageControlViewModel"
+                  RowDefinitions="10*"
+                  BindingContext="{viewmodels:PageControlViewModel}">
+
                 <Border Grid.Row="0"
+                        ZIndex="1"
                         Stroke="Transparent">
                     <ContentPresenter/>
                 </Border>
 
-                <BoxView Grid.Row="1" 
-                         Color="White"/>
-
-                <Grid x:Name="Shortcut"
-                      x:DataType="viewmodels:PageControlViewModel"
-                      BindingContext="{viewmodels:PageControlViewModel}"
-                      Grid.Row="2"
-                      IsVisible="{Binding IsHaveCurrentSong}"
-                      ColumnDefinitions="9*, 1*">
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding ReturnCommand}"/>
-                    </Grid.GestureRecognizers>
-
-                    <Label Grid.Column="0"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           VerticalTextAlignment="Center"
-                           Text="{Binding Current.Name}"
-                           Margin="10, 0">
-                    </Label>
-
-                    <sfbutton:SfButton ImageSource="{Binding ImageStatus}"
-                                       Grid.Column="1"
-                                       ShowIcon="True"
-                                       ImageSize="30"
-                                       EnableRippleEffect="False"
-                                       ImageAlignment="Default"
-                                       Background="Transparent"
-                                       Command="{Binding MusicCommand}">
-                    </sfbutton:SfButton>
-                </Grid>
+                <controls:SongShorcut ZIndex="2"
+                                      x:Name="Shortcut"
+                                      Grid.Row="0"
+                                      IsVisible="{Binding IsHaveCurrentSong}"
+                                      TapCommand="{Binding ReturnCommand}"
+                                      SongCommand="{Binding MusicCommand}"
+                                      CurrentSong="{Binding Current}"
+                                      VerticalOptions="End"
+                                      HeightRequest="70"
+                                      ImageStatusSource="{Binding ImageStatus}">
+                </controls:SongShorcut>
             </Grid>
         </ControlTemplate>
     </ContentView.ControlTemplate>

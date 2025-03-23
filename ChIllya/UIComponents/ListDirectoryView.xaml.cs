@@ -7,7 +7,7 @@ public partial class ListDirectoryView : ContentView
 {
 	public static readonly BindableProperty ItemTapCommandProperty =
 		BindableProperty
-		.Create(nameof(ItemTapCommand), typeof(ICommand), typeof(ChIllyaImageButton));
+		.Create(nameof(ItemTapCommand), typeof(ICommand), typeof(ListDirectoryView));
 
 	public static readonly BindableProperty ItemsSourceProperty =
 		BindableProperty

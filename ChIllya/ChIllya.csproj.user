@@ -20,7 +20,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="UIComponents\ChIllyaImageButton.xaml">
+    <MauiXaml Update="UIComponents\Icon.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="UIComponents\ListDirectoryView.xaml">

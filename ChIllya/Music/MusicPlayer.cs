@@ -2,14 +2,6 @@
 using ChIllya.ViewModels;
 using ChIllya.Views.Popups;
 using Plugin.Maui.Audio;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MauiStorage = Microsoft.Maui.Storage;
 
 namespace ChIllya.Music
 {
@@ -19,6 +11,7 @@ namespace ChIllya.Music
     public class MusicPlayer
     {
         private IAudioPlayer? player;
+        private bool isReady = false;
 
         public MusicPlayer()
         {
@@ -27,27 +20,29 @@ namespace ChIllya.Music
 
         #region Get Set
 
-        public bool IsPlaying() => player != null && player.IsPlaying;
+        public bool IsPlaying() => isReady && player != null && player.IsPlaying;
         public double GetPosition()
         {
-            return player != null ? player.CurrentPosition : 0;
+            return isReady && player != null ? player.CurrentPosition : 0;
         }
         public double GetDuration()
         {
-            return player != null ? player.Duration : 0;
+            return isReady && player != null ? player.Duration : 0;
         }
-        public bool IsEnd() => player != null && GetPosition() >= GetDuration();
+        public bool IsEnd() => isReady && player != null && GetPosition() >= GetDuration();
 
         #endregion
 
-        public void CreateMusic(Song song)
+        public void DisposePlayer(EventHandler playbackEndCallback)
         {
+            RemovePlaybackEvent(playbackEndCallback);
             player?.Stop();
             player?.Dispose();
+        }
 
-            //Task<Stream> task =
-            //    MauiStorage.FileSystem.OpenAppPackageFileAsync(song.SongPath);
-            //task.Wait();
+        public void CreateMusic(Song song)
+        {
+            isReady = false;
 
             try
             {
@@ -63,8 +58,7 @@ namespace ChIllya.Music
             if (player == null) throw new NullReferenceException("Cant create player");
             player.Play();
 
-            // wait to load information
-            Thread.Sleep(300);
+            isReady = true;
         }
 
         /// <summary>
@@ -74,6 +68,7 @@ namespace ChIllya.Music
         /// <exception cref="NullReferenceException"></exception>
         public void ContinueToPlay()
         {
+            if (!isReady) return;
             if (player == null) throw new NullReferenceException("Music Player is null");
             player.Play();
         }
@@ -83,19 +78,23 @@ namespace ChIllya.Music
         /// </summary>
         public void SeekMusic(double position)
         {
+            if (!isReady) return;
+
             player?.Stop();
             player?.Seek(position);
             player?.Play();
         }
 
-        public void PausePlaying()
+        public void Pause()
         {
+            if (!isReady) return;
             if (player == null) throw new NullReferenceException("Music Player is null");
             player.Pause();
         }
 
         public void ReplayMusic()
         {
+            if (!isReady) return;
             if (player == null) throw new NullReferenceException("Music Player is null");
 
             SeekMusic(0);

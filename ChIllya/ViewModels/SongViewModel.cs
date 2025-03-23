@@ -45,6 +45,9 @@ namespace ChIllya.ViewModels
         [ObservableProperty]
         private double sliderValue;
 
+        [ObservableProperty]
+        private double songLength;
+
         private readonly System.Timers.Timer timer = new(1000);
 
         #region Command
@@ -53,37 +56,71 @@ namespace ChIllya.ViewModels
 
         [ObservableProperty]
         private ICommand? musicCommand;
-
         public ICommand? NextSongCommand { get; set; }
         public ICommand? PreviousSongCommand { get; set; }
+        public ICommand? LoopCommand {  get; set; }
+        public ICommand? ShuffleCommand { get; set; }
 
         #endregion
 
+        [ObservableProperty]
+        private Color? loopButtonColor;
+
+        [ObservableProperty]
+        private Color? shuffleButtonColor;
+
         // User return to song page by shortcut or in directory
         public SongViewModel() {
-            Setup();
+            Initialize();
             SetViewPosition();
         }
 
         public SongViewModel(Song song)
         {
-            Setup();
+            Initialize();
             Manager.SetCurrentSong(song);
             Manager.StartSong();
+        }
+
+        public void Initialize()
+        {
+            Manager.Register(this);
+
+            UpdatePlayState();
+            SetTimer();
+            GenerateCommand();
         }
 
         // update information of current song
         public void Receive(SongMessage message)
         {
             (Current, ImageStatus, MusicCommand) = message.GetData();
-            TimerControl(Manager.IsPlaying());
+
+            Task.Delay(500).ContinueWith(task =>
+            {
+                UpdatePlayState();
+                TimerControl(Manager.IsPlaying());
+                SongLength = Manager.GetDuration();
+            });
         }
 
-        private void Setup()
+        private void UpdatePlayState()
         {
-            Manager.Register(this);
-            SetTimer();
-            GenerateCommand();
+            LoopButtonColor = Manager.IsLoop() ?
+                Color.FromArgb("#F8C7F1") : Color.FromArgb("#848384");
+
+            ShuffleButtonColor = Manager.IsShuffle() ?
+                Color.FromArgb("#F8C7F1") : Color.FromArgb("#848384");
+        }
+
+        private void OnLoopButtonClicked()
+        {
+            Manager.SwtichLoopMode();
+        }
+
+        private void OnShuffleButtonClicked()
+        {
+            Manager.SwitchShuffleMode();
         }
 
         private void SetTimer()
@@ -111,7 +148,7 @@ namespace ChIllya.ViewModels
             SetViewPosition();
         }
 
-        public void GenerateCommand()
+        private void GenerateCommand()
         {
             BackCommand = new RelayCommand(async () =>
             {
@@ -123,9 +160,13 @@ namespace ChIllya.ViewModels
 
             var nextAction = ToNextSong;
             var previousAction = ToPreviousSong;
+            //var loopAction = OnLoopButtonClicked;
+            //var shuffleAction = OnShuffleButtonClicked;
 
             NextSongCommand = new RelayCommand(nextAction.Debounce(500));
             PreviousSongCommand = new RelayCommand(previousAction.Debounce(500));
+            LoopCommand = new RelayCommand(OnLoopButtonClicked);
+            ShuffleCommand = new RelayCommand(OnShuffleButtonClicked);
         }
 
         private void ToNextSong()

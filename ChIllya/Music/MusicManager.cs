@@ -10,7 +10,14 @@ namespace ChIllya.Music
 {
     public partial class MusicManager : ObservableObject
     {
-        public static MusicManager? Instance { get; private set; }
+        private static MusicManager? instance;
+        public static MusicManager Instance
+        {
+            get {
+                instance ??= new MusicManager();
+                return instance;
+            }
+        }
 
         private readonly IMessenger messenger = new StrongReferenceMessenger();
 
@@ -42,7 +49,6 @@ namespace ChIllya.Music
 
         public MusicManager()
         {
-            Instance ??= this;
             imageStatus = new(this);
             playlistController = new();
 
@@ -85,6 +91,8 @@ namespace ChIllya.Music
         public double GetPosition() => player.GetPosition();
         public double GetDuration() => player.GetDuration();
         public bool IsEnd() => player.IsEnd();
+        public bool IsShuffle() => playlistController.IsShuffle();
+        public bool IsLoop() => playlistController.IsLoop();
         public Song? GetCurrentSong() => playlistController.GetCurrent();
 
         #endregion
@@ -112,7 +120,7 @@ namespace ChIllya.Music
 
         private void ResetPlayer()
         {
-            player.RemovePlaybackEvent(MusicEnding);
+            player.DisposePlayer(MusicEnding);
         }
 
         public void StartSong()
@@ -124,8 +132,11 @@ namespace ChIllya.Music
                 var song = playlistController.GetCurrent();
                 if (song == null) return;
 
-                player.CreateMusic(song);
-                player.AddPlaybackEvent(MusicEnding);
+                Task.Run(() =>
+                {
+                    player.CreateMusic(song);
+                    player.AddPlaybackEvent(MusicEnding);
+                });
 
                 SongState = EMusicState.Playing;
                 SendMessage();
@@ -154,7 +165,7 @@ namespace ChIllya.Music
 
         public void PauseSong()
         {
-            player.PausePlaying();
+            player.Pause();
             
             SongState = EMusicState.Stop;
             SendMessage();
@@ -171,11 +182,16 @@ namespace ChIllya.Music
         private void MusicEnding(object? sender, EventArgs e)
         {
             if (!IsEnd()) return;
-            //MusicCommand = replayCommand;
-            //SendMessage();
-
-            SongState = EMusicState.ReadyToChange;
-            NextSong();
+            if (!IsLoop())
+            {
+                SongState = EMusicState.ReadyToChange;
+                NextSong();
+            }
+            else
+            {
+                SongState = EMusicState.Ending;
+                ReplaySong();
+            }
         }
 
         public void SetPlaylist(Playlist playlist)
@@ -190,18 +206,34 @@ namespace ChIllya.Music
 
         public async void NextSong()
         {
-            playlistController.NextSong();
+            await Task.Run(() => playlistController.NextSong())
+                      .ContinueWith(task => Task.Delay(400));
 
-            await Task.Delay(400);
             StartSong();
         }
 
         public async void PreviousSong()
         {
-            playlistController.PreviousSong();
+            await Task.Run(() => playlistController.PreviousSong())
+                      .ContinueWith(task => Task.Delay(400));
 
-            await Task.Delay(400);
             StartSong();
+        }
+
+        public void SwitchShuffleMode()
+        {
+            bool isShuffle = !IsShuffle();
+            playlistController.SetShuffleMode(isShuffle);
+
+            SendMessage();
+        }
+
+        public void SwtichLoopMode()
+        {
+            bool isLoop = !IsLoop();
+            playlistController.SetLoopMode(isLoop);
+
+            SendMessage();
         }
 
         /// <summary>

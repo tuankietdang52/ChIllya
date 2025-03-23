@@ -3,16 +3,20 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
+using Android.Views;
 using AndroidX.Core.View;
+using Java.Lang;
 
 namespace ChIllya
 {
-	[Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+	[Activity(Theme = "@style/MainTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 	public class MainActivity : MauiAppCompatActivity
 	{
 		protected override void OnCreate(Bundle? savedInstanceState)
 		{
-			if (!Android.OS.Environment.IsExternalStorageManager)
+            RequestWindowFeature(WindowFeatures.NoTitle);
+
+            if (!Android.OS.Environment.IsExternalStorageManager)
 			{
 				Intent intent = new Intent();
 				intent.SetAction(Android.Provider.Settings.ActionManageAppAllFilesAccessPermission);
@@ -22,7 +26,11 @@ namespace ChIllya
 			}
 			
 			base.OnCreate(savedInstanceState);
+
+            SupportActionBar?.Hide();
+
 			Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
+			Window.AddFlags(Android.Views.WindowManagerFlags.Fullscreen);
 		}
 	}
 }

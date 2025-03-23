@@ -8,12 +8,6 @@
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:utils="clr-namespace:ChIllya.Utils"
              Shell.TabBarIsVisible="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <utils:BooleanConverter x:Key="BooleanConverter"></utils:BooleanConverter>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
     <views:PageControl>
         <Grid x:DataType="viewmodels:PlaylistViewModel">
             <Grid.RowDefinitions>
@@ -56,6 +50,7 @@
             <ActivityIndicator Grid.Row="1"
                                IsVisible="{Binding IsLoading}"
                                IsRunning="{Binding IsLoading}" 
+                               Color="{StaticResource Pink}"
                                VerticalOptions="Center" 
                                HorizontalOptions="Center"/>
 

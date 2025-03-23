@@ -43,7 +43,7 @@ namespace ChIllya.Models
 
         public Song()
         {
-
+            
         }
     }
 #pragma warning restore MVVMTK0045
