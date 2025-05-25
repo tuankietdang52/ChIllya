@@ -9,7 +9,7 @@ namespace ChIllya.Views.Popups
 {
     public static class WarningPopup
     {
-        private static Page MainPage => App.Current!.Windows[0]!.Page!;
+        private static Page MainPage => App.Instance!.GetMainPage()!;
 
         /// <summary>
         /// run without await

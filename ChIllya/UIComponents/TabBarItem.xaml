@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChIllya.UIComponents.TabBarItem"
+             xmlns:controls="clr-namespace:ChIllya.UIComponents">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+                         Background="{StaticResource DarkThemeSecondary}"          
+                         Padding="0, 10, 10, 0">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TapCommand}"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+                <controls:Icon HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HeightRequest="22"
+                               WidthRequest="22"
+                               InputTransparent="True"
+                               Color="{Binding Foreground}"
+                               Glyph="{Binding Glyph}">
+                </controls:Icon>
+                <BoxView HeightRequest="5" 
+                         Background="Transparent" 
+                         Color="Transparent">
+                    
+                </BoxView>
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="13"
+                       TextColor="{Binding Foreground}"
+                       Text="{Binding Text}">
+                    
+                </Label>
+            </StackLayout>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

@@ -36,17 +36,19 @@ namespace ChIllya.Music
 
         private void Initialize()
         {
-            var app = (App)App.Current!;
-            var services = app.ServiceProvider;
+            var services = App.Instance!.ServiceProvider;
             _localService = services?.GetService<ILocalService>();
         }
 
-        private async void FetchSongs()
+        private void FetchSongs()
         {
             if (_localService == null) return;
 
-            songs = await _localService.FetchSongOnDevice();
-            playlists = await _localService.OrganizeIntoPlaylist(songs);
+            Task.Run(async () =>
+            {
+                songs = await _localService.FetchSongOnDevice();
+                playlists = await _localService.OrganizeIntoPlaylist(songs);
+            }).Wait();
         }
 
         public List<Song>? GetAllSongs() => songs;

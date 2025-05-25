@@ -1,5 +1,6 @@
 ﻿using ChIllya.Models;
 using ChIllya.Services;
+using ChIllya.Utils;
 using ChIllya.Views.Popups;
 using CommunityToolkit.Maui.Views;
 using SpotifyAPI.Web.Http;
@@ -50,7 +51,8 @@ namespace ChIllya.Services
 			var streamManifest = Task.Run(async () => await client.Videos.Streams.GetManifestAsync(url)).Result;
 			var streamInfo = streamManifest.GetAudioStreams().GetWithHighestBitrate();
 
-			song.DirectoryPath = Path.Combine(dir, $"{song.Name}.mp3");
+			song.Name = song.Name.SanitizeFileName("_");
+            song.DirectoryPath = Path.Combine(dir, $"{song.Name}.mp3");
 
 			Progress<double> progress = new(handlerProgress);
 			string path = song.DirectoryPath;
@@ -111,8 +113,12 @@ namespace ChIllya.Services
 			}
 
 			var url = GenerateUrl(match.Value);
-
 			return $"https://www.youtube.com{url}";
 		}
-	}
+
+		~YoutubeService()
+		{
+			httpClient?.Dispose();
+		}
+    }
 }

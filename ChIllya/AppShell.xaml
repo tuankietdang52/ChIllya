@@ -2,24 +2,22 @@
 <Shell x:Class="ChIllya.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:contents="clr-namespace:ChIllya.Views.Contents"
        xmlns:views="clr-namespace:ChIllya.Views"
        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
        xmlns:utils="clr-namespace:ChIllya.Utils"
-       Shell.FlyoutBehavior="Disabled">
-
-    <Shell.Behaviors>
-        <toolkit:StatusBarBehavior StatusBarColor="Transparent"></toolkit:StatusBarBehavior>
-    </Shell.Behaviors>
+       Shell.FlyoutBehavior="Disabled"
+       Shell.FlyoutItemIsVisible="False">
 
     <TabBar Route="maintab">
         <Tab Title="Home" Route="home">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+            <ShellContent ContentTemplate="{DataTemplate contents:HomeView}"/>
         </Tab>
         <Tab Title="Download Song" Route="download">
-            <ShellContent ContentTemplate="{DataTemplate views:SpotifySearchPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate contents:DownloadView}"/>
         </Tab>
         <Tab Title="Directory" Route="directory">
-            <ShellContent ContentTemplate="{DataTemplate views:DirectoryPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate contents:DirectoryView}"/>
         </Tab>
     </TabBar>
 

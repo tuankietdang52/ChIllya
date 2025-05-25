@@ -17,9 +17,8 @@ namespace ChIllya.Services.Implementations
 
         public SpotifyClient CreateSpotifyClient()
         {
-            var config = SpotifyClientConfig
-                        .CreateDefault()
-                        .WithAuthenticator(new ClientCredentialsAuthenticator(clientID, clientSecret!));
+            var config = SpotifyClientConfig.CreateDefault()
+                                            .WithAuthenticator(new ClientCredentialsAuthenticator(clientID, clientSecret!));
 
             return new SpotifyClient(config);
         }

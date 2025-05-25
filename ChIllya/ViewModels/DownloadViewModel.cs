@@ -11,7 +11,7 @@ namespace ChIllya.ViewModels
 {
 #pragma warning disable IDE0079
 #pragma warning disable MVVMTK0045
-	public partial class SpotifySearchViewModel : ObservableObject, IViewModel
+	public partial class DownloadViewModel : ObservableObject, IViewModel
     {
         private readonly ISpotifyService _spotifyService;
         private readonly IYoutubeService _youtubeService;
@@ -32,7 +32,7 @@ namespace ChIllya.ViewModels
 
         #endregion
 
-        public SpotifySearchViewModel(ISpotifyService spotifyService, IYoutubeService youtubeService)
+        public DownloadViewModel(ISpotifyService spotifyService, IYoutubeService youtubeService)
         {
             _spotifyService = spotifyService;
             _youtubeService = youtubeService;
@@ -64,7 +64,7 @@ namespace ChIllya.ViewModels
             if (song is null) return;
 
             DownloadProgressWindow popupProgress = new();
-            Shell.Current.ShowPopup(popupProgress);
+            App.Instance!.GetMainPage()?.ShowPopup(popupProgress);
 
             try
             {

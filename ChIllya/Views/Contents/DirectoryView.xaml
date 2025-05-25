@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<contents:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   x:Class="ChIllya.Views.Contents.DirectoryView"
+                   xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
+                   xmlns:views="clr-namespace:ChIllya.Views"
+                   xmlns:contents="clr-namespace:ChIllya.Views.Contents"
+                   xmlns:controls="clr-namespace:ChIllya.UIComponents"
+                   xmlns:utils="clr-namespace:ChIllya.Utils">
+    <Grid x:DataType="viewmodels:DirectoryViewModel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Entry Grid.Row="0"
+               Placeholder="Search..."
+               TextChanged="OnTextChanged">
+        </Entry>
+
+        <ActivityIndicator Grid.Row="1"
+                           IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}" 
+                           Color="{StaticResource Pink}"
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+
+        <Grid Grid.Row="1" 
+              RowDefinitions="1*" 
+              IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}">
+            <Label Grid.Row="0"
+                   IsVisible="{Binding IsHaveItem, Converter={StaticResource BooleanConverter}}"
+                   HorizontalTextAlignment="Center">
+                No playlist
+            </Label>
+            <controls:ListDirectoryView Grid.Row="0"
+                                        ItemsSource="{Binding DisplayPlaylists}"
+                                        IsHaveItem="{Binding IsHaveItem}"
+                                        ItemTapCommand="{Binding TapCommand}">
+            </controls:ListDirectoryView>
+        </Grid>
+    </Grid>
+</contents:BaseView>

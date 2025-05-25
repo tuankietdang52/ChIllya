@@ -123,7 +123,7 @@ namespace ChIllya.Music
             player.DisposePlayer(MusicEnding);
         }
 
-        public void StartSong()
+        private void PrepareSong()
         {
             try
             {
@@ -136,9 +136,10 @@ namespace ChIllya.Music
                 {
                     player.CreateMusic(song);
                     player.AddPlaybackEvent(MusicEnding);
-                });
+                    player.Pause();
+                }).Wait();
 
-                SongState = EMusicState.Playing;
+                SongState = EMusicState.Stop;
                 SendMessage();
             }
             catch (Exception ex)
@@ -202,6 +203,7 @@ namespace ChIllya.Music
         public void SetCurrentSong(Song song)
         {
             playlistController.SetCurrentSong(song);
+            PrepareSong();
         }
 
         public async void NextSong()
@@ -209,7 +211,8 @@ namespace ChIllya.Music
             await Task.Run(() => playlistController.NextSong())
                       .ContinueWith(task => Task.Delay(400));
 
-            StartSong();
+            PrepareSong();
+            UnpauseSong();
         }
 
         public async void PreviousSong()
@@ -217,7 +220,8 @@ namespace ChIllya.Music
             await Task.Run(() => playlistController.PreviousSong())
                       .ContinueWith(task => Task.Delay(400));
 
-            StartSong();
+            PrepareSong();
+            UnpauseSong();
         }
 
         public void SwitchShuffleMode()

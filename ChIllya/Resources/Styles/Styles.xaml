@@ -3,7 +3,9 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:utils="clr-namespace:ChIllya.Utils">
+    xmlns:utils="clr-namespace:ChIllya.Utils"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:components="clr-namespace:ChIllya.UIComponents">
 
     <utils:BooleanConverter x:Key="BooleanConverter"></utils:BooleanConverter>
 
@@ -398,7 +400,7 @@
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource DarkTheme}}" />
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">

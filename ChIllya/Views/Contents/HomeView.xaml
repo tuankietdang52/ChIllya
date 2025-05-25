@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<contents:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   x:Class="ChIllya.Views.Contents.HomeView"
+                   xmlns:views="clr-namespace:ChIllya.Views"
+                   xmlns:contents="clr-namespace:ChIllya.Views.Contents"
+                   xmlns:controls="clr-namespace:ChIllya.UIComponents"
+                   xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                   xmlns:sfButton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons">
+    <Grid>
+        
+    </Grid>
+</contents:BaseView>

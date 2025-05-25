@@ -7,13 +7,10 @@ namespace ChIllya.Views
     {
         public SongViewModel ViewModel { get; set; }
 
-        public SongPage(Song? current = null)
+        public SongPage()
         {
             InitializeComponent();
-
-            if (current == null) ViewModel = new();
-            else ViewModel = new(current);
-
+            ViewModel = new SongViewModel();
             BindingContext = ViewModel;
         }
 

@@ -8,7 +8,6 @@ using ChIllya.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ChIllya.Music;
 
-
 namespace ChIllya.ViewModels
 {
 #pragma warning disable IDE0079
@@ -41,7 +40,7 @@ namespace ChIllya.ViewModels
 
         public void Initialize()
         {
-            TapCommand = new RelayCommand<Playlist>(DirectToPlaylistView!);
+            TapCommand = new RelayCommand<Playlist>(DirectToPlaylistView);
             LoadPlaylists();
         }
 
@@ -51,7 +50,12 @@ namespace ChIllya.ViewModels
             IsLoading = true;
 
             Playlists = MusicStorage.Instance.GetAllPlaylists();
-            ArgumentNullException.ThrowIfNull(Playlists);
+            
+            if (Playlists is null)
+            {
+                WarningPopup.DisplayError("Cannot fetch playlist in device");
+                return;
+            }
 
             await Task.Delay(700)
                       .ContinueWith(task => DisplayPlaylists.ResetTo(Playlists));
@@ -60,7 +64,7 @@ namespace ChIllya.ViewModels
             IsLoading = false;
         }
 
-        private async void DirectToPlaylistView(Playlist playlist)
+        private async void DirectToPlaylistView(Playlist? playlist)
         {
             if (playlist == null)
             {
@@ -68,7 +72,7 @@ namespace ChIllya.ViewModels
                 return;
             }
 
-            await Shell.Current.Navigation.PushAsync(new PlaylistView(playlist));
+            await App.Instance!.PushAsync(new PlaylistPage(playlist));
         }
 
         public void Searching(string query)

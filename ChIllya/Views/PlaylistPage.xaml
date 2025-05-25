@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChIllya.Views.PlaylistPage"
+             xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
+             xmlns:views="clr-namespace:ChIllya.Views"
+             xmlns:contents="clr-namespace:ChIllya.Views.Contents"
+             xmlns:models="clr-namespace:ChIllya.Models"
+             xmlns:controls="clr-namespace:ChIllya.UIComponents"
+             xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:utils="clr-namespace:ChIllya.Utils">
+    <contents:BaseView Padding="0, 0, 0, 40">
+        <Grid x:DataType="viewmodels:PlaylistViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  x:DataType="models:Playlist" 
+                  BindingContext="{Binding Current}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="3.5*"></RowDefinition>
+                    <RowDefinition Height="3.5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Color="{StaticResource AppTheme}" Offset="0.0"></GradientStop>
+                        <GradientStop Color="{StaticResource DarkTheme}" Offset="1.0"></GradientStop>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                
+                <Image Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.RowSpan="2"
+                       Source="Images/musickit.png"
+                       Aspect="Center"
+                       Scale="0.7"
+                       Opacity="0.8">
+                </Image>
+
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       VerticalTextAlignment="End"
+                       Text="{Binding Name}">
+                </Label>
+
+                <Label Grid.Row="2"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Start"
+                       Text="{Binding SongCount, StringFormat='{}{0} Songs'}">
+                </Label>
+
+                <sfbutton:SfButton Grid.Row="1"
+                                   Grid.Column="2"
+                                   Grid.RowSpan="2"
+                                   VerticalOptions="End"
+                                   HeightRequest="60"
+                                   WidthRequest="60"
+                                   CornerRadius="50"
+                                   Text="&#xf074;"
+                                   FontSize="20"
+                                   FontFamily="FontAwesomeSolid"
+                                   TextColor="White">
+                    <sfbutton:SfButton.Background>
+                        <LinearGradientBrush EndPoint="1, 1">
+                            <GradientStop Color="{StaticResource AppTheme}" Offset="0.0"></GradientStop>
+                            <GradientStop Color="{StaticResource Purple}" Offset="1.1"></GradientStop>
+                        </LinearGradientBrush>
+                    </sfbutton:SfButton.Background>
+                </sfbutton:SfButton>
+            </Grid>
+
+            <ActivityIndicator Grid.Row="1"
+                               IsVisible="{Binding IsLoading}"
+                               IsRunning="{Binding IsLoading}" 
+                               Color="{StaticResource Pink}"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"/>
+
+            <controls:ListSongView Grid.Row="1"
+                                   IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}"
+                                   ItemsSource="{Binding DisplaySongs}"
+                                   ItemTapCommand="{Binding TapCommand}"
+                                   Background="Transparent">
+
+            </controls:ListSongView>
+        </Grid>
+    </contents:BaseView>
+</ContentPage>

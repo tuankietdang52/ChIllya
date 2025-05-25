@@ -6,13 +6,7 @@
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:components="clr-namespace:ChIllya.UIComponents"
-             Shell.TabBarIsVisible="False"
              x:DataType="viewmodels:SongViewModel">
-
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
-    </Shell.BackButtonBehavior>
-
     <ContentPage.Resources>
         <LinearGradientBrush x:Key="BgGradient" EndPoint="1,1">
             <GradientStop Color="#CC00FF" Offset="0.1"></GradientStop>
@@ -38,7 +32,8 @@
                Scale="1.5">
         </Image>
 
-        <Grid x:DataType="viewmodels:SongViewModel">
+        <Grid x:DataType="viewmodels:SongViewModel"
+              Padding="0, 20, 0, 40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="4.5*"/>

@@ -58,14 +58,16 @@ namespace ChIllya.ViewModels
             if (manager == null) throw new NullReferenceException(nameof(manager));
 
             Song currentSong = manager.GetCurrentSong()!;
+            var app = App.Instance!;
 
             if (currentSong == null || choice.DirectoryPath != currentSong.DirectoryPath)
             {
-                await Shell.Current.Navigation.PushAsync(new SongPage(choice));
                 manager.SetPlaylist(Current);
+                manager.SetCurrentSong(choice);
+                await app.PushAsync(new SongPage()).ContinueWith(task => manager.UnpauseSong());
             }
             // User choose a song similar to the one currently playing
-            else await Shell.Current.Navigation.PushAsync(new SongPage());
+            else await app.PushAsync(new SongPage());
         }
     }
 #pragma warning restore MVVMTK0045

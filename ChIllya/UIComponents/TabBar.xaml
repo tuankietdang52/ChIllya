@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:components="clr-namespace:ChIllya.UIComponents"
+             xmlns:contents="clr-namespace:ChIllya.Views.Contents"
+             x:Class="ChIllya.UIComponents.TabBar">
+
+    <ContentView.Content>
+        <Grid x:Name="tabBarContainer"
+              BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+              Background="{StaticResource DarkThemeSecondary}"
+              ColumnDefinitions="0.5*, 3*, 3*, 3*, 0.5*">
+            <components:TabBarItem Grid.Column="1"
+                                   Text="Home"
+                                   Glyph="&#xf015;"
+                                   Foreground="{StaticResource IconSelected}"
+                                   Click="OnTabBarItemClick">
+                <components:TabBarItem.NavigationContent>
+                    <contents:HomeView></contents:HomeView>
+                </components:TabBarItem.NavigationContent>
+
+            </components:TabBarItem>
+            <components:TabBarItem Grid.Column="2"
+                                   Text="Download"
+                                   Glyph="&#xf019;"
+                                   Foreground="{StaticResource Icon}"
+                                   Click="OnTabBarItemClick">
+                <components:TabBarItem.NavigationContent>
+                    <contents:DownloadView></contents:DownloadView>
+                </components:TabBarItem.NavigationContent>
+
+            </components:TabBarItem>
+            <components:TabBarItem Grid.Column="3"
+                                   Text="Library"
+                                   Glyph="&#xf001;"
+                                   Foreground="{StaticResource Icon}"
+                                   Click="OnTabBarItemClick">
+                <components:TabBarItem.NavigationContent>
+                    <contents:DirectoryView></contents:DirectoryView>
+                </components:TabBarItem.NavigationContent>
+            </components:TabBarItem>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

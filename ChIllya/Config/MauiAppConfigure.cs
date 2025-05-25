@@ -4,23 +4,25 @@ using ChIllya.Utils;
 using ChIllya.ViewModels;
 using ChIllya.Views;
 using ChIllya.Music;
+using ChIllya.Views.Contents;
 
 namespace ChIllya.Config
 {
-	public static class MauiProgramConfigure
+	public static class MauiAppConfigure
 	{
 		public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
 		{
-			builder.Services.AddSingleton<HomePage>();
-			builder.Services.AddSingleton<DirectoryPage>();
-			builder.Services.AddSingleton<SpotifySearchPage>();
+			builder.Services.AddSingleton<HomeView>();
+			builder.Services.AddSingleton<DirectoryView>();
+			builder.Services.AddSingleton<DownloadView>();
+			builder.Services.AddSingleton<MainPage>();
 
 			return builder;
 		}
 
 		public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
 		{
-			builder.Services.AddScoped<SpotifySearchViewModel>();
+			builder.Services.AddScoped<DownloadViewModel>();
 			builder.Services.AddScoped<DirectoryViewModel>();
 
 			return builder;

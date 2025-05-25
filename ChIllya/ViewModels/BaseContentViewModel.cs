@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace ChIllya.ViewModels
 {
-    public partial class PageControlViewModel : ObservableObject, IRecipient<SongMessage>
+    public partial class BaseContentViewModel : ObservableObject, IRecipient<SongMessage>
     {
         private MusicManager Manager => MusicManager.Instance!;
 
@@ -30,7 +30,7 @@ namespace ChIllya.ViewModels
 
         #endregion
 
-        public PageControlViewModel()
+        public BaseContentViewModel()
         {
             Manager.Register(this);
             ReturnCommand = new RelayCommand(ReturnToSongPage);
@@ -45,7 +45,7 @@ namespace ChIllya.ViewModels
 
         private async void ReturnToSongPage()
         {
-            await Shell.Current.Navigation.PushAsync(new SongPage());
+            await App.Instance!.PushAsync(new SongPage());
         }
     }
 }

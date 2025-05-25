@@ -2,16 +2,18 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Hardware.Lights;
 using Android.OS;
 using Android.Views;
 using AndroidX.Core.View;
-using Java.Lang;
 
 namespace ChIllya
 {
 	[Activity(Theme = "@style/MainTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 	public class MainActivity : MauiAppCompatActivity
 	{
+		public static MainActivity? Current { get; private set; }
+
 		protected override void OnCreate(Bundle? savedInstanceState)
 		{
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -26,11 +28,20 @@ namespace ChIllya
 			}
 			
 			base.OnCreate(savedInstanceState);
+			Current = this;
 
             SupportActionBar?.Hide();
-
-			Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
-			Window.AddFlags(Android.Views.WindowManagerFlags.Fullscreen);
+			SetStatusBarTransparent();
 		}
-	}
+
+		private void SetStatusBarTransparent()
+		{
+			Window?.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+			Window?.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window?.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            WindowCompat.SetDecorFitsSystemWindows(Window, false);
+
+            Window?.SetStatusBarColor(Android.Graphics.Color.Transparent);
+        }
+    }
 }

@@ -29,22 +29,22 @@
     <MauiXaml Update="UIComponents\ListSongView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\DirectoryPage.xaml">
+    <MauiXaml Update="Views\Contents\DirectoryView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\HomePage.xaml">
+    <MauiXaml Update="Views\Contents\HomeView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\PageControl.xaml">
+    <MauiXaml Update="Views\Contents\BaseView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\PlaylistView.xaml">
+    <MauiXaml Update="Views\PlaylistPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\Popups\DownloadProgressWindow.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\SpotifySearchPage.xaml">
+    <MauiXaml Update="Views\Contents\DownloadView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\SongPage.xaml">

@@ -17,18 +17,6 @@ using System.Windows.Input;
 
 namespace ChIllya.ViewModels
 {
-    /// <summary>
-    /// View Model for Song Page
-    /// <para>
-    /// If move to another page, current Song View Model Instance 
-    /// will be deleted
-    /// </para>
-    /// <para>
-    ///     When move to Song Page in anyway, 
-    ///     always create the new Song VM instance
-    ///     and setup properties depend on song status through Music Player Instance 
-    /// </para>
-    /// </summary>
     public partial class SongViewModel : ObservableObject, IViewModel, IRecipient<SongMessage>
     {
         [ObservableProperty]
@@ -72,14 +60,7 @@ namespace ChIllya.ViewModels
         // User return to song page by shortcut or in directory
         public SongViewModel() {
             Initialize();
-            SetViewPosition();
-        }
-
-        public SongViewModel(Song song)
-        {
-            Initialize();
-            Manager.SetCurrentSong(song);
-            Manager.StartSong();
+            UpdateSliderPosition();
         }
 
         public void Initialize()
@@ -95,22 +76,28 @@ namespace ChIllya.ViewModels
         public void Receive(SongMessage message)
         {
             (Current, ImageStatus, MusicCommand) = message.GetData();
+            UpdateInformation();
+        }
 
-            Task.Delay(500).ContinueWith(task =>
+        private async void UpdateInformation()
+        {
+            UpdatePlayState();
+            SongLength = Manager.GetDuration();
+            UpdateTimer(Manager.IsPlaying());
+
+            await Task.Delay(500).ContinueWith(task =>
             {
-                UpdatePlayState();
-                TimerControl(Manager.IsPlaying());
-                SongLength = Manager.GetDuration();
+                if (!Manager.IsPlaying()) UpdateSliderPosition();
             });
         }
 
         private void UpdatePlayState()
         {
-            LoopButtonColor = Manager.IsLoop() ?
-                Color.FromArgb("#F8C7F1") : Color.FromArgb("#848384");
+            Color selectedColor = (Color)App.Instance!.Resources["IconSelected"];
+            Color unSelectedColor = (Color)App.Instance!.Resources["Icon"];
 
-            ShuffleButtonColor = Manager.IsShuffle() ?
-                Color.FromArgb("#F8C7F1") : Color.FromArgb("#848384");
+            LoopButtonColor = Manager.IsLoop() ? selectedColor : unSelectedColor;
+            ShuffleButtonColor = Manager.IsShuffle() ? selectedColor : unSelectedColor;
         }
 
         private void OnLoopButtonClicked()
@@ -125,13 +112,13 @@ namespace ChIllya.ViewModels
 
         private void SetTimer()
         {
-            timer.Elapsed += (source, e) => SetViewPosition();
+            timer.Elapsed += (source, e) => UpdateSliderPosition();
         }
 
         /// <summary>
         ///  Tracks remain time of music and convert it to string
         /// </summary>
-        private void SetViewPosition()
+        private void UpdateSliderPosition()
         {
             double remain = Manager.GetDuration() - Manager.GetPosition();
             Position = TimeSpan.FromSeconds((int)remain).ToString("hh\\:mm\\:ss");
@@ -140,12 +127,12 @@ namespace ChIllya.ViewModels
             else SliderValue = 0;
         }
 
-        private void TimerControl(bool isPlaying)
+        private void UpdateTimer(bool isPlaying)
         {
             if (!isPlaying) timer.Stop();
             else timer.Start();
 
-            SetViewPosition();
+            UpdateSliderPosition();
         }
 
         private void GenerateCommand()
@@ -155,13 +142,11 @@ namespace ChIllya.ViewModels
                 Manager.Unregister(this);
                 timer.Dispose();
 
-                await Shell.Current.Navigation.PopAsync();
+                await App.Instance!.PopAsync();
             });
 
             var nextAction = ToNextSong;
             var previousAction = ToPreviousSong;
-            //var loopAction = OnLoopButtonClicked;
-            //var shuffleAction = OnShuffleButtonClicked;
 
             NextSongCommand = new RelayCommand(nextAction.Debounce(500));
             PreviousSongCommand = new RelayCommand(previousAction.Debounce(500));
@@ -184,7 +169,7 @@ namespace ChIllya.ViewModels
             SliderValue = value;
             Manager.SeekSong(SliderValue);
 
-            SetViewPosition();
+            UpdateSliderPosition();
         }
     }
 }

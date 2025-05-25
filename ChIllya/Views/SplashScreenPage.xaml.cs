@@ -6,8 +6,7 @@ namespace ChIllya.Views;
 
 public partial class SplashScreenPage : ContentPage
 {
-    private AppSetup appSetup = new();
-    private bool isShowing = false;
+    private readonly AppSetup appSetup = new();
 
 	public SplashScreenPage()
 	{
@@ -18,9 +17,9 @@ public partial class SplashScreenPage : ContentPage
     private void OnProgressChanged(object? sender, ProgressReport e)
     {
         double percent = e.PercentComplete;
-        progressBar.Progress = percent;
+        MainThread.BeginInvokeOnMainThread(() => progressBar.Progress = percent);
 
-        if (percent == 100) ToApplication();
+        if (percent == 1) ToApplication();
     }
 
     protected override void OnAppearing()
@@ -40,18 +39,16 @@ public partial class SplashScreenPage : ContentPage
 
     private async void StartConfigure()
     {
-        await Task.Delay(1000);
+        await Task.Delay(100);
         appSetup.Start();
     }
 
     private async void ToApplication()
     {
-        var app = App.Current!;
+        var app = App.Instance!;
         if (app is null) return;
 
-        await Task.Delay(500);
-
-        app.CloseWindow(GetParentWindow());
-        app.OpenWindow(new Window(new AppShell()));
+        await Task.Delay(200);
+        app.Windows[0].Page = MainPage.Instance;
     }
 }

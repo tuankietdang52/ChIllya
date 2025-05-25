@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<contents:BaseView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   x:Class="ChIllya.Views.Contents.DownloadView"
+                   xmlns:views="clr-namespace:ChIllya.Views"
+                   xmlns:contents="clr-namespace:ChIllya.Views.Contents"
+                   xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
+                   xmlns:controls="clr-namespace:ChIllya.UIComponents"
+                   x:DataType="viewmodels:DownloadViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Entry Grid.Row="0"
+               x:Name="input"
+               Placeholder="Search on Spotify..."
+               IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanConverter}}"
+               ReturnCommand="{Binding LookupCommand}">
+        </Entry>
+
+        <ActivityIndicator Grid.Row="1"
+                           IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}"
+                           Color="{StaticResource Pink}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+
+        <controls:ListSongView
+                Grid.Row="1"
+                IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}"
+                ItemsSource="{Binding Songs}"
+                ItemTapCommand="{Binding TapCommand}">
+
+        </controls:ListSongView>
+    </Grid>
+</contents:BaseView>

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChIllya.Views.PageControl"
+             x:Class="ChIllya.Views.Contents.BaseView"
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Name="view">
-
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Grid x:DataType="viewmodels:PageControlViewModel"
+            <Grid x:DataType="viewmodels:BaseContentViewModel"
                   RowDefinitions="10*"
-                  BindingContext="{viewmodels:PageControlViewModel}">
+                  BindingContext="{viewmodels:BaseContentViewModel}">
 
                 <Border Grid.Row="0"
                         ZIndex="1"

@@ -1,4 +1,5 @@
 ﻿using ChIllya.Utils;
+using ChIllya.Views;
 using ChIllya.Views.Popups;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace ChIllya.Config
 
         private bool isError = false;
         private double eachProgressPercent;
+        private bool isFinish = false;
 
         public AppSetup()
         {
@@ -33,9 +35,13 @@ namespace ChIllya.Config
             configures.Add(configure);
         }
 
-        private void OnProgressChanged(object sender)
+        private async void OnProgressChanged(object sender)
         {
-            progressReport.PercentComplete += eachProgressPercent;
+            await Task.Delay(100);
+
+            if (!isFinish) progressReport.PercentComplete += eachProgressPercent;
+            else progressReport.PercentComplete = 1;
+
             progress.Report(progressReport);
         }
 
@@ -48,10 +54,10 @@ namespace ChIllya.Config
             App.Current?.Quit();
         }
 
-        public void Start()
+        public async void Start()
         {
-            int total = configures.Count;
-            eachProgressPercent = (1 * 100) / total;
+            int total = configures.Count + 1;
+            eachProgressPercent = (double)1  / (double)total;
 
             foreach (IConfigure configure in configures)
             {
@@ -59,8 +65,22 @@ namespace ChIllya.Config
                 configure.OnCompleteTask += OnProgressChanged;
                 configure.OnErrorTask += OnProgressError;
 
+                await Task.Delay(100);
                 configure.StartConfigProgress();
             }
+
+            PrepareApp();
+            isFinish = true;
+
+            OnProgressChanged(this);
+        }
+
+        private async void PrepareApp()
+        {
+            await Task.Delay(100);
+
+            _ = MainPage.Instance;
+            OnProgressChanged(this);
         }
     }
 }

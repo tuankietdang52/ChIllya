@@ -8,11 +8,12 @@ public partial class DownloadProgressWindow : Popup
 
 	public DownloadProgressWindow()
 	{
+		Console.WriteLine("Start");
 		InitializeComponent();
 		closeButton.Clicked += Cancel!;
-	}
+    }
 
-	public void TrackingDownload(double progress)
+    public void TrackingDownload(double progress)
 	{
 		progressBar.Progress = progress;
 		if (progress >= 1)
