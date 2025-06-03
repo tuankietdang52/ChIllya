@@ -70,15 +70,17 @@ namespace ChIllya.Services.Implementations
         {
             var task = Task.Factory.StartNew(() => FetchingSongs());
 
+
             // time out is 10 second
-            var result = await Task.WhenAny(task, Task.Delay(10000));
+            var result = await Task.WhenAny(task, Task.Delay(30000));
 
-            if (result != task)
-            {
-                WarningPopup.DisplayError("Time Out! Cant get songs on Devices");
-                return [];
-            }
+            // if (result != task)
+            // {
+            //     WarningPopup.DisplayError("Time Out! Cant get songs on Devices");
+            //     return [];
+            // }
 
+            // return task.Result;
             return task.Result;
         }
 

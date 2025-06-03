@@ -16,10 +16,10 @@ namespace ChIllya
             builder.UseMauiApp<App>()
                    .UseMauiCommunityToolkit()
                    .AddAudio()
+                   .SetupFonts()
                    .RegisterViews()
                    .RegisterViewModels()
                    .RegisterServices()
-                   .SetupFonts()
                    .ConfigureSyncfusionCore()
                    .ConfigureLifecycleEvents(AndroidConfigure.ConfigureFragment);
 
