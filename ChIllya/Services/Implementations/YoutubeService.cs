@@ -4,8 +4,10 @@ using ChIllya.Utils;
 using ChIllya.Views.Popups;
 using CommunityToolkit.Maui.Views;
 using SpotifyAPI.Web.Http;
+using Swan;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,8 +26,7 @@ namespace ChIllya.Services
 		private readonly HttpClient httpClient;
 
 		//only god know what this regex is
-		//only thing i know is it find string match the pattern '/watch/?v=code until meet a comma'
-		private readonly Regex videoUrlRegex = new(@"\/watch\?v[^,]*");
+		private readonly Regex pattern = new(@"headline\\x22:\\x7b\\x22runs\\x22:\\x5b\\x7b\\x22text\\x22:\\x22(.*?)\\x22.*?\\x22shortBylineText\\x22:\\x7b\\x22runs\\x22:\\x5b\\x7b\\x22text\\x22:\\x22(.*?)\\x22.*?\\/?(watch\?v.*?)\\u");
 
 		private readonly YoutubeClient client = new();
 
@@ -51,7 +52,7 @@ namespace ChIllya.Services
 			var streamManifest = Task.Run(async () => await client.Videos.Streams.GetManifestAsync(url)).Result;
 			var streamInfo = streamManifest.GetAudioStreams().GetWithHighestBitrate();
 
-			song.Name = song.Name.SanitizeFileName("_");
+			song.Name = song.Name.SanitizeFileNameWith("_");
             song.DirectoryPath = Path.Combine(dir, $"{song.Name}.mp3");
 
 			Progress<double> progress = new(handlerProgress);
@@ -100,20 +101,49 @@ namespace ChIllya.Services
 		private async Task<string> GetVideoUrl(Song song)
 		{
 			string query = $"{song.Title}+{GetArtistsQuery(song)}";
-			string searchUrl = $"https://www.youtube.com/results?search_query={query}+audio";
+			query = query.Replace(' ', '+');
+
+			string searchUrl = $"https://www.youtube.com/results?search_query={query}+official+audio";
 
 			// get html text
 			var response = await httpClient.GetStringAsync(searchUrl);
-			Match match = videoUrlRegex.Match(response);
+			string rawUrl = PrioritizeAudio(song, response);
 
-			if (!match.Success)
+			if (rawUrl == "")
 			{
 				WarningPopup.DisplayError("Cant find url");
 				return "";
 			}
 
-			var url = GenerateUrl(match.Value);
-			return $"https://www.youtube.com{url}";
+			string url = GenerateUrl(rawUrl);
+			return $"https://www.youtube.com/{url}";
+		}
+
+		private bool CheckArtist(Song song, string artist)
+		{
+			return song.Artists.Any(a => a.Name.Equals(artist, StringComparison.CurrentCultureIgnoreCase));
+		}
+
+		private string PrioritizeAudio(Song song, string response)
+		{
+			var matches = pattern.Matches(response).Take(3).ToList();
+			string result = matches[0].Groups[3].Value;
+
+			foreach (var m in matches)
+			{
+				string name = m.Groups[1].Value;
+				string uploader = m.Groups[2].Value;
+				string url = m.Groups[3].Value;
+
+				if (!CheckArtist(song, uploader)) continue;
+
+				if (name.Contains("audio", StringComparison.CurrentCultureIgnoreCase))
+				{
+					return url[..^1];
+				}
+			}
+
+			return result[.. ^1];
 		}
 
 		~YoutubeService()
