@@ -41,9 +41,12 @@ namespace ChIllya.Models
 
         #endregion
 
+        [ObservableProperty]
+        private bool isPlaying = false;
+
         public Song()
         {
-            
+
         }
     }
 #pragma warning restore MVVMTK0045

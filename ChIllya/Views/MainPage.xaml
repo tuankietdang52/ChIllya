@@ -4,12 +4,7 @@
              x:Class="ChIllya.Views.MainPage"
              xmlns:contents="clr-namespace:ChIllya.Views.Contents"
              xmlns:components="clr-namespace:ChIllya.UIComponents">
-    <Grid RowDefinitions="0.5*, 8*, 110">
-        <contents:BaseView x:Name="contentView"
-                           Grid.Row="1">
-        </contents:BaseView>
-        <components:TabBar Grid.Row="2"
-                           x:Name="tabBarContainer">
-        </components:TabBar>
+    <Grid>
+        <ContentView x:Name="contentView"></ContentView>
     </Grid>
 </ContentPage>

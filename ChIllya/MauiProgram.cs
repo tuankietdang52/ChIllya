@@ -21,6 +21,7 @@ namespace ChIllya
                    .RegisterViewModels()
                    .RegisterServices()
                    .ConfigureSyncfusionCore()
+                   .ConfigureAndroidUI()
                    .ConfigureLifecycleEvents(AndroidConfigure.ConfigureFragment);
 
 #if DEBUG

@@ -2,11 +2,6 @@ using ChIllya.Models;
 using ChIllya.Services;
 using ChIllya.ViewModels;
 using ChIllya.Views.Popups;
-using System.Threading.Tasks;
-#if ANDROID
-using Android.Views;
-using AndroidX.Core.View;
-#endif
 
 namespace ChIllya.Views;
 

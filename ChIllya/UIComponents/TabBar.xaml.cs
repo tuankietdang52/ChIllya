@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using ChIllya.Views.Contents;
 
 namespace ChIllya.UIComponents;
 
@@ -18,7 +19,7 @@ public partial class TabBar : ContentView
 		InitializeComponent();
 	}
 
-    private void OnTabBarItemClick(object sender, ContentView content)
+    private void OnTabBarItemClick(object sender, BaseView content)
     {
         if (sender is not TabBarItem tabBarItem) return;
 

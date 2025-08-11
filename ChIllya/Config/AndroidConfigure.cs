@@ -20,6 +20,19 @@ namespace ChIllya.Config
 {
     public static class AndroidConfigure
     {
+        public static MauiAppBuilder ConfigureAndroidUI(this MauiAppBuilder builder)
+        {
+            Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.BackgroundTintList =
+                    Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+#endif
+            });
+
+            return builder;
+        }
+
         public static void ConfigureFragment(ILifecycleBuilder lifeCycleBuilder)
         {
 #if ANDROID
@@ -47,7 +60,7 @@ namespace ChIllya.Config
 
                             if (window is null) return;
 
-			                //window?.ClearFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                            //window?.ClearFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
                             window?.ClearFlags(WindowManagerFlags.TranslucentStatus);
                             window?.ClearFlags(WindowManagerFlags.Fullscreen);
 

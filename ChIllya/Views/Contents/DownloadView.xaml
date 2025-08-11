@@ -27,12 +27,14 @@
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>
 
-        <controls:ListSongView
-                Grid.Row="1"
-                IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}"
-                ItemsSource="{Binding Songs}"
-                ItemTapCommand="{Binding TapCommand}">
-
-        </controls:ListSongView>
+        <Grid Grid.Row="1"
+              IsVisible="{Binding IsLoading, Converter={StaticResource BooleanConverter}}">
+              
+              <controls:ListSongView IsVisible="{Binding IsQueryEmpty, Converter={StaticResource BooleanConverter}}"
+                                     ItemsSource="{Binding Songs}"
+                                     ItemTapCommand="{Binding TapCommand}">
+                                   
+              </controls:ListSongView>
+        </Grid>
     </Grid>
 </contents:BaseView>

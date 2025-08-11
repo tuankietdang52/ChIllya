@@ -18,11 +18,18 @@ namespace ChIllya.ViewModels
 
         public BindableCollection<Song> Songs { get; set; }
 
-		public bool isLoading = false;
+		private bool isLoading = false;
 		public bool IsLoading
 		{
 			get => isLoading;
 			set => SetProperty(ref isLoading, value);
+        }
+
+        private bool isQueryEmpty = true;
+        public bool IsQueryEmpty
+        {
+            get => isQueryEmpty;
+            set => SetProperty(ref isQueryEmpty, value);
         }
 
         #region Command Field
@@ -43,8 +50,6 @@ namespace ChIllya.ViewModels
 
         public void Initialize()
         {
-            Songs = [];
-
             LookupCommand = new RelayCommand<string>(Searching!);
             TapCommand = new RelayCommand<Song>(DownloadMusic!);
         }

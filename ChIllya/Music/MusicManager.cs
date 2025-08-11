@@ -224,19 +224,31 @@ namespace ChIllya.Music
             UnpauseSong();
         }
 
+        public bool PlayShuffle()
+        {
+            var song = playlistController.PrepareShuffle();
+            if (song is null) return false;
+
+            SetShuffleMode(true);
+            SetCurrentSong(song);
+
+            return true;
+        }
+
+        public void SetShuffleMode(bool isShuffle)
+        {
+            playlistController.SetShuffleMode(isShuffle);
+        }
+
         public void SwitchShuffleMode()
         {
-            bool isShuffle = !IsShuffle();
-            playlistController.SetShuffleMode(isShuffle);
-
+            playlistController.SetShuffleMode(!IsShuffle());
             SendMessage();
         }
 
         public void SwtichLoopMode()
         {
-            bool isLoop = !IsLoop();
-            playlistController.SetLoopMode(isLoop);
-
+            playlistController.SetLoopMode(!IsLoop());
             SendMessage();
         }
 

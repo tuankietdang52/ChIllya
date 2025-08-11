@@ -35,6 +35,7 @@ public partial class SplashScreenPage : ContentPage
 
         appSetup.AddConfigure(new AppConfigure());
         appSetup.AddConfigure(new KeyConfigure());
+        appSetup.AddConfigure(new ContentConfigure());
     }
 
     private async void StartConfigure()

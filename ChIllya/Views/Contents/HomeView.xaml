@@ -3,11 +3,74 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    x:Class="ChIllya.Views.Contents.HomeView"
                    xmlns:views="clr-namespace:ChIllya.Views"
+                   xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
                    xmlns:contents="clr-namespace:ChIllya.Views.Contents"
                    xmlns:controls="clr-namespace:ChIllya.UIComponents"
                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                    xmlns:sfButton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons">
-    <Grid>
-        
+    <Grid x:DataType="viewmodels:HomeViewModel">
+        <Image Source="Images/bg.png"
+               Aspect="Center"
+               Scale="0.5">
+        </Image>
+        <Grid Margin="30, 101, 30, 0"
+              RowDefinitions="4*, 6*">
+            <Grid Grid.Row="0"
+                  RowDefinitions="Auto, *, 80">
+                <Label Grid.Row="0"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="Black">
+                    Playlists
+                </Label>
+                <controls:Playlists Grid.Row="1"
+                                    Margin="0, 20, 0, 0"
+                                    ItemsSource="{Binding DisplayPlaylists}">
+                </controls:Playlists>
+                <sfButton:SfButton Grid.Row="2"
+                                   CornerRadius="20"
+                                   Text="Add more"
+                                   FontSize="9.45"
+                                   HeightRequest="26"
+                                   WidthRequest="65"
+                                   Padding="5, 5"
+                                   TextColor="Black">
+                    <sfButton:SfButton.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="{StaticResource Pink}" Offset="0.0"></GradientStop>
+                            <GradientStop Color="{StaticResource LightPink}" Offset="1.0"></GradientStop>
+                        </LinearGradientBrush>
+                    </sfButton:SfButton.Background>
+                </sfButton:SfButton>
+            </Grid>
+            <Grid Grid.Row="1"
+                  RowDefinitions="Auto, *">
+                <Label Grid.Row="0"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="Black">
+                    Add Music
+                </Label>
+                <Border Grid.Row="1"
+                        Margin="0, 10, 0, 0"
+                        HeightRequest="55"
+                        VerticalOptions="Start"
+                        Stroke="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"></RoundRectangle>
+                    </Border.StrokeShape>
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="{StaticResource Pink}" Offset="0.0"></GradientStop>
+                            <GradientStop Color="{StaticResource LightPink}" Offset="1.0"></GradientStop>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Entry x:Name="input"
+                           HeightRequest="54"
+                           Placeholder="Search on Spotify...">
+                    </Entry>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </contents:BaseView>

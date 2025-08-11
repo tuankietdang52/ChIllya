@@ -5,41 +5,93 @@
              x:Class="ChIllya.UIComponents.SongShorcut">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
-                  RowDefinitions="0.5*, 9.5*"
-                  ColumnDefinitions="9*, 1*"
-                  BackgroundColor="{StaticResource DarkTheme}">
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer
-                        Command="{Binding TapCommand}"/>
-                </Grid.GestureRecognizers>
+            <Border Stroke="Transparent"
+                    Padding="5, 5"
+                    BindingContext="{Binding Source={RelativeSource TemplatedParent}}">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="{StaticResource LightPink}" Offset="0.0"></GradientStop>
+                        <GradientStop Color="{StaticResource DarkPink}" Offset="1.0"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="40, 40, 0, 0"></RoundRectangle>
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0, -5"
+                            Radius="40"
+                            Opacity="0.5" />
+                </Border.Shadow>
+                <Grid RowDefinitions="Auto, Auto, *">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TapCommand}"/>
+                    </Grid.GestureRecognizers>
 
-                <BoxView Grid.Row="0"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="2"
-                         HeightRequest="2"
-                         Color="White" />
+                    <Label Grid.Row="0"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Text="Tame Impala Playlist">
+                    </Label>
 
-                <Label Grid.Column="0"
-                       Grid.Row="1"
-                       FontSize="20"
-                       FontAttributes="Bold"
-                       VerticalTextAlignment="Center"
-                       Text="{Binding CurrentSong.Name}"
-                       Margin="10, 0">
-                </Label>
+                    <Label Grid.Row="1"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Text="Let It Happen - Tale Impala">
+                    </Label>
+                    
+                    <Grid Grid.Row="2"
+                          Padding="10, 10, 10, 30"
+                          ColumnDefinitions="100, 10, *">
+                        <Border Grid.Column="0"
+                                HeightRequest="96"
+                                WidthRequest="96">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20"></RoundRectangle>
+                            </Border.StrokeShape>
+                            <Image HeightRequest="96"
+                                   WidthRequest="96"
+                                   Source="Images/eye.jpg">
+                            </Image>
+                        </Border>
+                        <StackLayout Grid.Column="2">
+                            <Grid></Grid>
+                        </StackLayout>
+                    </Grid>
 
-                <sfbutton:SfButton ImageSource="{Binding ImageStatusSource}"
-                                   Grid.Column="1"
-                                   Grid.Row="1"
-                                   ShowIcon="True"
-                                   ImageSize="30"
-                                   EnableRippleEffect="False"
-                                   ImageAlignment="Default"
-                                   Background="Transparent"
-                                   Command="{Binding SongCommand}">
-                </sfbutton:SfButton>
-            </Grid>
+                    <!-- <BoxView Grid.Row="0"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2"
+                             HeightRequest="2"
+                             Color="White" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="1"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalTextAlignment="Center"
+                           Text="{Binding CurrentSong.Name}"
+                           Margin="10, 0">
+                    </Label>
+
+                    <sfbutton:SfButton ImageSource="{Binding ImageStatusSource}"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       ShowIcon="True"
+                                       ImageSize="30"
+                                       EnableRippleEffect="False"
+                                       ImageAlignment="Default"
+                                       Background="Transparent"
+                                       Command="{Binding SongCommand}">
+                    </sfbutton:SfButton> -->
+                </Grid>
+            </Border>
         </ControlTemplate>
     </ContentView.ControlTemplate>
 </ContentView>

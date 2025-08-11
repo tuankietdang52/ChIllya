@@ -9,8 +9,9 @@
              xmlns:controls="clr-namespace:ChIllya.UIComponents"
              xmlns:sfbutton="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:utils="clr-namespace:ChIllya.Utils">
-    <contents:BaseView Padding="0, 0, 0, 40">
-        <Grid x:DataType="viewmodels:PlaylistViewModel">
+    <contents:BaseView Padding="0, 0, 0, 40"
+                       x:DataType="viewmodels:PlaylistViewModel">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"></RowDefinition>
                 <RowDefinition Height="6*"></RowDefinition>
@@ -35,6 +36,28 @@
                         <GradientStop Color="{StaticResource DarkTheme}" Offset="1.0"></GradientStop>
                     </LinearGradientBrush>
                 </Grid.Background>
+
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="3">
+                        <sfbutton:SfButton HeightRequest="50"
+                                           WidthRequest="50"
+                                           CornerRadius="50"
+                                           FontSize="15"
+                                           Text="&#xf060;"
+                                           Margin="10, 0, 0, 0"
+                                           HorizontalOptions="Start"
+                                           Background="Transparent"
+                                           FontFamily="FontAwesomeSolid"
+                                           Command="{Binding x:DataType='viewmodels:PlaylistViewModel',
+                                                     Source={
+                                                        RelativeSource AncestorType={
+                                                            x:Type viewmodels:PlaylistViewModel
+                                                        }
+                                                     },
+                                                     Path=BackCommand
+                                            }">
+                        </sfbutton:SfButton>
+                </Grid>
                 
                 <Image Grid.Row="1"
                        Grid.Column="0"
@@ -67,7 +90,15 @@
                                    Text="&#xf074;"
                                    FontSize="20"
                                    FontFamily="FontAwesomeSolid"
-                                   TextColor="White">
+                                   TextColor="White"
+                                   Command="{Binding x:DataType='viewmodels:PlaylistViewModel',
+                                                     Source={
+                                                        RelativeSource AncestorType={
+                                                            x:Type viewmodels:PlaylistViewModel
+                                                        }
+                                                     },
+                                                     Path=PlayShuffleCommand
+                                            }">
                     <sfbutton:SfButton.Background>
                         <LinearGradientBrush EndPoint="1, 1">
                             <GradientStop Color="{StaticResource AppTheme}" Offset="0.0"></GradientStop>

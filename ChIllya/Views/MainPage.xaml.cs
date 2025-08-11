@@ -23,12 +23,14 @@ public partial class MainPage : ContentPage
 
 		BindingContext = this;
 		contentView.Content = new HomeView();
-        tabBarContainer.OnNavigate = new RelayCommand<ContentView>(Navigate);
+        // tabBarContainer.OnNavigate = new RelayCommand<BaseView>(Navigate);
 	}
 
-	public void Navigate(ContentView? view)
+	public void Navigate(BaseView? view)
 	{
 		if (view == null) return;
 		contentView.Content = view;
+
+		contentView.InvalidateMeasure();
     }
 }

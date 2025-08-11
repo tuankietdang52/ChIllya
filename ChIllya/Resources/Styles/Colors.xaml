@@ -29,7 +29,9 @@
     <Color x:Key="Gray950">#141414</Color>
 
     <Color x:Key="AppTheme">#FF01B3</Color>
-    <Color x:Key="Pink">#FF13F4</Color>
+    <Color x:Key="DarkPink">#FF4EA4</Color>
+    <Color x:Key="Pink">#FF57CD</Color>
+    <Color x:Key="LightPink">#FB93D9</Color>
     <Color x:Key="Purple">#C711FF</Color>
     <Color x:Key="DarkTheme">#323131</Color>
     <Color x:Key="DarkThemeSecondary">#2F2E2E</Color>

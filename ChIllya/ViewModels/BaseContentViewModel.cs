@@ -18,8 +18,16 @@ namespace ChIllya.ViewModels
         [ObservableProperty]
         private string? imageStatus;
 
-        [ObservableProperty]
         private bool isHaveCurrentSong = false;
+        public bool IsHaveCurrentSong
+        {
+            get => isHaveCurrentSong;
+            set
+            {
+                SetProperty(ref isHaveCurrentSong, value);
+                ShortcutHeight = value ? 393 : 393; // 0
+            }
+        }
 
         #region Command
 
@@ -27,6 +35,9 @@ namespace ChIllya.ViewModels
 
         [ObservableProperty]
         private ICommand? musicCommand;
+
+        [ObservableProperty]
+        private double shortcutHeight;
 
         #endregion
 
@@ -41,6 +52,8 @@ namespace ChIllya.ViewModels
             (Current, ImageStatus, MusicCommand) = message.GetData();
 
             if (Current is not null && !IsHaveCurrentSong) IsHaveCurrentSong = true;
+
+            // Current = MusicStorage.Instance?.GetAllSongs()![0];
         }
 
         private async void ReturnToSongPage()

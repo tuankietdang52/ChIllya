@@ -22,6 +22,7 @@ namespace ChIllya.Config
 
 		public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
 		{
+			builder.Services.AddScoped<HomeViewModel>();
 			builder.Services.AddScoped<DownloadViewModel>();
 			builder.Services.AddScoped<DirectoryViewModel>();
 

@@ -1,9 +1,10 @@
+using ChIllya.Views.Contents;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
 namespace ChIllya.UIComponents;
 
-public delegate void OnTabBarNavigateHanlder(object sender, ContentView content);
+public delegate void OnTabBarNavigateHanlder(object sender, BaseView content);
 
 public partial class TabBarItem : ContentView
 {
@@ -14,7 +15,7 @@ public partial class TabBarItem : ContentView
         BindableProperty.Create(nameof(Glyph), typeof(string), typeof(TabBarItem));
 
     public static readonly BindableProperty NavigationContentProperty =
-        BindableProperty.Create(nameof(NavigationContent), typeof(ContentView), typeof(TabBarItem));
+        BindableProperty.Create(nameof(NavigationContent), typeof(BaseView), typeof(TabBarItem));
 
     public static readonly BindableProperty ForegroundProperty =
       BindableProperty.Create(nameof(Foreground), typeof(Color), typeof(TabBarItem));
@@ -41,9 +42,9 @@ public partial class TabBarItem : ContentView
         set => SetValue(ForegroundProperty, value);
     }
 
-    public ContentView NavigationContent
+    public BaseView NavigationContent
     {
-        get => (ContentView)GetValue(NavigationContentProperty);
+        get => (BaseView)GetValue(NavigationContentProperty);
         set => SetValue(NavigationContentProperty, value);
     }
 

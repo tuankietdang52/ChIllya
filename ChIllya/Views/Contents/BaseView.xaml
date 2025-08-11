@@ -10,24 +10,17 @@
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid x:DataType="viewmodels:BaseContentViewModel"
-                  RowDefinitions="10*"
                   BindingContext="{viewmodels:BaseContentViewModel}">
-
-                <Border Grid.Row="0"
-                        ZIndex="1"
-                        Stroke="Transparent">
+                <Border Stroke="Transparent">
                     <ContentPresenter/>
                 </Border>
-
-                <controls:SongShorcut ZIndex="2"
-                                      x:Name="Shortcut"
-                                      Grid.Row="0"
-                                      IsVisible="{Binding IsHaveCurrentSong}"
+                                      <!-- IsVisible="{Binding IsHaveCurrentSong}" -->
+                                      <!-- CurrentSong="{Binding Current}" -->
+                <controls:SongShorcut x:Name="Shortcut"
+                                      HeightRequest="240"
+                                      VerticalOptions="End"
                                       TapCommand="{Binding ReturnCommand}"
                                       SongCommand="{Binding MusicCommand}"
-                                      CurrentSong="{Binding Current}"
-                                      VerticalOptions="End"
-                                      HeightRequest="70"
                                       ImageStatusSource="{Binding ImageStatus}">
                 </controls:SongShorcut>
             </Grid>

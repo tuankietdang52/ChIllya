@@ -7,13 +7,10 @@ namespace ChIllya.Music
 
     public class PlaylistController
     {
-        private Song? current;
-        
-        private Playlist? playlist;
         private bool isShuffle = false;
         private bool isLoop = false;
 
-        private List<Song> shuffleSongs = [];
+        private readonly SongCollection songs = new();
 
         public event CurrentSongChangedHandler? CurrentSongChanged;
 
@@ -22,19 +19,31 @@ namespace ChIllya.Music
 
         }
 
-        public Song? GetCurrent() => current;
+        public Song? GetCurrent() => songs.GetCurrent();
         public bool IsShuffle() => isShuffle;
         public bool IsLoop() => isLoop;
 
         public void OnCurrentSongChanged()
         {
+            var current = songs.GetCurrent();
             if (current != null) CurrentSongChanged?.Invoke(this, current);
+        }
+
+        /// <summary>
+        /// Shuffle the list and get the first song of the list
+        /// </summary>
+        /// <returns></returns>
+        public Song? PrepareShuffle()
+        {
+            var song = songs.GetRandomSong();
+            songs.Shuffle();
+
+            return song;
         }
 
         public void SetShuffleMode(bool isShuffle)
         {
             this.isShuffle = isShuffle;
-            if (!isShuffle || playlist == null) shuffleSongs.Clear();
         }
 
         public void SetLoopMode(bool isLoop)
@@ -44,13 +53,16 @@ namespace ChIllya.Music
 
         public void SetCurrentSong(Song song)
         {
-            current = song;
-            OnCurrentSongChanged();
+            if (songs.SetCurrent(song)) OnCurrentSongChanged();
+
+            //TODO: Show error when fail to set current
         }
 
         public void SetPlaylist(Playlist playlist)
         {
-            this.playlist = playlist;
+            songs.Set(playlist.GetSongs());
+            isShuffle = false;
+            isLoop = false;
         }
 
         public async Task NextSong()
@@ -66,51 +78,27 @@ namespace ChIllya.Music
         private void ToAdjacentSong(EAdjacent adjacent)
         {
             if (isLoop) return;
-            if (playlist == null) return;
+            if (!songs.HasSong()) return;
+            if (songs.GetCurrent() is null) return;
 
-            if (isShuffle && shuffleSongs.IsEmpty()) OnShuffleSongs();
-
-            var songs = isShuffle ? shuffleSongs : playlist.GetSongs();
-            if (songs == null) return;
-
-            for (int i = 0; i < songs.Count; i++)
+            if (isShuffle)
             {
-                var song = songs[i];
-
-                if (current == null) return;
-                if (current.DirectoryPath != song.DirectoryPath) continue;
-
-                current = GetAdjacentSong(adjacent, songs, i);
-                break;
+                songs.ActivateShuffle();
             }
+            else songs.DeactivateShuffle();
 
-            if (current == null) return;
+            _ = GetAdjacentSong(adjacent);
             OnCurrentSongChanged();
         }
 
-        private void OnShuffleSongs()
+        private Song? GetAdjacentSong(EAdjacent adjacent)
         {
-            if (playlist == null) return;
-
-            shuffleSongs = new List<Song>(playlist.GetSongs());
-            shuffleSongs.Shuffle();
-        }
-
-        private Song? GetAdjacentSong(EAdjacent adjacent, List<Song> songs, int i)
-        {
-            switch (adjacent)
+            return adjacent switch
             {
-                case EAdjacent.Previous:
-                    if (i - 1 < 0) return songs[^1];
-                    else return songs[i - 1];
-
-                case EAdjacent.Next:
-                    if (i + 1 >= songs.Count) return songs[0];
-                    else return songs[i + 1];
-
-                default: 
-                    return null;
-            }
+                EAdjacent.Previous => songs.GetPrevious(),
+                EAdjacent.Next => songs.GetNext(),
+                _ => null,
+            };
         }
     }
 
