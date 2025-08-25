@@ -15,8 +15,15 @@ namespace ChIllya.Config
 
         public void StartConfigProgress()
         {
-            RegisterSyncfusionKey();
-            OnCompleteTask?.Invoke(this);
+            try
+            {
+                RegisterSyncfusionKey();
+                OnCompleteTask?.Invoke(this);
+            }
+            catch (Exception ex)
+            {
+                OnErrorTask?.Invoke(this, ex);
+            }
         }
 
         private void RegisterSyncfusionKey()

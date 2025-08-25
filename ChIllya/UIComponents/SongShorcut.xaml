@@ -34,7 +34,7 @@
                            TextColor="Black"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"
-                           Text="Tame Impala Playlist">
+                           Text="Nurture">
                     </Label>
 
                     <Label Grid.Row="1"
@@ -43,7 +43,7 @@
                            TextColor="Black"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"
-                           Text="Let It Happen - Tale Impala">
+                           Text="Blossom - Porter Robison">
                     </Label>
                     
                     <Grid Grid.Row="2"
@@ -60,9 +60,67 @@
                                    Source="Images/eye.jpg">
                             </Image>
                         </Border>
-                        <StackLayout Grid.Column="2">
-                            <Grid></Grid>
-                        </StackLayout>
+                        <Grid Grid.Column="2"
+                              RowDefinitions="*, 10, *">
+                            <StackLayout Grid.Row="0"
+                                         Orientation="Horizontal"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="End"
+                                         Spacing="15">
+                                <StackLayout.Resources>
+                                    <Style TargetType="sfbutton:SfButton">
+                                        <Setter Property="ShowIcon" Value="True"></Setter>
+                                        <Setter Property="EnableRippleEffect" Value="True"></Setter>
+                                        <Setter Property="ImageAlignment" Value="Default"></Setter>
+                                        <Setter Property="ImageSize" Value="20"></Setter>
+                                        <Setter Property="WidthRequest" Value="30"></Setter>
+                                        <Setter Property="HeightRequest" Value="30"></Setter>
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                    </Style>
+                                </StackLayout.Resources>
+                                <sfbutton:SfButton ImageSource="Images/previous.svg"
+                                                   Margin="0, 5, 0, 3">
+                                </sfbutton:SfButton>
+                                <StackLayout Spacing="4"
+                                             Orientation="Horizontal">
+                                    <sfbutton:SfButton ImageSource="Images/shufflemini.svg"
+                                                       ImageSize="25">
+                                    </sfbutton:SfButton>
+                                    <sfbutton:SfButton ImageSource="Images/playmini.svg"
+                                                       WidthRequest="40"
+                                                       HeightRequest="40"
+                                                       ImageSize="30">
+                                    </sfbutton:SfButton>
+                                    <sfbutton:SfButton ImageSource="Images/loop.svg"
+                                                       ImageSize="25">
+                                    </sfbutton:SfButton>
+                                </StackLayout>
+                                <sfbutton:SfButton ImageSource="Images/nextmini.svg"
+                                                   Margin="0, 5, 0, 0">
+                                </sfbutton:SfButton>
+                            </StackLayout>
+                            <StackLayout Grid.Row="2">
+                                <Slider Value="20"
+                                        Minimum="0"
+                                        Maximum="100"
+                                        ThumbColor="White"
+                                        MinimumTrackColor="{StaticResource DarkPink2}"
+                                        MaximumTrackColor="White" />
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="17, 0, 0, 0"
+                                             Spacing="5">
+                                    <StackLayout.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="FontSize" Value="7.5"></Setter>
+                                            <Setter Property="TextColor" Value="Black"></Setter>
+                                        </Style>
+                                    </StackLayout.Resources>
+                                    <Label FontSize="7.5">0:23</Label>
+                                    <Label FontSize="7.5">|</Label>
+                                    <Label FontSize="7.5">3:23</Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
                     </Grid>
 
                     <!-- <BoxView Grid.Row="0"

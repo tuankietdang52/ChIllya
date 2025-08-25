@@ -7,7 +7,7 @@
                    xmlns:viewmodels="clr-namespace:ChIllya.ViewModels"
                    xmlns:controls="clr-namespace:ChIllya.UIComponents"
                    x:DataType="viewmodels:DownloadViewModel">
-    <Grid>
+    <Grid Margin="0, 20, 0, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>

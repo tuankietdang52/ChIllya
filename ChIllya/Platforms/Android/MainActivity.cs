@@ -30,7 +30,7 @@ namespace ChIllya
 			base.OnCreate(savedInstanceState);
 			Current = this;
 
-            SupportActionBar?.Hide();
+			SupportActionBar?.Hide();
 			SetStatusBarTransparent();
 		}
 

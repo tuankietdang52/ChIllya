@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChIllya.Views.MainPage"
              xmlns:contents="clr-namespace:ChIllya.Views.Contents"
-             xmlns:components="clr-namespace:ChIllya.UIComponents">
-    <Grid>
-        <ContentView x:Name="contentView"></ContentView>
+             xmlns:components="clr-namespace:ChIllya.UIComponents"
+             x:Name="main">
+    <Grid   >
+        <ContentView Content="{Binding MainContent, Source={x:Reference main}}"></ContentView>
     </Grid>
 </ContentPage>

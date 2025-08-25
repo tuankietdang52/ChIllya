@@ -1,4 +1,5 @@
 using ChIllya.Views.Contents;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
@@ -17,20 +18,56 @@ public partial class MainPage : ContentPage
 		set => instance = value;
 	}
 
+	private readonly Stack<ContentView> contents = [];
+
+	#region Bindable Property
+
+	public static readonly BindableProperty MainContentProperty =
+		BindableProperty.Create(nameof(MainContent), typeof(ContentView), typeof(MainPage));
+
+	#endregion
+
+	public ContentView MainContent
+	{
+		get => (ContentView)GetValue(MainContentProperty);
+		set => SetValue(MainContentProperty, value);
+	}
+
 	public MainPage()
 	{
 		InitializeComponent();
-
 		BindingContext = this;
-		contentView.Content = new HomeView();
-        // tabBarContainer.OnNavigate = new RelayCommand<BaseView>(Navigate);
+
+		MainContent = new HomeView();
+		contents.Push(MainContent);
 	}
 
-	public void Navigate(BaseView? view)
+	public void PushContent(ContentView content)
 	{
-		if (view == null) return;
-		contentView.Content = view;
+		contents.Push(content);
+		MainContent = contents.Peek();
+	}
 
-		contentView.InvalidateMeasure();
-    }
+	protected override bool OnBackButtonPressed()
+	{
+		if (contents.Count > 1)
+		{
+			contents.Pop();
+			MainContent = contents.Peek();
+		}
+		else
+		{
+			MinimizeWindow();
+		}
+
+		return true;
+	}
+
+	private void MinimizeWindow()
+	{
+#if ANDROID
+		var activity = Platform.CurrentActivity;
+		activity?.MoveTaskToBack(true);
+#endif
+	}
 }
