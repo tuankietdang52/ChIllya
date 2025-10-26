@@ -1,6 +1,6 @@
 namespace ChIllya.UIComponents;
+
 using ChIllya.Models;
-using ChIllya.Views.Popups;
 using System.Windows.Input;
 
 public partial class ListDirectoryView : ContentView

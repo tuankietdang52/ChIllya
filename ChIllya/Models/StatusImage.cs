@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ChIllya.Music;
-using CommunityToolkit.Mvvm.Input;
 
 namespace ChIllya.Models
 {

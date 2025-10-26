@@ -1,18 +1,9 @@
 ﻿using ChIllya.Models;
 using ChIllya.Music;
 using ChIllya.Utils;
-using ChIllya.ViewModels.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Input;
 
 namespace ChIllya.ViewModels

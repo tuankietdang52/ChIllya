@@ -1,9 +1,7 @@
 ﻿using ChIllya.Services;
 using ChIllya.Services.Implementations;
-using ChIllya.Utils;
 using ChIllya.ViewModels;
 using ChIllya.Views;
-using ChIllya.Music;
 using ChIllya.Views.Contents;
 
 namespace ChIllya.Config

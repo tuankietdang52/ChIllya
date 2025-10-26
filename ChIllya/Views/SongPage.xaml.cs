@@ -1,4 +1,3 @@
-using ChIllya.Models;
 using ChIllya.ViewModels;
 
 namespace ChIllya.Views

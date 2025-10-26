@@ -1,7 +1,6 @@
 ﻿using ChIllya.Config;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.LifecycleEvents;
 using Plugin.Maui.Audio;
 using Syncfusion.Maui.Core.Hosting;

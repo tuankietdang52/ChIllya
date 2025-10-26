@@ -1,7 +1,5 @@
-using ChIllya.Utils;
 using ChIllya.ViewModels;
 using ChIllya.Views.Popups;
-using System.Diagnostics;
 
 namespace ChIllya.Views.Contents;
 

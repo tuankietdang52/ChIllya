@@ -1,7 +1,4 @@
 using ChIllya.Views.Contents;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
 
 namespace ChIllya.Views;
 

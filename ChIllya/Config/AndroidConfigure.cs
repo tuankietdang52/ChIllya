@@ -1,20 +1,12 @@
 ﻿#if ANDROID
-using Android.App;
 using AndroidX.Activity;
-using AndroidX.Fragment.App;
 using FragmentManager = AndroidX.Fragment.App.FragmentManager;
 using Microsoft.Maui.Platform;
 using Android.Views;
 using AndroidX.Core.View;
 #endif
 
-using ChIllya.Config;
-using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.LifecycleEvents;
-using Plugin.Maui.Audio;
-using Syncfusion.Maui.Core.Hosting;
 
 namespace ChIllya.Config
 {

@@ -1,14 +1,4 @@
-﻿using ChIllya.Views.Popups;
-using Microsoft.Maui.Controls.Shapes;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChIllya.Utils
+﻿namespace ChIllya.Utils
 {
     public static class EnvLoader
     {

@@ -1,7 +1,4 @@
 ﻿using ChIllya.Models;
-using ChIllya.Views.Popups;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 
 namespace ChIllya.Services.Implementations

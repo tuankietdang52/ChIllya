@@ -1,19 +1,9 @@
 ﻿using ChIllya.Models;
-using ChIllya.Services;
 using ChIllya.Utils;
 using ChIllya.Views.Popups;
-using CommunityToolkit.Maui.Views;
-using SpotifyAPI.Web.Http;
-using Swan;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using YoutubeExplode;
-using YoutubeExplode.Converter;
 using YoutubeExplode.Videos.Streams;
 
 namespace ChIllya.Services

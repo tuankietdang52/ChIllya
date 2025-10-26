@@ -1,10 +1,4 @@
-﻿using ChIllya.Views.Popups;
-using Syncfusion.Licensing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Syncfusion.Licensing;
 
 namespace ChIllya.Config
 {

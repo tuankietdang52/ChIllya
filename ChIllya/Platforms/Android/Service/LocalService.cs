@@ -1,8 +1,6 @@
 ﻿using Android.Content;
 using Android.Database;
 using Android.Provider;
-using ChIllya.Models;
-using System.Diagnostics;
 
 namespace ChIllya.Services.Implementations
 {

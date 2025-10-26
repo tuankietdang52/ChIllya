@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Graphics;
-using Android.Hardware.Lights;
 using Android.OS;
 using Android.Views;
 using AndroidX.Core.View;
